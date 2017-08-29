@@ -1,0 +1,36 @@
+venue-detail {
+
+	.venue{
+		text-align: center;
+		margin:12px 0px;
+	}
+
+	.venue-image{
+		margin: 0px 0px;
+	}
+
+	.venue-distance{
+		margin: 5px 0px;
+		display: inline-block;
+	}
+
+	.favorite-heart{
+		width:15px;
+		height:15px;
+		margin-left:8px;
+		margin-bottom:-2px;
+	}
+
+	.venue-name{
+		margin: 15px 0px;
+	}
+
+	.venue-bio{
+		margin: 5px 0px 40px 0px;
+	}
+	
+	[col-6]{
+		padding:2px 2px 0px 2px;
+	}
+}
+

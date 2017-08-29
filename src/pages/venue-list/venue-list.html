@@ -1,0 +1,15 @@
+<ion-header>
+	<app-header></app-header>
+</ion-header>
+<ion-content>
+	<h1 class="location-title">{{location.City_Plain}}</h1>
+	<ion-list no-lines>
+		<ion-item *ngFor="let venue of venues" (click)="onSelect(venue)" class="venue" text-wrap>
+			<img class="venue-image" src="{{venue.most_liked_media}}"/>
+			<p class="venue-distance">{{venue.distance}} km</p>
+			<h1 class="venue-name">{{venue.name}}</h1>
+			<p class="venue-bio">{{venue.bio}}</p>
+			<div class="venue-divider"></div>
+		</ion-item>
+	</ion-list>
+</ion-content>

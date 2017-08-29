@@ -1,0 +1,20 @@
+<ion-header>
+	<app-header></app-header>
+</ion-header>
+<ion-content padding>
+	<div class="venue">
+	  	<img class="venue-image" src={{venue.most_liked_media}}/>
+	  	<div class="feature">
+	  		<p class="venue-distance">{{venue.distance}} km</p>
+	  		<img class="favorite-heart" src={{heart_image}} (click)="favorite_venue()"/>
+	  	</div>
+	    <h1 class="venue-name">{{venue.name}}</h1>
+	    <p class="venue-bio">{{venue.bio}}</p>
+		<ion-grid>
+		  	<ion-row *ngFor="let m of top_media">
+		    	<ion-col col-6><img src={{m[0].images.low_resolution.url}}/></ion-col>
+		    	<ion-col col-6><img src={{m[1].images.low_resolution.url}}/></ion-col>
+		  	</ion-row>
+		</ion-grid>
+	</div>
+</ion-content>

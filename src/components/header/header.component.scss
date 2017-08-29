@@ -1,0 +1,62 @@
+app-header{
+
+	.nav-icon-container{
+		display: inline-block;
+		position:absolute;
+		top:50%;
+		transform:translateY(-50%);
+	}
+	.nav-left{
+		left:6px;
+	}
+
+	.nav-right{
+		right:6px;
+	}
+
+	.nav-icon{
+		display:inline-block;
+		width:30px;
+		height:30px;
+	}
+
+	.nav-map{
+		padding:4px;
+	}
+
+	.nav-account{
+		padding:2px;
+	}
+
+	.nav-back{
+		padding:2px;
+	}
+
+	ion-navbar{
+		text-align:center;
+	}
+	ion-title{
+		margin-bottom:10px;
+		display:inline-block;
+		position:absolute;
+		left:50%;
+		top:50%;
+		transform:translate(-50%,-50%);
+	}
+
+	.title-divider{
+		height:1px;
+		width:100%;
+		background-color:#eeeeee;
+		position: absolute;
+		bottom:0px;
+		left:0px;
+	}
+
+	.back-button{
+		position:absolute;
+		top:8px !important;
+		z-index:100;
+		display:none !important;
+	}
+}
