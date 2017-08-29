@@ -25,12 +25,25 @@ export class VenueList implements OnInit{
   }
 
   ngOnInit(): void {
-    this.venues = this.utils.order_array_by(this.venues,'followers');
+    this.select_top_venues();
     for(var i=0; i<this.venues.length; i++){
       //console.log(i+') name: '+this.venues[i].name+', '+'instagram: '+this.venues[i].instagram+', '+'followers: '+this.venues[i].followers)
     }
     this.get_distances(function(){});
 	}
+
+  select_top_venues(): void{
+    this.venues = this.utils.order_array_by(this.venues,'followers');
+    console.log(this.location.Population);
+    var num_results = Math.round(this.location.Population/30000);
+    if(num_results > 20){
+      num_results = 20;
+    }
+    if(num_results < 2){
+      num_results = 2;
+    }
+    this.venues = this.venues.slice(0,num_results);
+  }
 
   get_distances(callback): void{
       for(var i=0; i<this.venues.length; i++){
