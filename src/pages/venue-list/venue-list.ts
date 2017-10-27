@@ -17,6 +17,7 @@ export class VenueList implements OnInit{
 	venues: Venue[];
 	location : Location;
   distances : number[];
+  venue_type : string = "food";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private venueService: VenueService, private utils: UtilService , private headerService: HeaderService) {
   	this.location = this.navParams.get('location');
@@ -31,6 +32,16 @@ export class VenueList implements OnInit{
     }
     this.get_distances(function(){});
 	}
+
+  change_type(event: any){
+    console.log(this.venue_type);
+    var self = this;
+    self.venueService.get_venues(this.venue_type,this.location,function(venues){
+      self.venues = venues;
+      self.select_top_venues();
+      self.get_distances(function(){});
+    });
+  }
 
   select_top_venues(): void{
     this.venues = this.utils.order_array_by(this.venues,'followers');

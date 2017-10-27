@@ -10,7 +10,7 @@ export class VenueService {
 
 	constructor(public afd: AngularFireDatabase) { }
 
-  get_venues(type: String, location: SearchLocation, callback: any){
+  get_venues(type: String, location: any, callback: any){
 		var venues = this.afd.object('/'+type+'/'+location.key, { preserveSnapshot: true });
 		venues.subscribe(snapshot => {
 		  callback(snapshot.val());
