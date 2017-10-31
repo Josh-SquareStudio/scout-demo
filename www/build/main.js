@@ -43,9 +43,12 @@ var HomePage = (function () {
         this.headerService.homeIcons();
     };
     HomePage.prototype.getSearchLocations = function () {
-        var _this = this;
-        this.locationService.getSearchLocations().then(function (locations) {
-            _this.locations = locations;
+        var self = this;
+        this.locationService.getListOfLocations(function (locations) {
+            self.locations = [];
+            for (var key in locations) {
+                self.locations.push({ name: locations[key].City_Plain, key: key });
+            }
         });
     };
     HomePage.prototype.getItems = function (ev) {
@@ -215,10 +218,9 @@ var VenueService = (function () {
 }());
 VenueService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
 ], VenueService);
 
-var _a;
 //# sourceMappingURL=venue.service.js.map
 
 /***/ }),
@@ -538,10 +540,9 @@ VenueList = __decorate([
         selector: 'venue-list',template:/*ion-inline-start:"C:\dev\ionic\CITY\src\pages\venue-list\venue-list.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content>\n\n	<h1 class="location-title">{{location.City_Plain}}</h1>\n\n	<ion-list>\n\n	  <ion-item>\n\n	    <ion-label>Type</ion-label>\n\n	    <ion-select [(ngModel)]="venue_type" (ngModelChange)="change_type($event)">\n\n	      <ion-option value="food">Food</ion-option>\n\n	      <ion-option value="drinks">Drinks</ion-option>\n\n	      <ion-option value="coffee">Coffee</ion-option>\n\n	    </ion-select>\n\n	  </ion-item>\n\n	</ion-list>\n\n	<ion-list no-lines>\n\n		<ion-item *ngFor="let venue of venues" (click)="onSelect(venue)" class="venue" text-wrap>\n\n			<img class="venue-image" src="{{venue.most_liked_media}}"/>\n\n			<p class="venue-distance"><!-- {{venue.distance}} -->0 km</p>\n\n			<h1 class="venue-name">{{venue.name}}</h1>\n\n			<p class="venue-bio">{{venue.bio}}</p>\n\n			<div class="venue-divider"></div>\n\n		</ion-item>\n\n	</ion-list>\n\n</ion-content>'/*ion-inline-end:"C:\dev\ionic\CITY\src\pages\venue-list\venue-list.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */]]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__["a" /* VenueService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__["a" /* VenueService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__app_util_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_util_util_service__["a" /* UtilService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_4__app_util_util_service__["a" /* UtilService */], __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */]])
 ], VenueList);
 
-var _a, _b, _c, _d, _e;
 //# sourceMappingURL=venue-list.js.map
 
 /***/ }),
@@ -918,6 +919,13 @@ var LocationService = (function () {
     };
     LocationService.prototype.getFirebaseLocation = function (location, callback) {
         var loc = this.afd.object('/locations/' + location.key, { preserveSnapshot: true });
+        loc.subscribe(function (snapshot) {
+            console.log(snapshot.val());
+            callback(snapshot.val());
+        });
+    };
+    LocationService.prototype.getListOfLocations = function (callback) {
+        var loc = this.afd.object('/locations', { preserveSnapshot: true });
         loc.subscribe(function (snapshot) {
             console.log(snapshot.val());
             callback(snapshot.val());

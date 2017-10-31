@@ -29,9 +29,13 @@ export class HomePage implements OnInit{
 	}
 
   getSearchLocations() {
-    this.locationService.getSearchLocations().then((locations) => {
-    	this.locations = locations;
-    });
+    var self = this;
+    this.locationService.getListOfLocations(function(locations){
+      self.locations = [];
+      for(var key in locations){
+        self.locations.push({name:locations[key].City_Plain,key:key});
+      }
+    })
   }
 
   getItems(ev: any) {

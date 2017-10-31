@@ -21,4 +21,12 @@ export class LocationService {
 		});
   }
 
+  getListOfLocations(callback:any){
+    var loc = this.afd.object('/locations', { preserveSnapshot: true });
+    loc.subscribe(snapshot => {
+      console.log(snapshot.val());
+      callback(snapshot.val());
+    });
+  }
+
 }
