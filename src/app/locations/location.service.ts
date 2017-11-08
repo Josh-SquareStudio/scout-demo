@@ -14,6 +14,7 @@ export class LocationService {
   }
 
   getFirebaseLocation(location: SearchLocation, callback: any){
+    console.log(location);
 		var loc = this.afd.object('/locations/'+location.key, { preserveSnapshot: true });
 		loc.subscribe(snapshot => {
       console.log(snapshot.val());

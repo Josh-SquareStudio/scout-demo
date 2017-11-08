@@ -508,15 +508,15 @@ var VenueList = (function () {
     };
     VenueList.prototype.select_top_venues = function () {
         this.venues = this.utils.order_array_by(this.venues, 'followers');
-        console.log(this.location.Population);
-        var num_results = Math.round(this.location.Population / 30000);
-        if (num_results > 20) {
-            num_results = 20;
-        }
-        if (num_results < 2) {
-            num_results = 2;
-        }
-        this.venues = this.venues.slice(0, num_results);
+        // console.log(this.location.Population);
+        // var num_results = Math.round(this.location.Population/30000);
+        // if(num_results > 20){
+        //   num_results = 20;
+        // }
+        // if(num_results < 2){
+        //   num_results = 2;
+        // }
+        // this.venues = this.venues.slice(0,num_results);
     };
     VenueList.prototype.get_distances = function (callback) {
         for (var i = 0; i < this.venues.length; i++) {
@@ -537,7 +537,7 @@ var VenueList = (function () {
 }());
 VenueList = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'venue-list',template:/*ion-inline-start:"C:\dev\ionic\CITY\src\pages\venue-list\venue-list.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content>\n\n	<h1 class="location-title">{{location.City_Plain}}</h1>\n\n	<ion-list>\n\n	  <ion-item>\n\n	    <ion-label>Type</ion-label>\n\n	    <ion-select [(ngModel)]="venue_type" (ngModelChange)="change_type($event)">\n\n	      <ion-option value="food">Food</ion-option>\n\n	      <ion-option value="drinks">Drinks</ion-option>\n\n	      <ion-option value="coffee">Coffee</ion-option>\n\n	    </ion-select>\n\n	  </ion-item>\n\n	</ion-list>\n\n	<ion-list no-lines>\n\n		<ion-item *ngFor="let venue of venues" (click)="onSelect(venue)" class="venue" text-wrap>\n\n			<img class="venue-image" src="{{venue.most_liked_media}}"/>\n\n			<p class="venue-distance"><!-- {{venue.distance}} -->0 km</p>\n\n			<h1 class="venue-name">{{venue.name}}</h1>\n\n			<p class="venue-bio">{{venue.bio}}</p>\n\n			<div class="venue-divider"></div>\n\n		</ion-item>\n\n	</ion-list>\n\n</ion-content>'/*ion-inline-end:"C:\dev\ionic\CITY\src\pages\venue-list\venue-list.html"*/,
+        selector: 'venue-list',template:/*ion-inline-start:"C:\dev\ionic\CITY\src\pages\venue-list\venue-list.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content>\n\n	<h1 class="location-title">{{location.City_Plain}}</h1>\n\n	<ion-list>\n\n	  <ion-item>\n\n	    <ion-label>Type</ion-label>\n\n	    <ion-select [(ngModel)]="venue_type" (ngModelChange)="change_type($event)">\n\n	      <ion-option value="food">Food</ion-option>\n\n	      <ion-option value="drinks">Drinks</ion-option>\n\n	      <ion-option value="coffee">Coffee</ion-option>\n\n	    </ion-select>\n\n	  </ion-item>\n\n	</ion-list>\n\n	<ion-list no-lines>\n\n		<ion-item *ngFor="let venue of venues" (click)="onSelect(venue)" class="venue" text-wrap>\n\n			<img class="venue-image" src="{{venue.most_liked_media}}"/>\n\n			<p class="venue-distance"><!-- {{venue.distance}} -->0 km</p>\n\n			<p class="venue-distance">{{venue.prediction}}</p>\n\n			<a href="https://instagram.com/{{venue.instagram}}" target="_blank"><p class="venue-distance">{{venue.instagram}}</p></a>\n\n			<h1 class="venue-name">{{venue.name}}</h1>\n\n			<p class="venue-bio">{{venue.bio}}</p>\n\n			<div class="venue-divider"></div>\n\n		</ion-item>\n\n	</ion-list>\n\n</ion-content>'/*ion-inline-end:"C:\dev\ionic\CITY\src\pages\venue-list\venue-list.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_4__app_util_util_service__["a" /* UtilService */], __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */]])
@@ -780,12 +780,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 // Initialize Firebase
 var firebase_config = {
-    apiKey: "AIzaSyC4NpwiPVi-0bYfL9Q0JT5pcrDKYujPt3Y",
-    authDomain: "c-i-t-y.firebaseapp.com",
-    databaseURL: "https://c-i-t-y.firebaseio.com",
-    projectId: "c-i-t-y",
-    storageBucket: "c-i-t-y.appspot.com",
-    messagingSenderId: "438025464632"
+    apiKey: "AIzaSyA1S5Zv48ciri4AvvLC1aNBsQr21IXi2UQ",
+    authDomain: "scout-f7b83.firebaseapp.com",
+    databaseURL: "https://scout-f7b83.firebaseio.com",
+    projectId: "scout-f7b83",
+    storageBucket: "scout-f7b83.appspot.com",
+    messagingSenderId: "166508255488"
 };
 var cloudSettings = {
     'core': {
@@ -918,6 +918,7 @@ var LocationService = (function () {
         return Promise.resolve(__WEBPACK_IMPORTED_MODULE_1__search_locations__["a" /* LOCATIONS */]);
     };
     LocationService.prototype.getFirebaseLocation = function (location, callback) {
+        console.log(location);
         var loc = this.afd.object('/locations/' + location.key, { preserveSnapshot: true });
         loc.subscribe(function (snapshot) {
             console.log(snapshot.val());

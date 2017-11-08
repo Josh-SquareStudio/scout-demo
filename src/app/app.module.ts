@@ -25,12 +25,12 @@ import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
 // Initialize Firebase
 var firebase_config = {
-  apiKey: "AIzaSyC4NpwiPVi-0bYfL9Q0JT5pcrDKYujPt3Y",
-  authDomain: "c-i-t-y.firebaseapp.com",
-  databaseURL: "https://c-i-t-y.firebaseio.com",
-  projectId: "c-i-t-y",
-  storageBucket: "c-i-t-y.appspot.com",
-  messagingSenderId: "438025464632"
+  apiKey: "AIzaSyA1S5Zv48ciri4AvvLC1aNBsQr21IXi2UQ",
+  authDomain: "scout-f7b83.firebaseapp.com",
+  databaseURL: "https://scout-f7b83.firebaseio.com",
+  projectId: "scout-f7b83",
+  storageBucket: "scout-f7b83.appspot.com",
+  messagingSenderId: "166508255488"
 };
 
 const cloudSettings: CloudSettings = {

@@ -45,15 +45,15 @@ export class VenueList implements OnInit{
 
   select_top_venues(): void{
     this.venues = this.utils.order_array_by(this.venues,'followers');
-    console.log(this.location.Population);
-    var num_results = Math.round(this.location.Population/30000);
-    if(num_results > 20){
-      num_results = 20;
-    }
-    if(num_results < 2){
-      num_results = 2;
-    }
-    this.venues = this.venues.slice(0,num_results);
+    // console.log(this.location.Population);
+    // var num_results = Math.round(this.location.Population/30000);
+    // if(num_results > 20){
+    //   num_results = 20;
+    // }
+    // if(num_results < 2){
+    //   num_results = 2;
+    // }
+    // this.venues = this.venues.slice(0,num_results);
   }
 
   get_distances(callback): void{
