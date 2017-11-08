@@ -12,8 +12,8 @@
 	    <p class="venue-bio">{{venue.bio}}</p>
 		<ion-grid>
 		  	<ion-row *ngFor="let m of top_media">
-		    	<ion-col col-6><img src={{m[0].images.low_resolution.url}}/></ion-col>
-		    	<ion-col col-6><img src={{m[1].images.low_resolution.url}}/></ion-col>
+		    	<ion-col col-6><img src={{m[0].images.thumbnail.url}}/></ion-col>
+		    	<ion-col col-6><img src={{m[1].images.thumbnail.url}}/></ion-col>
 		  	</ion-row>
 		</ion-grid>
 	</div>

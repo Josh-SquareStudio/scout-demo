@@ -17,8 +17,8 @@
 		<ion-item *ngFor="let venue of venues" (click)="onSelect(venue)" class="venue" text-wrap>
 			<img class="venue-image" src="{{venue.most_liked_media}}"/>
 			<p class="venue-distance"><!-- {{venue.distance}} -->0 km</p>
-			<p class="venue-distance">{{venue.prediction}}</p>
-			<a href="https://instagram.com/{{venue.instagram}}" target="_blank"><p class="venue-distance">{{venue.instagram}}</p></a>
+			<!-- <p class="venue-distance">{{venue.prediction}}</p>
+			<a href="https://instagram.com/{{venue.instagram}}" target="_blank"><p class="venue-distance">{{venue.instagram}}</p></a> -->
 			<h1 class="venue-name">{{venue.name}}</h1>
 			<p class="venue-bio">{{venue.bio}}</p>
 			<div class="venue-divider"></div>
