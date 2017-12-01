@@ -25317,6 +25317,11 @@ venue-detail .venue {
   margin: 12px 0px;
 }
 
+venue-detail a {
+  color: black;
+  text-decoration: none;
+}
+
 venue-detail .venue-image {
   margin: 0px 0px;
 }

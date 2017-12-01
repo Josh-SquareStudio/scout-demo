@@ -8,7 +8,7 @@
 	  		<p class="venue-distance"><!-- {{venue.distance}} -->0 km</p>
 	  		<img class="favorite-heart" src={{heart_image}} (click)="favorite_venue()"/>
 	  	</div>
-	    <h1 class="venue-name">{{venue.name}}</h1>
+	   <a href="https:/instagram.com//{{venue.instagram}}"><h1 class="venue-name">{{venue.name}}</h1></a>
 	    <p class="venue-bio">{{venue.bio}}</p>
 		<ion-grid>
 		  	<ion-row *ngFor="let m of top_media">

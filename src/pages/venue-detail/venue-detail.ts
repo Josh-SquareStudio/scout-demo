@@ -52,7 +52,7 @@ export class VenueDetail implements OnInit{
     }
   }
 
-  check_favorite(){   
+  check_favorite(){
     var self = this;
     this.profileService.getProfile(function(profile){
       for(var i=0; i<profile.favorites.length; i++){
@@ -88,7 +88,7 @@ export class VenueDetail implements OnInit{
 
   _unfavorited(){
     this.favorited = false;
-    this.heart_image = '../../assets/icons/scoutHEART.png';   
+    this.heart_image = '../../assets/icons/scoutHEART.png';
   }
 
 }
