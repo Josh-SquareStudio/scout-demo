@@ -1,7 +1,7 @@
 export class Profile{
+	id: string;
 	name: string;
-	instagram: string;
-	bio: string;
-	profile_picture: string;
+	email: string;
+	picture: any;
 	favorites: string[];
 }

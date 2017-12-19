@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Geolocation } from 'ionic-native';
+//import { Geolocation } from 'ionic-native';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Injectable()
 export class UtilService{
@@ -8,14 +9,14 @@ export class UtilService{
 	lat: number;
 	lng: number;
 
-	constructor() {
+	constructor(private geolocation: Geolocation) {
 		this.browser = true;
 		this.get_location(function(){});
 	}
 
   get_location(callback): void{
     var self = this;
-    Geolocation.getCurrentPosition().then(res => {
+    this.geolocation.getCurrentPosition().then(res => {
       self.lat = res.coords.latitude;
       self.lng = res.coords.longitude;
       callback();
@@ -36,7 +37,7 @@ export class UtilService{
 	  var a =
 	    Math.sin(dLat/2) * Math.sin(dLat/2) +
 	    Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
-	    Math.sin(dLon/2) * Math.sin(dLon/2); 
+	    Math.sin(dLon/2) * Math.sin(dLon/2);
 	  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 	  var d = R * c; // Distance in km
 	  return parseFloat(d.toFixed(2));

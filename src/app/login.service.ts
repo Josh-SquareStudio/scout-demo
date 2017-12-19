@@ -20,7 +20,7 @@ export class LoginService {
 	}
 
 	createUser(response){
-		this.user = {//
+		this.user = {
 			access_token : response.token,
     	user_id : this.insta_info.social.instagram.data.username,
     	full_name : this.insta_info.social.instagram.data.full_name,

@@ -11,7 +11,7 @@ import { HomePage } from '../pages/home/home';
 })
 export class MyApp {
   //forever start /usr/local/bin/http-server /home/ec2-user/scout-demo/www
-  rootPage:any = HomePage;
+  rootPage:any = SplashPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
@@ -22,4 +22,3 @@ export class MyApp {
     });
   }
 }
-

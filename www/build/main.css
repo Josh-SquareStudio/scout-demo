@@ -25327,8 +25327,9 @@ venue-detail .venue-image {
 }
 
 venue-detail .venue-distance {
-  margin: 5px 0px;
+  margin: 10px 0px;
   display: inline-block;
+  text-decoration: underline;
 }
 
 venue-detail .favorite-heart {
@@ -25339,7 +25340,7 @@ venue-detail .favorite-heart {
 }
 
 venue-detail .venue-name {
-  margin: 15px 0px;
+  margin: 20px 0px;
 }
 
 venue-detail .venue-bio {

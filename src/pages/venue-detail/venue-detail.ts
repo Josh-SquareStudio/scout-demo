@@ -6,6 +6,7 @@ import { Media } from '../../app/media/media';
 import { UtilService } from '../../app/util/util.service';
 import { HeaderService } from '../../components/header/header.service';
 import { ProfileService } from '../profile/profile.service';
+import { Platform } from 'ionic-angular'; //for checking if device is ios for different maps app
 
 @Component({
   selector: 'venue-detail',
@@ -21,7 +22,7 @@ export class VenueDetail implements OnInit{
 	top_media: any[];
   heart_image: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private utils: UtilService, private headerService: HeaderService, private profileService: ProfileService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private utils: UtilService, private headerService: HeaderService, private profileService: ProfileService, private plt: Platform) {
   	this.venue = this.navParams.get('venue');
   	this.media = this.navParams.get('media');
     this.venue_link = this.navParams.get('venue_link');
@@ -74,6 +75,20 @@ export class VenueDetail implements OnInit{
       this.profileService.unFavoriteVenue(this.venue_link,function(){
         self._unfavorited();
       });
+    }
+  }
+
+  open_map(){
+    var geocoords = this.venue.lat + ',' + this.venue.lng;
+
+    if (this.plt.is('ios')) {
+      window.open('maps://?q=' + geocoords, '_system');
+    }
+    else if(this.plt.is('android')){
+      window.open('geo:0,0?q=' + geocoords, '_system');
+    }
+    else{
+      window.open('https://maps.google.com/maps/place/' + geocoords, '_blank');
     }
   }
 

@@ -10,13 +10,17 @@ import { HomePage } from '../home/home'
 })
 export class LoginPage implements OnInit{
 
+  userData: any;
+
   constructor(public navCtrl: NavController, private login: LoginService) {
-  	
+
   }
 
 	ngOnInit(): void {
 
 	}
+
+
 
 	onLoginClick(location: Location){
     var self = this;

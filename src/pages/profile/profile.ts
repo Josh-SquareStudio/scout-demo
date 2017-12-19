@@ -5,6 +5,7 @@ import { Profile }  from './profile.class';
 import { ProfileService } from './profile.service';
 import { VenueService } from '../../app/venues/venue.service';
 import { VenueDetail } from '../venue-detail/venue-detail';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'profile-page',
@@ -13,16 +14,17 @@ import { VenueDetail } from '../venue-detail/venue-detail';
 })
 export class ProfilePage implements OnInit{
 
-	favorite_links : any[];
-	favorite_venues : any[];
-	profile_name : string;
-	profile_bio : string;
-	profile_picture : string;
+  id: string;
+	name: string;
+	email: string;
+	profile_picture: string;
+	favorite_links: any[];
+  favorite_venues: any[];
 
-	constructor(public navCtrl: NavController, private headerService: HeaderService, private profileService: ProfileService, private venueService: VenueService) {
+	constructor(public navCtrl: NavController, private headerService: HeaderService, private profileService: ProfileService, private venueService: VenueService, private afd: AngularFireDatabase) {
 		this.headerService.profileIcons();
 		this.favorite_venues = [];
-		this.favorite_links = [];
+	  this.favorite_links = [];
 	}
 
 	ngOnInit(){
@@ -35,32 +37,34 @@ export class ProfilePage implements OnInit{
 
 	setupProfile(){
 		var self = this;
-		this.favorite_venues = [];
-		this.favorite_links = [];
 		this.getProfileInfo(function(){
-			self.getProfileFavorites(0,[],function(favorites){
-				for(var i=0; i<favorites.length; i+=2){
-					if((i+1)<favorites.length){
-						self.favorite_venues.push([favorites[i],favorites[i+1]]);
-					}
-					else{
-						self.favorite_venues.push([favorites[i],{link:"",venue:{most_liked_media:"",name:""},present:false}]);
-					}
-				}
-			})
-		});		
+      self.favorite_links = self.getFavorites(self.id);
+    }); 
 	}
 
 	getProfileInfo(callback){
 		var self = this;
-		this.profileService.getProfile(function(profile){
-			self.profile_name = profile.instagram;
-			self.profile_bio = profile.bio;
-			self.profile_picture = profile.profile_picture;
-			self.favorite_links = profile.favorites;
-			callback();
+		this.profileService.checkUser(function(profile){
+			self.id = profile.id;
+			self.name = profile.name;
+			self.email = profile.email;
+      self.profile_picture = profile.picture.data.url;
+      callback();
 		});
 	}
+
+  getFavorites(id: string){
+		var favorites = this.afd.object('/profiles/' + id + '/favorites', {preserveSnapshot: true});
+		favorites.subscribe(snapshot =>{
+			//alert(JSON.stringify(snapshot.val()))
+			return snapshot.val();
+		})
+		return [];
+	}
+
+
+
+
 
 	getProfileFavorites(i,favorites,callback){
 		var self = this;

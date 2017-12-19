@@ -15,6 +15,7 @@ import { HeaderComponent } from '../components/header/header.component';
 
 import { ProfileService } from '../pages/profile/profile.service';
 import { UtilService } from './util/util.service';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -22,6 +23,8 @@ import { AngularFireModule } from 'angularfire2';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+
+import { Facebook } from '@ionic-native/facebook';
 
 // Initialize Firebase
 var firebase_config = {
@@ -75,7 +78,9 @@ const cloudSettings: CloudSettings = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseProvider,
     ProfileService,
-    UtilService
+    UtilService,
+    Facebook,
+    Geolocation
   ]
 })
 export class AppModule {}
