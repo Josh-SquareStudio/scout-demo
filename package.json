@@ -28,8 +28,11 @@
     "@ionic/cloud-angular": "^0.12.0",
     "@ionic/storage": "2.0.1",
     "angularfire2": "^4.0.0-rc.0",
-    "cordova-android": "6.4.0",
+    "com.testfairy.cordova-plugin": "^2.5.0",
+    "cordova-android": "git+https://github.com/infil00p/cordova-android.git#StudioThreeFix",
+    "cordova-browser": "^5.0.3",
     "cordova-ios": "4.5.4",
+    "cordova-plugin-browsersync": "^1.1.0",
     "cordova-plugin-browsertab": "^0.2.0",
     "cordova-plugin-buildinfo": "^2.0.1",
     "cordova-plugin-compat": "^1.2.0",
@@ -45,6 +48,7 @@
     "cordova-universal-links-plugin": "^1.2.1",
     "express": "^4.15.4",
     "firebase": "^3.9.*",
+    "glob": "^7.1.1",
     "ionic-angular": "3.6.0",
     "ionic-plugin-keyboard": "^2.2.1",
     "ionicons": "3.0.0",
@@ -68,7 +72,9 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-whitelist": {},
       "ionic-plugin-keyboard": {},
-      "cordova-plugin-geolocation": {},
+      "cordova-plugin-geolocation": {
+        "GEOLOCATION_USAGE_DESCRIPTION": "To tell you how far a venue is from you"
+      },
       "cordova-plugin-facebook4": {
         "APP_ID": "164571787607121",
         "APP_NAME": "Scout App"
@@ -81,11 +87,13 @@
         "ANDROID_SCHEME": " ",
         "ANDROID_HOST": " ",
         "ANDROID_PATHPREFIX": "/"
-      }
+      },
+      "cordova-plugin-browsersync": {},
+      "com.testfairy.cordova-plugin": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "browser"
     ]
   }
 }
