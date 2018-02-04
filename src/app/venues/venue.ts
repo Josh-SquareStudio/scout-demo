@@ -12,5 +12,7 @@ export class Venue {
   most_liked_media: string;
   name: string;
   profile_picture: string;
-	type: string;	
+	type: string;
+	price: number;
+	interactions: number;
 }

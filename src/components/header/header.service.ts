@@ -18,7 +18,7 @@ export class HeaderService {
 		this.showAccount(true);
 		this.showSearch(false);
 		this.showLeftBack(false);
-		this.showRightBack(false);		
+		this.showRightBack(false);
 	}
 
 	venueListIcons(){
@@ -34,15 +34,16 @@ export class HeaderService {
 		this.showAccount(true);
 		this.showSearch(false);
 		this.showLeftBack(false);
-		this.showRightBack(true);		
+		this.showRightBack(true);
 	}
 
 	profileIcons(){
 		this.showMap(false);
 		this.showAccount(false);
 		this.showSearch(true);
-		this.showLeftBack(true);
-		this.showRightBack(false);		
+		//this.showLeftBack(true);
+		this.showLeftBack(false);
+		this.showRightBack(false);
 	}
 
 	showMap(b){

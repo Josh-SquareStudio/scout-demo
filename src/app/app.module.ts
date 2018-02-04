@@ -25,6 +25,7 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
 import { Facebook } from '@ionic-native/facebook';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // Initialize Firebase
 var firebase_config = {
@@ -80,7 +81,8 @@ const cloudSettings: CloudSettings = {
     ProfileService,
     UtilService,
     Facebook,
-    Geolocation
+    Geolocation,
+    AngularFireAuthModule
   ]
 })
 export class AppModule {}

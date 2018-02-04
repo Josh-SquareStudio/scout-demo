@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Profile }  from './profile.class';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { Facebook } from '@ionic-native/facebook';
 
 @Injectable()
 export class ProfileService {
 
 	profile : Profile;
 
-	constructor(public afd: AngularFireDatabase, private facebook: Facebook) { }
+	constructor(private afd: AngularFireDatabase, private facebook: Facebook) {
+
+	}
 
 	checkUser(callback: any){
     var self = this;
-    this.facebook.getLoginStatus().then((response) =>{
+		this.facebook.getLoginStatus().then((response) =>{
       if (response.status === 'connected') {
-				//get user data from facebook
 				self.facebook.api('/' + response.authResponse.userID + '?fields=id,name,email,picture.type(large)',[]).then((response)=>{
 					self.profile = response;
-					self.profile.favorites = [];
-
 					callback(self.profile);
         }, (error) => {
           alert(error);
@@ -26,7 +25,8 @@ export class ProfileService {
       } else if (response.status === 'not_authorized') {
         alert('You have not authorized this app with facebook');
       } else {
-        alert('You are not logged in '); //shoudn't ever happen
+				//not logged in
+        //self.navCtrl.push() //shoudn't ever happen
       }
     });
   }
@@ -44,8 +44,8 @@ export class ProfileService {
 		}
   }
 
+  //get the favourites of the facebook user
   getFirebaseProfile(profileString: string,callback:any){
-  	var self = this;
 		var profile = this.afd.object(profileString, { preserveSnapshot: true });
 		profile.subscribe(snapshot => {																								//convert favorites to array for ease
 			var p = snapshot.val();
@@ -58,34 +58,60 @@ export class ProfileService {
 		});
   }
 
-  favoriteVenue(venueString: string, callback: any){
+  /*favoriteVenue(venueString: string, callback: any){
   	var self = this;
   	var favorites = this.afd.list('/profiles/'+this.profile.id+'/favorites');
   	favorites.push({link:venueString}).then((item) => {
   		self.getFirebaseProfile('/profiles/'+this.profile.id,function(profile){
-  			callback();
+				//profile.favorites is a list of objects with profile.favorites[i].link being the link
+  			//callback();
   		});
   	});
-  }
+  }*/
+
+	getFavoritesSubscribe(id: string, callback: any){
+		var favorites = this.afd.object('/profiles/' + id + '/favorites', {preserveSnapshot: true});
+		favorites.subscribe(snapshot =>{
+      callback(snapshot.val());
+		});
+	}
+
+	getFavorites(id: string, callback: any){
+		var favorites = this.afd.object('/profiles/' + id + '/favorites', {preserveSnapshot: true}).take(1);
+		favorites.subscribe(snapshot =>{
+      callback(snapshot.val());
+		});
+	}
+
+	getFavoritesAsList(){
+		var f = this.afd.list('/profiles/'+this.profile.id+'/favorites');
+		console.log(f);
+		return f;
+	}
+
+	favoriteVenue(venueString : string, callback: any){
+		this.afd.list('/profiles/'+this.profile.id+'/favorites').push({link:venueString}).then(_ => callback());
+	}
 
   unFavoriteVenue(venueString: string, callback: any){
   	var self = this;
-  	this.profile.favorites.push(venueString);
-  	this.getProfile(function(p){
-  		var delete_key = "";
-			for (var key in p.favorites) {
-		  	if (p.favorites[key].link == venueString){
-		  		delete_key = p.favorites[key].key;
-		  	}
+		var deleteKey = "";
+
+  	//this.profile.favorites.push(venueString);
+  	this.getFavorites(this.profile.id, function(favs){
+			for (var key in favs){
+				if(favs[key].link == venueString){
+					deleteKey = key;
+					continue;
+				}
 			}
-			var favorites = self.afd.list('/profiles/'+this.profile.id+'/favorites');
-			favorites.remove(delete_key).then((item) => {
-				console.log('removed');
-	  		self.getFirebaseProfile('/profiles/-'+this.profile.id,function(profile){
-	  			callback();
-	  		});
-	  	});
-  	})
+
+			//alert(deleteKey);
+
+			if(deleteKey != ""){
+				self.afd.list('/profiles/'+self.profile.id+'/favorites').remove(deleteKey).then(_ => callback());
+			}
+  	});
   }
 
 }

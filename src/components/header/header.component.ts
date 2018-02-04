@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { HomePage } from '../../pages/home/home';
 import { ProfilePage } from '../../pages/profile/profile';
 import { LoginPage } from '../../pages/login/login';
@@ -23,7 +23,7 @@ export class HeaderComponent{
   }
 
 	account(){
-		this.navCtrl.push(ProfilePage);
+		this.navCtrl.setRoot(ProfilePage);
 	}
 
 	search(){

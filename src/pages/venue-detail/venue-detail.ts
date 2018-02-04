@@ -1,12 +1,12 @@
 import { Component, OnInit} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Location } from '../../app/locations/location';
 import { Venue } from '../../app/venues/venue';
 import { Media } from '../../app/media/media';
 import { UtilService } from '../../app/util/util.service';
 import { HeaderService } from '../../components/header/header.service';
 import { ProfileService } from '../profile/profile.service';
 import { Platform } from 'ionic-angular'; //for checking if device is ios for different maps app
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   selector: 'venue-detail',
@@ -21,8 +21,9 @@ export class VenueDetail implements OnInit{
   favorited : boolean;
 	top_media: any[];
   heart_image: string;
+  checked: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private utils: UtilService, private headerService: HeaderService, private profileService: ProfileService, private plt: Platform) {
+  constructor(private afd: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams, private utils: UtilService, private headerService: HeaderService, private profileService: ProfileService, private plt: Platform) {
   	this.venue = this.navParams.get('venue');
   	this.media = this.navParams.get('media');
     this.venue_link = this.navParams.get('venue_link');
@@ -30,6 +31,7 @@ export class VenueDetail implements OnInit{
     this.favorited = false;
     this.heart_image = '../../assets/icons/scoutHEART.png';
     this.headerService.venueDetailIcons();
+    this.checked = false;
   }
 
 	ngOnInit(): void {
@@ -55,25 +57,29 @@ export class VenueDetail implements OnInit{
 
   check_favorite(){
     var self = this;
-    this.profileService.getProfile(function(profile){
-      for(var i=0; i<profile.favorites.length; i++){
-        if(self.venue_link == profile.favorites[i].link){
-          self._favorited();
-        }
-      }
-    });
+      this.profileService.checkUser(function(profile){
+        var favorites = self.afd.object('/profiles/' + profile.id + '/favorites', {preserveSnapshot: true}).take(1);;
+    		favorites.subscribe(snapshot =>{
+            var snap = snapshot.val();
+            for (var key in snap){
+              if(self.venue_link == snap[key].link){
+                self._favorite();
+                continue;
+              }
+            }
+    		})
+      });
   }
 
   favorite_venue(){
     var self = this;
-    if(!(this.favorited)){
+    if(!this.favorited){
       this.profileService.favoriteVenue(this.venue_link,function(){
-        self._favorited();
+        self._favorite();
       });
-    }
-    else{
+    }else{
       this.profileService.unFavoriteVenue(this.venue_link,function(){
-        self._unfavorited();
+        self._unfavorite();
       });
     }
   }
@@ -91,17 +97,14 @@ export class VenueDetail implements OnInit{
       window.open('https://maps.google.com/maps/place/' + geocoords, '_blank');
     }
   }
-
-  get_distance(){
-
-  }
-
-  _favorited(){
+  _favorite(){
+    //alert('fav');
     this.favorited = true;
     this.heart_image = '../../assets/icons/scoutHEARTFULL.png';
   }
 
-  _unfavorited(){
+  _unfavorite(){
+    //alert('unfav');
     this.favorited = false;
     this.heart_image = '../../assets/icons/scoutHEART.png';
   }

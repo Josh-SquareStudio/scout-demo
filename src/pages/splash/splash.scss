@@ -1,0 +1,42 @@
+.loginButton{
+  height: 50px;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  top: calc(50% - 25px);
+  padding: 0;
+  width: 80%;
+  left: 10%;
+}
+
+.loginButtonText{
+  height: 50px;
+  border-right: 2px solid black;
+  text-align: center;
+  line-height: 50px;
+  width: calc(100% - 50px);
+}
+
+.loginButtonIcon{
+  height: 50px;
+  width: 50px;
+  //color: #4267b2; //facebook blue
+  color: black;
+  text-align: center;
+  line-height: 55px;
+  font-size: 1.5em;
+}
+
+.splashContent .scroll-content{
+  background-image: url('../../assets/images/scout-splash.jpg');
+  background-size: cover;
+  border: 15px solid white;
+}
+
+.platoform-ios .scroll-content{
+  border-top: 20px solid white !important;
+}
+
+ion-icon{
+  padding: 0 !important;
+}

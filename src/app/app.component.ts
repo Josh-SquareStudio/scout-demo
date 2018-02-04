@@ -1,3 +1,5 @@
+//declare var TestFairy: any;
+
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -19,6 +21,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      //TestFairy.begin("7a5cb39e8543159f61ffe5483fe5f0e9f1c22d33");
     });
   }
 }

@@ -25205,8 +25205,8 @@ ion-navbar.toolbar {
 }
 
 @font-face {
-  font-family: "Bodoni";
-  src: url(../assets/fonts/BodoniFLF.ttf) format("woff");
+  font-family: "Domine";
+  src: url(../assets/fonts/Domine-Regular.ttf) format("woff");
 }
 
 body, span, button, p, ion-item {
@@ -25214,11 +25214,15 @@ body, span, button, p, ion-item {
 }
 
 h1, h2, h3, h4, h5, h6, ion-title, input {
-  font-family: "Bodoni" !important;
+  font-family: "Domine" !important;
 }
 
 ion-header::after {
   background-image: none !important;
+}
+
+app-header .logo {
+  height: 15px;
 }
 
 app-header .nav-icon-container {
@@ -25312,6 +25316,48 @@ profile-page .favorites-title {
   margin-bottom: 50px;
 }
 
+.loginButton {
+  height: 50px;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  top: calc(50% - 25px);
+  padding: 0;
+  width: 80%;
+  left: 10%;
+}
+
+.loginButtonText {
+  height: 50px;
+  border-right: 2px solid black;
+  text-align: center;
+  line-height: 50px;
+  width: calc(100% - 50px);
+}
+
+.loginButtonIcon {
+  height: 50px;
+  width: 50px;
+  color: black;
+  text-align: center;
+  line-height: 55px;
+  font-size: 1.5em;
+}
+
+.splashContent .scroll-content {
+  background-image: url("../../assets/images/scout-splash.jpg");
+  background-size: cover;
+  border: 15px solid white;
+}
+
+.platoform-ios .scroll-content {
+  border-top: 20px solid white !important;
+}
+
+ion-icon {
+  padding: 0 !important;
+}
+
 venue-detail .venue {
   text-align: center;
   margin: 12px 0px;
@@ -25330,6 +25376,12 @@ venue-detail .venue-distance {
   margin: 10px 0px;
   display: inline-block;
   text-decoration: underline;
+}
+
+venue-detail .price {
+  margin-right: 8px;
+  display: inline-block;
+  font-size: 1.1em;
 }
 
 venue-detail .favorite-heart {
@@ -25374,7 +25426,11 @@ venue-list .venue-name {
 }
 
 venue-list .venue-bio {
-  margin: 5px 0px 40px 0px;
+  margin: 5px 0px 20px 0px;
+}
+
+venue-list .venue-interactions {
+  margin: 5px 0px 20px 0px;
 }
 
 venue-list .venue-divider {
