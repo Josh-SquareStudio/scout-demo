@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { SearchLocation } from './search-location';
 import { LOCATIONS } from './search-locations';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 export class LocationService {

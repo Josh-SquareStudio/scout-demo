@@ -19,9 +19,10 @@ export class UtilService{
     this.geolocation.getCurrentPosition().then(res => {
       self.lat = res.coords.latitude;
       self.lng = res.coords.longitude;
+			//alert(self.lat + " " + self.lng);
       callback();
     }).catch((error) => {
-      console.log('Error getting location', error);
+      console.log('Error getting location ',error);
       callback();
     });
   }

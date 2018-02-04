@@ -1,9 +1,10 @@
 <ion-header>
 	<app-header></app-header>
 </ion-header>
-<ion-content>
-	<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-	  <ion-list *ngFor="let filter_location of filter_locations" (click)="onSelect(filter_location)">
-    	<ion-item class="card-title">{{ filter_location.name }}</ion-item>
-	  </ion-list>
+<ion-content [attr.noScroll]="shouldScroll" class="homeContent">
+	<ion-searchbar mode="md" class="searchbar" (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-list no-lines *ngFor="let filter_location of filter_locations" (click)="onSelect(filter_location)">
+  	<ion-item class="card-title">{{ filter_location.name }}</ion-item>
+  </ion-list>
+	<div class="homeImage"></div>
 </ion-content>

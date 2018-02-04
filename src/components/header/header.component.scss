@@ -1,5 +1,9 @@
 app-header{
 
+	.logo{
+		height: 15px;
+	}
+
 	.nav-icon-container{
 		display: inline-block;
 		position:absolute;
@@ -35,13 +39,17 @@ app-header{
 	ion-navbar{
 		text-align:center;
 	}
+
 	ion-title{
-		margin-bottom:10px;
 		display:inline-block;
 		position:absolute;
 		left:50%;
 		top:50%;
 		transform:translate(-50%,-50%);
+	}
+
+	ion-title img{
+		display: inline-block;
 	}
 
 	.title-divider{

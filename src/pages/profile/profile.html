@@ -11,15 +11,19 @@
 	<div class="favorites">
 		<h1 class="favorites-title">Favorites</h1>
 		<ion-grid>
-		  	<ion-row *ngFor="let f of favorite_venues">
+		  	<ion-row *ngFor="let f of favs">
 		    	<ion-col col-6>
 		    		<img class="favorites-image" src={{f[0].venue.most_liked_media}} (click)="openFavorite(f[0])"/>
 		    		<p class="favorites-name" (click)="openFavorite(f[0])">{{f[0].venue.name}}</p>
 		    	</ion-col>
-		    	<ion-col col-6 *ngIf="f[1].present">
+					<ion-col col-6>
 		    		<img class="favorites-image" src={{f[1].venue.most_liked_media}} (click)="openFavorite(f[1])"/>
 		    		<p class="favorites-name" (click)="openFavorite(f[1])">{{f[1].venue.name}}</p>
 		    	</ion-col>
+					<!--<ion-col col-6>
+		    		<img class="favorites-image" src={{favorite_venues[i+1].venue.most_liked_media}} (click)="openFavorite(favorite_venues[i+1])"/>
+		    		<p class="favorites-name" (click)="openFavorite(favorite_venues[i+1])">{{favorite_venues[i+1].venue.name}}</p>
+		    	</ion-col>-->
 		  	</ion-row>
 		</ion-grid>
 	</div>

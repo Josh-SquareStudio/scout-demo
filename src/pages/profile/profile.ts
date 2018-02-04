@@ -1,17 +1,16 @@
 import { Component, OnInit} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { HeaderService } from '../../components/header/header.service';
-import { Profile }  from './profile.class';
 import { ProfileService } from './profile.service';
 import { VenueService } from '../../app/venues/venue.service';
 import { VenueDetail } from '../venue-detail/venue-detail';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'profile-page',
   templateUrl: 'profile.html',
   providers: [HeaderService, VenueService]
 })
+
 export class ProfilePage implements OnInit{
 
   id: string;
@@ -20,26 +19,55 @@ export class ProfilePage implements OnInit{
 	profile_picture: string;
 	favorite_links: any[];
   favorite_venues: any[];
+  favs: any[];
 
-	constructor(public navCtrl: NavController, private headerService: HeaderService, private profileService: ProfileService, private venueService: VenueService, private afd: AngularFireDatabase) {
+	constructor(public navCtrl: NavController, private headerService: HeaderService, private profileService: ProfileService, private venueService: VenueService) {
 		this.headerService.profileIcons();
 		this.favorite_venues = [];
 	  this.favorite_links = [];
+    this.favs = [];
 	}
 
 	ngOnInit(){
-		//this.setupProfile();
+		this.setupProfile();
 	}
 
 	ionViewWillEnter() {
-    this.setupProfile();
+
+  }
+
+  pipeFavorites(){
+    this.favs = [];
+    for(var i = 0; i < this.favorite_venues.length; i++){
+      if(i == this.favorite_venues.length - 1){
+        this.favs.push([this.favorite_venues[i], {"link":"","venue":"","bio":"","followers":0,"key":""}]);
+        //alert(JSON.stringify(this.favorite_venues[i]));
+        continue;
+      }
+      if(i%2 == 0){
+        this.favs.push([this.favorite_venues[i], this.favorite_venues[i+1]]);
+      }
+    }
   }
 
 	setupProfile(){
 		var self = this;
 		this.getProfileInfo(function(){
-      self.favorite_links = self.getFavorites(self.id);
-    }); 
+      self.profileService.getFavoritesSubscribe(self.id, function(favorites){
+        self.favorite_links = favorites;
+
+        for(var key in favorites){
+          self.getFavoriteVenue(favorites[key].link, function(venue){
+            self.favorite_venues.push({
+              link: favorites[key].link,
+              venue: venue,
+              present: true
+            });
+            self.pipeFavorites();
+          });
+        }
+      });
+    });
 	}
 
 	getProfileInfo(callback){
@@ -53,18 +81,11 @@ export class ProfilePage implements OnInit{
 		});
 	}
 
-  getFavorites(id: string){
-		var favorites = this.afd.object('/profiles/' + id + '/favorites', {preserveSnapshot: true});
-		favorites.subscribe(snapshot =>{
-			//alert(JSON.stringify(snapshot.val()))
-			return snapshot.val();
-		})
-		return [];
-	}
-
-
-
-
+  getFavoriteVenue(link, callback){
+    this.venueService.get_favorite_venue(link, function(venue){
+      callback(venue);
+    })
+  }
 
 	getProfileFavorites(i,favorites,callback){
 		var self = this;

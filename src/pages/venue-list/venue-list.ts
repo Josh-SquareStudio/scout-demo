@@ -27,13 +27,11 @@ export class VenueList implements OnInit{
 
   ngOnInit(): void {
     this.select_top_venues();
-    for(var i=0; i<this.venues.length; i++){
-      //console.log(i+') name: '+this.venues[i].name+', '+'instagram: '+this.venues[i].instagram+', '+'followers: '+this.venues[i].followers)
-    }
     this.get_distances(function(){});
 	}
 
-  change_type(event: any){
+  change_type(type : string){
+    this.venue_type = type;
     console.log(this.venue_type);
     var self = this;
     self.venueService.get_venues(this.venue_type,this.location,function(venues){
@@ -43,22 +41,50 @@ export class VenueList implements OnInit{
     });
   }
 
+  filterFollowers(minimumFollowers){
+    var venues = [];
+    for(var i = 0; i < this.venues.length; i++){
+      if(this.venues[i].followers > 300){
+        venues.push(this.venues[i]);
+      }
+    }
+    this.venues = venues;
+  }
+
   select_top_venues(): void{
     this.venues = this.utils.order_array_by(this.venues,'followers');
-    // console.log(this.location.Population);
-    // var num_results = Math.round(this.location.Population/30000);
-    // if(num_results > 20){
-    //   num_results = 20;
-    // }
-    // if(num_results < 2){
-    //   num_results = 2;
-    // }
-    // this.venues = this.venues.slice(0,num_results);
+    console.log(this.location.Population);
+
+    var min,max,divisor;
+    var minimumFollowers = 300;
+
+    this.filterFollowers(minimumFollowers);
+
+    if(this.venue_type == "food"){
+      min = 2;
+      max = 40;
+      divisor = 40000;
+    }else{
+      min = 1;
+      max = 30;
+      divisor = 30000;
+    }
+
+    var num_results = Math.round(this.location.Population/divisor);
+
+    if(num_results > max){
+      num_results = max;
+    }else if(num_results < min){
+      num_results = min;
+    }
+
+    this.venues = this.venues.slice(0,num_results);
   }
 
   get_distances(callback): void{
       for(var i=0; i<this.venues.length; i++){
         this.venues[i].distance = this.utils.get_distance(this.venues[i].lat,this.venues[i].lng);
+        this.venues[i].interactions = Math.round(this.venues[i].followers * 1.38);
       }
   }
 

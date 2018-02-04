@@ -21,8 +21,8 @@
 }
 
 @font-face {
-	font-family: "Bodoni";
-	src: url(../assets/fonts/BodoniFLF.ttf) format("woff");
+	font-family: "Domine";
+	src: url(../assets/fonts/Domine-Regular.ttf) format("woff");
 }
 
 body, span, button, p, ion-item {
@@ -30,10 +30,9 @@ body, span, button, p, ion-item {
 }
 
 h1, h2, h3, h4, h5, h6, ion-title, input {
-	font-family: "Bodoni" !important;
+	font-family: "Domine" !important;
 }
 
 ion-header::after {
 	background-image: none !important;
 }
-

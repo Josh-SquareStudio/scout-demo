@@ -1,9 +1,9 @@
 <ion-header>
-	<ion-navbar color="primary">
-	  <ion-title>Splash</ion-title>
-	</ion-navbar>
+	<app-header></app-header>
 </ion-header>
-
-<ion-content padding>
-	<button ion-button full icon-left (click)="loginFB()" class="loginButton"><ion-icon name="lock"></ion-icon>Login With Facebook</button>
+<ion-content padding class="splashContent">
+	<button ion-button full icon-left (click)="loginFB()" class="loginButton">
+		<div class="loginButtonText">Login Via Facebook</div>
+		<div class="loginButtonIcon"><ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon></div>
+	</button>
 </ion-content>

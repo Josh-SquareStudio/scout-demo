@@ -25205,8 +25205,8 @@ ion-navbar.toolbar {
 }
 
 @font-face {
-  font-family: "Bodoni";
-  src: url(../assets/fonts/BodoniFLF.ttf) format("woff");
+  font-family: "Domine";
+  src: url(../assets/fonts/Domine-Regular.ttf) format("woff");
 }
 
 body, span, button, p, ion-item {
@@ -25214,11 +25214,15 @@ body, span, button, p, ion-item {
 }
 
 h1, h2, h3, h4, h5, h6, ion-title, input {
-  font-family: "Bodoni" !important;
+  font-family: "Domine" !important;
 }
 
 ion-header::after {
   background-image: none !important;
+}
+
+app-header .logo {
+  height: 15px;
 }
 
 app-header .nav-icon-container {
@@ -25260,13 +25264,16 @@ app-header ion-navbar {
 }
 
 app-header ion-title {
-  margin-bottom: 10px;
   display: inline-block;
   position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+app-header ion-title img {
+  display: inline-block;
 }
 
 app-header .title-divider {
@@ -25283,6 +25290,60 @@ app-header .back-button {
   top: 8px !important;
   z-index: 100;
   display: none !important;
+}
+
+[noScroll] {
+  overflow: hidden;
+}
+
+.searchbar {
+  width: 95%;
+  margin-left: 2.5%;
+  margin-top: 20px;
+  height: 40px;
+  font-family: "Apercu";
+  font-size: 1.1em;
+  border: none;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.searchbar-search-icon {
+  display: none !important;
+}
+
+.searchbar-md, .searchbar-ios {
+  padding: 0 !important;
+}
+
+.searchbar-md .searchbar-input, .searchbar-ios .searchbar-input {
+  padding: 0 !important;
+  border-radius: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  font-size: 2.5rem;
+}
+
+.searchbar-md .searchbar-input::-webkit-input-placeholder, .searchbar-ios .searchbar-input::-webkit-input-placeholder {
+  color: black;
+  opacity: 1;
+}
+
+.searchbar-md .searchbar-input:-ms-input-placeholder, .searchbar-ios .searchbar-input:-ms-input-placeholder {
+  color: black;
+  opacity: 1;
+}
+
+.searchbar-md .searchbar-input::placeholder, .searchbar-ios .searchbar-input::placeholder {
+  color: black;
+  opacity: 1;
+}
+
+.homeImage {
+  height: calc( 100% - 60px);
+  width: 100%;
+  background-image: url("../assets/images/scout-splash.jpg");
+  background-size: cover;
+  border: 15px solid white;
 }
 
 profile-page .profile {
@@ -25312,6 +25373,48 @@ profile-page .favorites-title {
   margin-bottom: 50px;
 }
 
+.loginButton {
+  height: 50px;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  top: calc(50% - 25px);
+  padding: 0;
+  width: 80%;
+  left: 10%;
+}
+
+.loginButtonText {
+  height: 50px;
+  border-right: 2px solid black;
+  text-align: center;
+  line-height: 50px;
+  width: calc(100% - 50px);
+}
+
+.loginButtonIcon {
+  height: 50px;
+  width: 50px;
+  color: black;
+  text-align: center;
+  line-height: 55px;
+  font-size: 1.5em;
+}
+
+.splashContent .scroll-content {
+  background-image: url("../assets/images/scout-splash.jpg");
+  background-size: cover;
+  border: 15px solid white;
+}
+
+.platoform-ios .scroll-content {
+  border-top: 20px solid white !important;
+}
+
+ion-icon {
+  padding: 0 !important;
+}
+
 venue-detail .venue {
   text-align: center;
   margin: 12px 0px;
@@ -25332,6 +25435,12 @@ venue-detail .venue-distance {
   text-decoration: underline;
 }
 
+venue-detail .price {
+  margin-right: 8px;
+  display: inline-block;
+  font-size: 1.1em;
+}
+
 venue-detail .favorite-heart {
   width: 15px;
   height: 15px;
@@ -25349,6 +25458,33 @@ venue-detail .venue-bio {
 
 venue-detail [col-6] {
   padding: 2px 2px 0px 2px;
+}
+
+.radio-button {
+  width: 50px;
+  height: 50px;
+  font-size: .9em;
+}
+
+.button-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-bottom: 1px solid #eeeeee;
 }
 
 venue-list .location-title {
@@ -25374,7 +25510,11 @@ venue-list .venue-name {
 }
 
 venue-list .venue-bio {
-  margin: 5px 0px 40px 0px;
+  margin: 5px 0px 20px 0px;
+}
+
+venue-list .venue-interactions {
+  margin: 5px 0px 20px 0px;
 }
 
 venue-list .venue-divider {

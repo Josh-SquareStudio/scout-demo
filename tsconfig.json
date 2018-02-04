@@ -19,6 +19,9 @@
   "exclude": [
     "node_modules"
   ],
+  "files": [
+    "plugins/com.testfairy.cordova-plugin/www/testfairy.d.ts"
+  ],
   "compileOnSave": false,
   "atom": {
     "rewriteTsconfig": false

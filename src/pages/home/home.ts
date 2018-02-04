@@ -4,9 +4,7 @@ import { SearchLocation } from '../../app/locations/search-location';
 import { LocationService } from '../../app/locations/location.service';
 import { VenueService } from '../../app/venues/venue.service';
 import { VenueList } from '../venue-list/venue-list'
-import { HeaderComponent } from '../../components/header/header.component';
 import { HeaderService } from '../../components/header/header.service';
-import { UtilService } from '../../app/util/util.service';
 
 @Component({
   selector: 'page-home',
@@ -19,7 +17,7 @@ export class HomePage implements OnInit{
   locations: SearchLocation[];
   filter_locations : SearchLocation[];
 
-  constructor(public navCtrl: NavController, private locationService: LocationService, private venue_service: VenueService, private headerService: HeaderService, private utils: UtilService) {
+  constructor(public navCtrl: NavController, private locationService: LocationService, private venue_service: VenueService, private headerService: HeaderService) {
     this.headerService.showMap(true);
   }
 
