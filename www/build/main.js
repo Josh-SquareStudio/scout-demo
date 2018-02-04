@@ -10,7 +10,7 @@ webpackJsonp([0],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_locations_location_service__ = __webpack_require__(861);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_venues_venue_service__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__venue_list_venue_list__ = __webpack_require__(502);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__ = __webpack_require__(60);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -78,7 +78,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/home/home.html"*/'<ion-header>\n	<app-header></app-header>\n</ion-header>\n<ion-content>\n	<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n	  <ion-list *ngFor="let filter_location of filter_locations" (click)="onSelect(filter_location)">\n    	<ion-item class="card-title">{{ filter_location.name }}</ion-item>\n	  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/home/home.html"*/,
+        selector: 'page-home',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/home/home.html"*/'<ion-header>\n	<app-header></app-header>\n</ion-header>\n<ion-content [attr.noScroll]="shouldScroll" class="homeContent">\n	<ion-searchbar mode="md" class="searchbar" (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-list no-lines *ngFor="let filter_location of filter_locations" (click)="onSelect(filter_location)">\n  	<ion-item class="card-title">{{ filter_location.name }}</ion-item>\n  </ion-list>\n	<div class="homeImage"></div>\n</ion-content>\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/home/home.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__app_locations_location_service__["a" /* LocationService */], __WEBPACK_IMPORTED_MODULE_3__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__app_locations_location_service__["a" /* LocationService */], __WEBPACK_IMPORTED_MODULE_3__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */]])
@@ -167,7 +167,7 @@ VenueService = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_util_util_service__ = __webpack_require__(183);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_header_header_service__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_header_header_service__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__profile_profile_service__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_database__ = __webpack_require__(58);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -200,7 +200,7 @@ var VenueDetail = (function () {
         this.venue_link = this.navParams.get('venue_link');
         this.top_media = [];
         this.favorited = false;
-        this.heart_image = '../../assets/icons/scoutHEART.png';
+        this.heart_image = '/assets/icons/scoutHEART.png';
         this.headerService.venueDetailIcons();
         this.checked = false;
     }
@@ -267,12 +267,12 @@ var VenueDetail = (function () {
     VenueDetail.prototype._favorite = function () {
         //alert('fav');
         this.favorited = true;
-        this.heart_image = '../../assets/icons/scoutHEARTFULL.png';
+        this.heart_image = '/assets/icons/scoutHEARTFULL.png';
     };
     VenueDetail.prototype._unfavorite = function () {
         //alert('unfav');
         this.favorited = false;
-        this.heart_image = '../../assets/icons/scoutHEART.png';
+        this.heart_image = '/assets/icons/scoutHEART.png';
     };
     return VenueDetail;
 }());
@@ -544,6 +544,7 @@ webpackEmptyAsyncContext.id = 237;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__home_home__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_auth__ = __webpack_require__(504);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_header_header_service__ = __webpack_require__(60);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -561,14 +562,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var SplashPage = (function () {
-    function SplashPage(navCtrl, login, facebook, firebaseProvider, afAuth, platform) {
+    function SplashPage(navCtrl, login, facebook, firebaseProvider, afAuth, platform, headerService) {
         this.navCtrl = navCtrl;
         this.login = login;
         this.facebook = facebook;
         this.firebaseProvider = firebaseProvider;
         this.afAuth = afAuth;
         this.platform = platform;
+        this.headerService = headerService;
+        this.headerService.splashIcons();
     }
     SplashPage.prototype.ngOnInit = function () {
         this.checkUser(); //if the user is already logged in, get their info and move on
@@ -577,7 +581,7 @@ var SplashPage = (function () {
     };
     SplashPage.prototype.loginFB = function () {
         var self = this;
-        return this.facebook.login(["email"]).then(function (loginResponse) {
+        this.facebook.login(["email"]).then(function (loginResponse) {
             var credential = __WEBPACK_IMPORTED_MODULE_5_firebase___default.a.auth.FacebookAuthProvider.credential(loginResponse.authResponse.accessToken);
             __WEBPACK_IMPORTED_MODULE_5_firebase___default.a.auth().signInWithCredential(credential).then(function (info) {
                 self.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__home_home__["a" /* HomePage */]);
@@ -607,15 +611,16 @@ var SplashPage = (function () {
 }());
 SplashPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'splash',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/splash/splash.html"*/'<ion-content padding class="splashContent">\n\n	<button ion-button full icon-left (click)="loginFB()" class="loginButton">\n\n		<div class="loginButtonText">Login Via Facebook</div>\n\n		<div class="loginButtonIcon"><ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon></div>\n\n	</button>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/splash/splash.html"*/,
-        providers: [__WEBPACK_IMPORTED_MODULE_2__app_login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_7_angularfire2_auth__["a" /* AngularFireAuth */]]
+        selector: 'splash',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/splash/splash.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content padding class="splashContent">\n\n	<button ion-button full icon-left (click)="loginFB()" class="loginButton">\n\n		<div class="loginButtonText">Login Via Facebook</div>\n\n		<div class="loginButtonIcon"><ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon></div>\n\n	</button>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/splash/splash.html"*/,
+        providers: [__WEBPACK_IMPORTED_MODULE_8__components_header_header_service__["a" /* HeaderService */], __WEBPACK_IMPORTED_MODULE_2__app_login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_7_angularfire2_auth__["a" /* AngularFireAuth */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_2__app_login_service__["a" /* LoginService */],
         __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__["a" /* Facebook */],
         __WEBPACK_IMPORTED_MODULE_4__providers_firebase_firebase__["a" /* FirebaseProvider */],
         __WEBPACK_IMPORTED_MODULE_7_angularfire2_auth__["a" /* AngularFireAuth */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */]])
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */],
+        __WEBPACK_IMPORTED_MODULE_8__components_header_header_service__["a" /* HeaderService */]])
 ], SplashPage);
 
 //# sourceMappingURL=splash.js.map
@@ -742,7 +747,7 @@ FirebaseProvider = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__venue_detail_venue_detail__ = __webpack_require__(182);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_util_util_service__ = __webpack_require__(183);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__ = __webpack_require__(60);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -774,7 +779,8 @@ var VenueList = (function () {
         this.select_top_venues();
         this.get_distances(function () { });
     };
-    VenueList.prototype.change_type = function (event) {
+    VenueList.prototype.change_type = function (type) {
+        this.venue_type = type;
         console.log(this.venue_type);
         var self = this;
         self.venueService.get_venues(this.venue_type, this.location, function (venues) {
@@ -837,7 +843,7 @@ var VenueList = (function () {
 }());
 VenueList = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'venue-list',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/venue-list/venue-list.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content>\n\n	<h1 class="location-title">{{location.City_Plain}}</h1>\n\n	<ion-list>\n\n	  <ion-item>\n\n	    <ion-label>Type</ion-label>\n\n	    <ion-select [(ngModel)]="venue_type" (ngModelChange)="change_type($event)">\n\n	      <ion-option value="food">Food</ion-option>\n\n	      <!--<ion-option value="drinks">Drinks</ion-option>-->\n\n	      <ion-option value="coffee">Coffee</ion-option>\n\n	    </ion-select>\n\n	  </ion-item>\n\n	</ion-list>\n\n	<ion-list no-lines>\n\n		<ion-item *ngFor="let venue of venues; let i = index" (click)="onSelect(venue)" class="venue" text-wrap>\n\n			<img class="venue-image" src="{{venue.most_liked_media}}"/>\n\n			<p class="venue-distance"><span *ngIf="venue.price == 1">&#36;</span><span *ngIf="venue.price == 2">&#36;&#36;</span><span *ngIf="venue.price == 3">&#36;&#36;&#36;</span><span *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span> {{venue.distance}} km</p>\n\n			<!-- <p class="venue-distance">{{venue.prediction}}</p>\n\n			<a href="https://instagram.com/{{venue.instagram}}" target="_blank"><p class="venue-distance">{{venue.instagram}}</p></a> -->\n\n			<h1 class="venue-name">{{i+1}}. {{venue.name}}</h1>\n\n			<p class="venue-bio">{{venue.bio}}</p>\n\n			<p class="venue-interactions">{{venue.interactions}} interactions</p>\n\n			<div class="venue-divider"></div>\n\n		</ion-item>\n\n	</ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/venue-list/venue-list.html"*/,
+        selector: 'venue-list',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/venue-list/venue-list.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content>\n\n	<h1 class="location-title">{{location.City_Plain}}</h1>\n\n	<div class="button-container">\n\n		<button ion-button clear class="radio-button" (click)="change_type(\'food\')">\n\n			<img src="assets/icons/scoutFOOD.png"/>\n\n		</button>\n\n		<button ion-button clear class="radio-button" (click)="change_type(\'coffee\')">\n\n			<img src="assets/icons/scoutCOFFEE.png"/>\n\n		</button>\n\n	</div>\n\n		<!--<ion-item>\n\n			<ion-label>F</ion-label>\n\n			<ion-radio value="food" checked></ion-radio>\n\n		</ion-item>\n\n		<ion-item>\n\n			<ion-label>C</ion-label>\n\n			<ion-radio value="coffee"></ion-radio>\n\n		</ion-item>\n\n	</ion-list>-->\n\n	<!--<ion-list>\n\n	  <ion-item>\n\n	    <ion-label>Type</ion-label>\n\n	    <ion-select [(ngModel)]="venue_type" (ngModelChange)="change_type($event)">\n\n	      <ion-option value="food">Food</ion-option>\n\n	      <ion-option value="coffee">Coffee</ion-option>\n\n	    </ion-select>\n\n	  </ion-item>\n\n	</ion-list>-->\n\n	<ion-list no-lines>\n\n		<ion-item *ngFor="let venue of venues; let i = index" (click)="onSelect(venue)" class="venue" text-wrap>\n\n			<img class="venue-image" src="{{venue.most_liked_media}}"/>\n\n			<p class="venue-distance"><span *ngIf="venue.price == 1">&#36;</span><span *ngIf="venue.price == 2">&#36;&#36;</span><span *ngIf="venue.price == 3">&#36;&#36;&#36;</span><span *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span> {{venue.distance}} km</p>\n\n			<!-- <p class="venue-distance">{{venue.prediction}}</p>\n\n			<a href="https://instagram.com/{{venue.instagram}}" target="_blank"><p class="venue-distance">{{venue.instagram}}</p></a> -->\n\n			<h1 class="venue-name">{{i+1}}. {{venue.name}}</h1>\n\n			<p class="venue-bio">{{venue.bio}}</p>\n\n			<p class="venue-interactions">{{venue.interactions}} interactions</p>\n\n			<div class="venue-divider"></div>\n\n		</ion-item>\n\n	</ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/venue-list/venue-list.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_4__app_util_util_service__["a" /* UtilService */], __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */]])
@@ -904,7 +910,7 @@ LoginPage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfilePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_header_header_service__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_header_header_service__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__profile_service__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_venues_venue_service__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__venue_detail_venue_detail__ = __webpack_require__(182);
@@ -1216,7 +1222,7 @@ MyApp = __decorate([
 
 /***/ }),
 
-/***/ 77:
+/***/ 60:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1262,6 +1268,13 @@ var HeaderService = (function () {
         this.showAccount(false);
         this.showSearch(true);
         //this.showLeftBack(true);
+        this.showLeftBack(false);
+        this.showRightBack(false);
+    };
+    HeaderService.prototype.splashIcons = function () {
+        this.showMap(false);
+        this.showAccount(false);
+        this.showSearch(false);
         this.showLeftBack(false);
         this.showRightBack(false);
     };
@@ -1365,7 +1378,7 @@ var LOCATIONS = [{ "key": "brightonuk", "name": "Brighton" }, { "key": "chichest
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_home_home__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_profile_profile__ = __webpack_require__(507);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(506);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__header_service__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__header_service__ = __webpack_require__(60);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1396,6 +1409,7 @@ var HeaderComponent = (function () {
         this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__pages_profile_profile__["a" /* ProfilePage */]);
     };
     HeaderComponent.prototype.search = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__pages_home_home__["a" /* HomePage */]);
         this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__pages_home_home__["a" /* HomePage */]);
     };
     HeaderComponent.prototype.map = function () {
@@ -1404,7 +1418,7 @@ var HeaderComponent = (function () {
 }());
 HeaderComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'app-header',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/components/header/header.component.html"*/'<ion-navbar color="light">\n\n	<div class="nav-left nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_left_back" (click)="back()"/>\n\n		<img class="nav-icon nav-account" src="assets/icons/scoutACCOUNT.png" *ngIf="headerService.show_account" (click)="account()"/>\n\n	</div>\n\n	<ion-title><img class=\'logo\' src=\'assets/images/scout-logo.png\'></ion-title>\n\n	<div class="title-divider"></div>\n\n	<div class="nav-right nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_right_back" (click)="back()"/>\n\n		<img class="nav-icon nav-search" src="assets/icons/scoutSEARCH.png" *ngIf="headerService.show_search" (click)="search()"/>\n\n		<!--<img class="nav-icon nav-map" src="../assets/icons/scoutPIN.png" *ngIf="headerService.show_map" (click)="map()"/>-->\n\n	</div>\n\n</ion-navbar>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/components/header/header.component.html"*/
+        selector: 'app-header',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/components/header/header.component.html"*/'<ion-navbar mode="md" color="light">\n\n	<div class="nav-left nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_left_back" (click)="back()"/>\n\n		<img class="nav-icon nav-account" src="assets/icons/scoutACCOUNT.png" *ngIf="headerService.show_account" (click)="account()"/>\n\n	</div>\n\n	<ion-title><img class=\'logo\' src=\'assets/images/scout-logo.png\'></ion-title>\n\n	<div class="title-divider"></div>\n\n	<div class="nav-right nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_right_back" (click)="back()"/>\n\n		<img class="nav-icon nav-search" src="assets/icons/scoutSEARCH.png" *ngIf="headerService.show_search" (click)="search()"/>\n\n		<!--<img class="nav-icon nav-map" src="../assets/icons/scoutPIN.png" *ngIf="headerService.show_map" (click)="map()"/>-->\n\n	</div>\n\n</ion-navbar>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/components/header/header.component.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_5__header_service__["a" /* HeaderService */]])
 ], HeaderComponent);

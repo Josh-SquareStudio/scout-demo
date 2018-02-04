@@ -27,6 +27,7 @@ export class HeaderComponent{
 	}
 
 	search(){
+    this.navCtrl.push(HomePage);
 		this.navCtrl.setRoot(HomePage);
 	}
 

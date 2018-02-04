@@ -29,7 +29,7 @@ export class VenueDetail implements OnInit{
     this.venue_link = this.navParams.get('venue_link');
   	this.top_media = [];
     this.favorited = false;
-    this.heart_image = '../../assets/icons/scoutHEART.png';
+    this.heart_image = '/assets/icons/scoutHEART.png';
     this.headerService.venueDetailIcons();
     this.checked = false;
   }
@@ -100,13 +100,13 @@ export class VenueDetail implements OnInit{
   _favorite(){
     //alert('fav');
     this.favorited = true;
-    this.heart_image = '../../assets/icons/scoutHEARTFULL.png';
+    this.heart_image = '/assets/icons/scoutHEARTFULL.png';
   }
 
   _unfavorite(){
     //alert('unfav');
     this.favorited = false;
-    this.heart_image = '../../assets/icons/scoutHEART.png';
+    this.heart_image = '/assets/icons/scoutHEART.png';
   }
 
 }

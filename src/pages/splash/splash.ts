@@ -7,11 +7,12 @@ import { FirebaseListObservable } from 'angularfire2/database';
 import firebase from 'firebase';
 import { HomePage } from '../home/home';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { HeaderService } from '../../components/header/header.service';
 
 @Component({
   selector: 'splash',
   templateUrl: 'splash.html',
-  providers: [LoginService, AngularFireAuth]
+  providers: [HeaderService, LoginService, AngularFireAuth]
 })
 export class SplashPage implements OnInit{
 
@@ -21,8 +22,11 @@ export class SplashPage implements OnInit{
     private facebook: Facebook,
     public firebaseProvider: FirebaseProvider,
     private afAuth: AngularFireAuth,
-    private platform: Platform
-  ){}
+    private platform: Platform,
+    private headerService: HeaderService
+  ){
+    this.headerService.splashIcons();
+  }
 
   ngOnInit(): void {
     this.checkUser(); //if the user is already logged in, get their info and move on
@@ -34,7 +38,7 @@ export class SplashPage implements OnInit{
 
   loginFB(){
     var self = this;
-    return this.facebook.login(["email"]).then((loginResponse) =>{
+    this.facebook.login(["email"]).then((loginResponse) =>{
     	let credential = firebase.auth.FacebookAuthProvider.credential(loginResponse.authResponse.accessToken);
 
     	firebase.auth().signInWithCredential(credential).then((info) =>{

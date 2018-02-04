@@ -25264,13 +25264,16 @@ app-header ion-navbar {
 }
 
 app-header ion-title {
-  margin-bottom: 10px;
   display: inline-block;
   position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+app-header ion-title img {
+  display: inline-block;
 }
 
 app-header .title-divider {
@@ -25287,6 +25290,60 @@ app-header .back-button {
   top: 8px !important;
   z-index: 100;
   display: none !important;
+}
+
+[noScroll] {
+  overflow: hidden;
+}
+
+.searchbar {
+  width: 95%;
+  margin-left: 2.5%;
+  margin-top: 20px;
+  height: 40px;
+  font-family: "Apercu";
+  font-size: 1.1em;
+  border: none;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.searchbar-search-icon {
+  display: none !important;
+}
+
+.searchbar-md, .searchbar-ios {
+  padding: 0 !important;
+}
+
+.searchbar-md .searchbar-input, .searchbar-ios .searchbar-input {
+  padding: 0 !important;
+  border-radius: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  font-size: 2.5rem;
+}
+
+.searchbar-md .searchbar-input::-webkit-input-placeholder, .searchbar-ios .searchbar-input::-webkit-input-placeholder {
+  color: black;
+  opacity: 1;
+}
+
+.searchbar-md .searchbar-input:-ms-input-placeholder, .searchbar-ios .searchbar-input:-ms-input-placeholder {
+  color: black;
+  opacity: 1;
+}
+
+.searchbar-md .searchbar-input::placeholder, .searchbar-ios .searchbar-input::placeholder {
+  color: black;
+  opacity: 1;
+}
+
+.homeImage {
+  height: calc( 100% - 60px);
+  width: 100%;
+  background-image: url("../assets/images/scout-splash.jpg");
+  background-size: cover;
+  border: 15px solid white;
 }
 
 profile-page .profile {
@@ -25345,7 +25402,7 @@ profile-page .favorites-title {
 }
 
 .splashContent .scroll-content {
-  background-image: url("../../assets/images/scout-splash.jpg");
+  background-image: url("../assets/images/scout-splash.jpg");
   background-size: cover;
   border: 15px solid white;
 }
@@ -25401,6 +25458,33 @@ venue-detail .venue-bio {
 
 venue-detail [col-6] {
   padding: 2px 2px 0px 2px;
+}
+
+.radio-button {
+  width: 50px;
+  height: 50px;
+  font-size: .9em;
+}
+
+.button-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-bottom: 1px solid #eeeeee;
 }
 
 venue-list .location-title {

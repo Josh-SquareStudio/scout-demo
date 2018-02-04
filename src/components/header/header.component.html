@@ -1,9 +1,9 @@
-<ion-navbar color="light">
+<ion-navbar mode="md" color="light">
 	<div class="nav-left nav-icon-container">
 		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_left_back" (click)="back()"/>
 		<img class="nav-icon nav-account" src="assets/icons/scoutACCOUNT.png" *ngIf="headerService.show_account" (click)="account()"/>
 	</div>
-	<ion-title><img class='logo' src='assets/images/scout-logo.png'></ion-title>
+	<ion-title><img class='logo' src='assets/images/scout-logo.png'/></ion-title>
 	<div class="title-divider"></div>
 	<div class="nav-right nav-icon-container">
 		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_right_back" (click)="back()"/>

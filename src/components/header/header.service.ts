@@ -46,6 +46,14 @@ export class HeaderService {
 		this.showRightBack(false);
 	}
 
+	splashIcons(){
+		this.showMap(false);
+		this.showAccount(false);
+		this.showSearch(false);
+		this.showLeftBack(false);
+		this.showRightBack(false);
+	}
+
 	showMap(b){
 		this.show_map = b;
 	}

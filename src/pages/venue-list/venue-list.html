@@ -3,16 +3,32 @@
 </ion-header>
 <ion-content>
 	<h1 class="location-title">{{location.City_Plain}}</h1>
-	<ion-list>
+	<div class="button-container">
+		<button ion-button clear class="radio-button" (click)="change_type('food')">
+			<img src="assets/icons/scoutFOOD.png"/>
+		</button>
+		<button ion-button clear class="radio-button" (click)="change_type('coffee')">
+			<img src="assets/icons/scoutCOFFEE.png"/>
+		</button>
+	</div>
+		<!--<ion-item>
+			<ion-label>F</ion-label>
+			<ion-radio value="food" checked></ion-radio>
+		</ion-item>
+		<ion-item>
+			<ion-label>C</ion-label>
+			<ion-radio value="coffee"></ion-radio>
+		</ion-item>
+	</ion-list>-->
+	<!--<ion-list>
 	  <ion-item>
 	    <ion-label>Type</ion-label>
 	    <ion-select [(ngModel)]="venue_type" (ngModelChange)="change_type($event)">
 	      <ion-option value="food">Food</ion-option>
-	      <!--<ion-option value="drinks">Drinks</ion-option>-->
 	      <ion-option value="coffee">Coffee</ion-option>
 	    </ion-select>
 	  </ion-item>
-	</ion-list>
+	</ion-list>-->
 	<ion-list no-lines>
 		<ion-item *ngFor="let venue of venues; let i = index" (click)="onSelect(venue)" class="venue" text-wrap>
 			<img class="venue-image" src="{{venue.most_liked_media}}"/>

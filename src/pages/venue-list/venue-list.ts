@@ -30,7 +30,8 @@ export class VenueList implements OnInit{
     this.get_distances(function(){});
 	}
 
-  change_type(event: any){
+  change_type(type : string){
+    this.venue_type = type;
     console.log(this.venue_type);
     var self = this;
     self.venueService.get_venues(this.venue_type,this.location,function(venues){
