@@ -27,6 +27,11 @@
   font-size: 1.5em;
 }
 
+.loginButtonIcon img{
+  height: 25px;
+  margin-top: calc(50% - 12.5px)
+}
+
 .splashContent .scroll-content{
   background-image: url('../assets/images/scout-splash.jpg');
   background-size: cover;

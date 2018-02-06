@@ -21,6 +21,7 @@ export class VenueList implements OnInit{
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private venueService: VenueService, private utils: UtilService , private headerService: HeaderService) {
   	this.location = this.navParams.get('location');
+    this.format_location_name();
     this.venues = this.navParams.get('venues');
     this.headerService.venueListIcons();
   }
@@ -29,6 +30,16 @@ export class VenueList implements OnInit{
     this.select_top_venues();
     this.get_distances(function(){});
 	}
+
+  format_location_name(){
+    var locationName = this.location.City_Plain;
+    var p1, p2;
+    locationName = locationName.replace(/ /g,", ");
+    p1 = locationName.slice(0, locationName.length - 2);
+    p2 = locationName.slice(locationName.length - 2);
+    p2 = p2.toUpperCase();
+    this.location.City_Plain = p1 + p2;
+  }
 
   change_type(type : string){
     this.venue_type = type;
