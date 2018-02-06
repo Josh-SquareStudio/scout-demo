@@ -200,7 +200,7 @@ var VenueDetail = (function () {
         this.venue_link = this.navParams.get('venue_link');
         this.top_media = [];
         this.favorited = false;
-        this.heart_image = '/assets/icons/scoutHEART.png';
+        this.heart_image = '../../assets/icons/scoutHEART.png';
         this.headerService.venueDetailIcons();
         this.checked = false;
     }
@@ -267,12 +267,12 @@ var VenueDetail = (function () {
     VenueDetail.prototype._favorite = function () {
         //alert('fav');
         this.favorited = true;
-        this.heart_image = '/assets/icons/scoutHEARTFULL.png';
+        this.heart_image = '../../assets/icons/scoutHEARTFULL.png';
     };
     VenueDetail.prototype._unfavorite = function () {
         //alert('unfav');
         this.favorited = false;
-        this.heart_image = '/assets/icons/scoutHEART.png';
+        this.heart_image = '../../assets/icons/scoutHEART.png';
     };
     return VenueDetail;
 }());
@@ -611,7 +611,7 @@ var SplashPage = (function () {
 }());
 SplashPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'splash',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/splash/splash.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content padding class="splashContent">\n\n	<button ion-button full icon-left (click)="loginFB()" class="loginButton">\n\n		<div class="loginButtonText">Login Via Facebook</div>\n\n		<div class="loginButtonIcon"><ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon></div>\n\n	</button>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/splash/splash.html"*/,
+        selector: 'splash',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/splash/splash.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content padding class="splashContent">\n\n	<button ion-button full icon-left (click)="loginFB()" class="loginButton disable-hover">\n\n		<div class="loginButtonText">Login Via Facebook</div>\n\n		<div class="loginButtonIcon"><img src=\'assets/icons/X-facebook.png\'></div>\n\n	</button>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/splash/splash.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_8__components_header_header_service__["a" /* HeaderService */], __WEBPACK_IMPORTED_MODULE_2__app_login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_7_angularfire2_auth__["a" /* AngularFireAuth */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */],
@@ -772,12 +772,22 @@ var VenueList = (function () {
         this.headerService = headerService;
         this.venue_type = "food";
         this.location = this.navParams.get('location');
+        this.format_location_name();
         this.venues = this.navParams.get('venues');
         this.headerService.venueListIcons();
     }
     VenueList.prototype.ngOnInit = function () {
         this.select_top_venues();
         this.get_distances(function () { });
+    };
+    VenueList.prototype.format_location_name = function () {
+        var locationName = this.location.City_Plain;
+        var p1, p2;
+        locationName = locationName.replace(/ /g, ", ");
+        p1 = locationName.slice(0, locationName.length - 2);
+        p2 = locationName.slice(locationName.length - 2);
+        p2 = p2.toUpperCase();
+        this.location.City_Plain = p1 + p2;
     };
     VenueList.prototype.change_type = function (type) {
         this.venue_type = type;
@@ -944,6 +954,7 @@ var ProfilePage = (function () {
         this.setupProfile();
     };
     ProfilePage.prototype.ionViewWillEnter = function () {
+        //this.setupProfile();
     };
     ProfilePage.prototype.pipeFavorites = function () {
         this.favs = [];
@@ -1183,7 +1194,6 @@ AppModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(280);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(277);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_splash_splash__ = __webpack_require__(281);
-//declare var TestFairy: any;
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1207,7 +1217,7 @@ var MyApp = (function () {
             // Here you can do any higher level native things you might need.
             statusBar.styleDefault();
             splashScreen.hide();
-            //TestFairy.begin("7a5cb39e8543159f61ffe5483fe5f0e9f1c22d33");
+            TestFairy.begin("7a5cb39e8543159f61ffe5483fe5f0e9f1c22d33");
         });
     }
     return MyApp;
@@ -1418,7 +1428,7 @@ var HeaderComponent = (function () {
 }());
 HeaderComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'app-header',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/components/header/header.component.html"*/'<ion-navbar mode="md" color="light">\n\n	<div class="nav-left nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_left_back" (click)="back()"/>\n\n		<img class="nav-icon nav-account" src="assets/icons/scoutACCOUNT.png" *ngIf="headerService.show_account" (click)="account()"/>\n\n	</div>\n\n	<ion-title><img class=\'logo\' src=\'assets/images/scout-logo.png\'></ion-title>\n\n	<div class="title-divider"></div>\n\n	<div class="nav-right nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_right_back" (click)="back()"/>\n\n		<img class="nav-icon nav-search" src="assets/icons/scoutSEARCH.png" *ngIf="headerService.show_search" (click)="search()"/>\n\n		<!--<img class="nav-icon nav-map" src="../assets/icons/scoutPIN.png" *ngIf="headerService.show_map" (click)="map()"/>-->\n\n	</div>\n\n</ion-navbar>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/components/header/header.component.html"*/
+        selector: 'app-header',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/components/header/header.component.html"*/'<ion-navbar mode="md" color="light">\n\n	<div class="nav-left nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_left_back" (click)="back()"/>\n\n		<img class="nav-icon nav-account" src="assets/icons/scoutACCOUNT.png" *ngIf="headerService.show_account" (click)="account()"/>\n\n	</div>\n\n	<ion-title><img class=\'logo\' src=\'assets/images/scout-logo.png\'/></ion-title>\n\n	<div class="title-divider"></div>\n\n	<div class="nav-right nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_right_back" (click)="back()"/>\n\n		<img class="nav-icon nav-search" src="assets/icons/scoutSEARCH.png" *ngIf="headerService.show_search" (click)="search()"/>\n\n		<!--<img class="nav-icon nav-map" src="../assets/icons/scoutPIN.png" *ngIf="headerService.show_map" (click)="map()"/>-->\n\n	</div>\n\n</ion-navbar>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/components/header/header.component.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_5__header_service__["a" /* HeaderService */]])
 ], HeaderComponent);

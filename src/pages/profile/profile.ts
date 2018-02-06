@@ -33,7 +33,7 @@ export class ProfilePage implements OnInit{
 	}
 
 	ionViewWillEnter() {
-
+    //this.setupProfile();
   }
 
   pipeFavorites(){
