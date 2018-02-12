@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import { SearchLocation } from '../../app/locations/search-location';
 import { LocationService } from '../../app/locations/location.service';
 import { VenueService } from '../../app/venues/venue.service';
 import { VenueList } from '../venue-list/venue-list'
 import { HeaderService } from '../../components/header/header.service';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Component({
   selector: 'page-home',
@@ -17,21 +18,40 @@ export class HomePage implements OnInit{
   locations: SearchLocation[];
   filter_locations : SearchLocation[];
 
-  constructor(public navCtrl: NavController, private locationService: LocationService, private venue_service: VenueService, private headerService: HeaderService) {
+  constructor(public navCtrl: NavController, private locationService: LocationService, private venue_service: VenueService, private headerService: HeaderService, private geo: Geolocation, private platform: Platform) {
     this.headerService.showMap(true);
+  }
+
+  format_location_name(locationName: string){
+    var p1, p2;
+    var pos = locationName.lastIndexOf(' ');
+    locationName = locationName.substring(0,pos) + ', ' + locationName.substring(pos+1);
+    p1 = locationName.slice(0, locationName.length - 2);
+    p2 = locationName.slice(locationName.length - 2);
+    p2 = p2.toUpperCase();
+    return p1 + p2;
   }
 
   ngOnInit(): void {
 	  this.getSearchLocations();
     this.headerService.homeIcons();
+    this.setLocation();
 	}
+
+  setLocation() {
+     this.platform.ready().then(() => {
+        return this.geo.getCurrentPosition()
+                       .then(pos => {});
+     });
+  }
+
 
   getSearchLocations() {
     var self = this;
     this.locationService.getListOfLocations(function(locations){
       self.locations = [];
       for(var key in locations){
-        self.locations.push({name:locations[key].City_Plain,key:key});
+        self.locations.push({name:self.format_location_name(locations[key].City_Plain),key:key});
       }
     })
   }

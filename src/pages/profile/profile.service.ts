@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
+import firebase from 'firebase';
 import { Profile }  from './profile.class';
 import { Facebook } from '@ionic-native/facebook';
 
@@ -9,27 +10,29 @@ export class ProfileService {
 	profile : Profile;
 
 	constructor(private afd: AngularFireDatabase, private facebook: Facebook) {
-
+		this.profile = {
+			id: "",
+			name: "",
+			email: "",
+			picture: ""
+		}
 	}
 
 	checkUser(callback: any){
-    var self = this;
-		this.facebook.getLoginStatus().then((response) =>{
-      if (response.status === 'connected') {
-				self.facebook.api('/' + response.authResponse.userID + '?fields=id,name,email,picture.type(large)',[]).then((response)=>{
-					self.profile = response;
-					callback(self.profile);
-        }, (error) => {
-          alert(error);
-        })
-      } else if (response.status === 'not_authorized') {
-        alert('You have not authorized this app with facebook');
-      } else {
-				//not logged in
-        //self.navCtrl.push() //shoudn't ever happen
-      }
-    });
+		var self = this;
+		firebase.auth().onAuthStateChanged(function(user) {
+		  if (user) {
+				self.profile.id = user.uid;
+				self.profile.name = user.displayName;
+				if(user.user_location){
+					self.profile.email = user.user_location;
+				}
+				self.profile.picture = user.photoURL;
+				callback(self.profile);
+		  }
+		});
   }
+
 
 	getProfile(callback: any){
 		var self = this;

@@ -76,7 +76,7 @@ export class ProfilePage implements OnInit{
 			self.id = profile.id;
 			self.name = profile.name;
 			self.email = profile.email;
-      self.profile_picture = profile.picture.data.url;
+      self.profile_picture = profile.picture;
       callback();
 		});
 	}

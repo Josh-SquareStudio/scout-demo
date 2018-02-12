@@ -25222,7 +25222,7 @@ ion-header::after {
 }
 
 app-header .logo {
-  height: 15px;
+  height: 14px;
 }
 
 app-header .nav-icon-container {
@@ -25296,10 +25296,11 @@ app-header .back-button {
   overflow: hidden;
 }
 
-.searchbar {
+.homeContent .searchbar {
   width: 95%;
   margin-left: 2.5%;
   margin-top: 20px;
+  margin-bottom: 20px;
   height: 40px;
   font-family: "Apercu";
   font-size: 1.1em;
@@ -25307,12 +25308,20 @@ app-header .back-button {
   border-bottom: 1px solid #eeeeee;
 }
 
-.searchbar-search-icon {
+.homeContent .searchbar-search-icon {
   display: none !important;
 }
 
-.searchbar-md, .searchbar-ios {
+.homeContent .searchbar-md, .homeContent .searchbar-ios {
   padding: 0 !important;
+}
+
+.homeContent .label-md, .homeContent .label-ios {
+  margin: 0px 8px 13px 0;
+  border-bottom: 1px solid #eee !important;
+  padding-bottom: 10px;
+  width: 95%;
+  padding-left: 2.5%;
 }
 
 .searchbar-md .searchbar-input, .searchbar-ios .searchbar-input {
@@ -25324,26 +25333,27 @@ app-header .back-button {
 }
 
 .searchbar-md .searchbar-input::-webkit-input-placeholder, .searchbar-ios .searchbar-input::-webkit-input-placeholder {
-  color: black;
+  color: #ccc;
   opacity: 1;
 }
 
 .searchbar-md .searchbar-input:-ms-input-placeholder, .searchbar-ios .searchbar-input:-ms-input-placeholder {
-  color: black;
+  color: #ccc;
   opacity: 1;
 }
 
 .searchbar-md .searchbar-input::placeholder, .searchbar-ios .searchbar-input::placeholder {
-  color: black;
+  color: #ccc;
   opacity: 1;
 }
 
 .homeImage {
   height: calc( 100% - 60px);
+  position: absolute;
   width: 100%;
   background-image: url("../assets/images/scout-splash.jpg");
   background-size: cover;
-  border: 15px solid white;
+  border: 9px solid white;
 }
 
 profile-page .profile {
@@ -25354,42 +25364,55 @@ profile-page .profile-image {
   border-radius: 100%;
   max-width: 100px;
   max-height: 100px;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 profile-page .profile-name {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+profile-page .favorites-name {
+  font-size: 1.2rem;
 }
 
 profile-page .divider {
   width: 100%;
   height: 1px;
   background-color: #eeeeee;
-  margin: 60px 0px;
+  margin: 30px 0px;
 }
 
 profile-page .favorites-title {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
+  font-family: "apercu" !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 900;
+  font-size: 12px;
+  color: #444;
 }
 
 .loginButton {
-  height: 50px;
+  height: 45px;
   background-color: white;
   color: black;
-  border: 2px solid black;
+  border: 1px solid #eee;
   top: calc(50% - 25px);
   padding: 0;
-  width: 80%;
-  left: 10%;
+  width: 90%;
+  left: 5%;
 }
 
 .loginButtonText {
   height: 50px;
-  border-right: 2px solid black;
+  border-right: 1px solid #eee;
   text-align: center;
   line-height: 50px;
   width: calc(100% - 50px);
+  letter-spacing: .2px;
+  font-size: 9px;
 }
 
 .loginButtonIcon {
@@ -25397,19 +25420,18 @@ profile-page .favorites-title {
   width: 50px;
   color: black;
   text-align: center;
-  line-height: 55px;
+  line-height: 50px;
   font-size: 1.5em;
 }
 
 .loginButtonIcon img {
-  height: 25px;
-  margin-top: calc(50% - 12.5px);
+  height: 13px;
 }
 
 .splashContent .scroll-content {
   background-image: url("../assets/images/scout-splash.jpg");
   background-size: cover;
-  border: 15px solid white;
+  border: 9px solid white;
 }
 
 .platoform-ios .scroll-content {
@@ -25455,10 +25477,17 @@ venue-detail .favorite-heart {
 
 venue-detail .venue-name {
   margin: 20px 0px;
+  margin-top: 1rem !important;
+  font-size: 2.1rem;
 }
 
 venue-detail .venue-bio {
   margin: 5px 0px 40px 0px;
+  font-size: 1.2rem;
+}
+
+venue-detail .price span {
+  margin-right: 5px;
 }
 
 venue-detail [col-6] {
@@ -25469,6 +25498,11 @@ venue-detail [col-6] {
   width: 50px;
   height: 50px;
   font-size: .9em;
+}
+
+.radio-button img {
+  width: 20px;
+  height: 20px;
 }
 
 .button-container {
@@ -25495,6 +25529,8 @@ venue-detail [col-6] {
 venue-list .location-title {
   margin: 45px 0px;
   text-align: center;
+  font-size: 2.1rem;
+  margin-bottom: 35px;
 }
 
 venue-list .venue {
@@ -25516,10 +25552,19 @@ venue-list .venue-name {
 
 venue-list .venue-bio {
   margin: 5px 0px 20px 0px;
+  font-size: 1.2rem;
+}
+
+venue-list .price span {
+  margin-right: 5px;
 }
 
 venue-list .venue-interactions {
   margin: 5px 0px 20px 0px;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1.5px;
 }
 
 venue-list .venue-divider {
