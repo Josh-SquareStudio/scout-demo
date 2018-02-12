@@ -6,7 +6,7 @@
 	  	<img class="venue-image" src={{venue.most_liked_media}}/>
 	  	<div class="feature">
 	  		<div class="price"><span *ngIf="venue.price == 1">&#36;</span><span *ngIf="venue.price == 2">&#36;&#36;</span><span *ngIf="venue.price == 3">&#36;&#36;&#36;</span><span *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span></div>
-				<p class="venue-distance" (click)="open_map()">{{venue.distance}} km - Directions</p>
+				<p class="venue-distance" (click)="open_map()">{{venue.distance}} km ></p>
 	  		<img class="favorite-heart" src={{heart_image}} (click)="favorite_venue()" />
 	  	</div>
 	   <a href="https://www.instagram.com/{{venue.instagram}}"><h1 class="venue-name">{{venue.name}}</h1></a>
