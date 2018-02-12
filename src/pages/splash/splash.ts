@@ -29,14 +29,32 @@ export class SplashPage implements OnInit{
   }
 
   ngOnInit(): void {
-    this.checkUser(); //if the user is already logged in, get their info and move on
+    var self = this;
+    if (this.platform.is('cordova')){
+      this.checkUser(); //if the user is already logged in, get their info and move on
+    }else{
+      firebase.auth().onAuthStateChanged(function(user) {
+  		  if (user) {
+          self.navCtrl.push(HomePage);
+          self.navCtrl.setRoot(HomePage);
+        }
+      });
+    }
 	}
-
+  
 	createUser(response){
 
 	}
 
   loginFB(){
+    if (this.platform.is('cordova')){
+      this.loginApp();
+    }else{
+      this.loginBrowser();
+    }
+  }
+
+  loginApp(){
     var self = this;
     this.facebook.login(["email"]).then((loginResponse) =>{
     	let credential = firebase.auth.FacebookAuthProvider.credential(loginResponse.authResponse.accessToken);
@@ -45,6 +63,28 @@ export class SplashPage implements OnInit{
         self.navCtrl.push(HomePage);
         self.navCtrl.setRoot(HomePage);
     	})
+    });
+  }
+
+  loginBrowser(){
+    var self = this;
+    var provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope('email');
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      var token = result.credential.accessToken;
+      var user = result.user;
+      self.navCtrl.push(HomePage);
+      self.navCtrl.setRoot(HomePage);
+    }).catch(function(error) {
+      alert(error);
+      /*// Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...*/
     });
   }
 

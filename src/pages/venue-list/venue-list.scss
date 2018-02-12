@@ -4,6 +4,11 @@
 	font-size: .9em;
 }
 
+.radio-button img{
+	width: 20px;
+	height: 20px;
+}
+
 .button-container {
    display: flex;
    flex-direction: row;
@@ -16,6 +21,8 @@ venue-list{
 	.location-title{
 		margin:45px 0px;
 		text-align: center;
+		font-size: 2.1rem;
+		margin-bottom: 35px;
 	}
 	.venue{
 		text-align: center;
@@ -36,10 +43,19 @@ venue-list{
 
 	.venue-bio{
 		margin: 5px 0px 20px 0px;
+		font-size: 1.2rem;
+	}
+
+	.price span{
+		margin-right: 5px;
 	}
 
 	.venue-interactions{
 		margin: 5px 0px 20px 0px;
+		font-weight: 900;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1.5px;
 	}
 
 	.venue-divider{

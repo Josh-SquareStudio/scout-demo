@@ -28,7 +28,10 @@ export class UtilService{
   }
 
   get_distance(lat,lng): number{
-    return this.calculate_distance(this.lat,this.lng,lat,lng);
+		var dist = this.calculate_distance(this.lat,this.lng,lat,lng);
+		console.log(this.lat, this.lng, lat, lng);
+		//console.log(dist);
+		return dist;
   }
 
 	calculate_distance(lat1,lon1,lat2,lon2) {

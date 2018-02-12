@@ -11,24 +11,6 @@
 			<img src="assets/icons/scoutCOFFEE.png"/>
 		</button>
 	</div>
-		<!--<ion-item>
-			<ion-label>F</ion-label>
-			<ion-radio value="food" checked></ion-radio>
-		</ion-item>
-		<ion-item>
-			<ion-label>C</ion-label>
-			<ion-radio value="coffee"></ion-radio>
-		</ion-item>
-	</ion-list>-->
-	<!--<ion-list>
-	  <ion-item>
-	    <ion-label>Type</ion-label>
-	    <ion-select [(ngModel)]="venue_type" (ngModelChange)="change_type($event)">
-	      <ion-option value="food">Food</ion-option>
-	      <ion-option value="coffee">Coffee</ion-option>
-	    </ion-select>
-	  </ion-item>
-	</ion-list>-->
 	<ion-list no-lines>
 		<ion-item *ngFor="let venue of venues; let i = index" (click)="onSelect(venue)" class="venue" text-wrap>
 			<img class="venue-image" src="{{venue.most_liked_media}}"/>
@@ -37,7 +19,7 @@
 			<a href="https://instagram.com/{{venue.instagram}}" target="_blank"><p class="venue-distance">{{venue.instagram}}</p></a> -->
 			<h1 class="venue-name">{{i+1}}. {{venue.name}}</h1>
 			<p class="venue-bio">{{venue.bio}}</p>
-			<p class="venue-interactions">{{venue.interactions}} interactions</p>
+			<p class="venue-interactions">{{venue.interactions}} instagrams</p>
 			<div class="venue-divider"></div>
 		</ion-item>
 	</ion-list>

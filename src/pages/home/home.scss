@@ -6,23 +6,34 @@ page-home {
   overflow: hidden;
 }
 
-.searchbar{
-  width: 95%;
-  margin-left: 2.5%;
-  margin-top: 20px;
-  height: 40px;
-  font-family: "Apercu";
-  font-size: 1.1em;
-  border: none;
-  border-bottom: 1px solid #eeeeee;
-}
+.homeContent{
+  .searchbar{
+    width: 95%;
+    margin-left: 2.5%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 40px;
+    font-family: "Apercu";
+    font-size: 1.1em;
+    border: none;
+    border-bottom: 1px solid #eeeeee;
+  }
 
-.searchbar-search-icon{
-  display: none !important;
-}
+  .searchbar-search-icon{
+    display: none !important;
+  }
 
-.searchbar-md, .searchbar-ios {
-  padding: 0 !important;
+  .searchbar-md, .searchbar-ios {
+    padding: 0 !important;
+  }
+
+  .label-md, .label-ios {
+      margin: 0px 8px 13px 0;
+      border-bottom: 1px solid #eee !important;
+      padding-bottom: 10px;
+      width: 95%;
+      padding-left: 2.5%;
+  }
 }
 
 .searchbar-md .searchbar-input, .searchbar-ios .searchbar-input{
@@ -33,14 +44,15 @@ page-home {
 }
 
 .searchbar-md .searchbar-input::placeholder, .searchbar-ios .searchbar-input::placeholder{
-  color: black;
+  color: #ccc;
   opacity: 1;
 }
 
 .homeImage{
   height: calc( 100% - 60px );
+  position: absolute;
   width: 100%;
   background-image: url('../assets/images/scout-splash.jpg');
   background-size: cover;
-  border: 15px solid white;
+  border: 9px solid white;
 }

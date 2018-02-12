@@ -34,7 +34,8 @@ export class VenueList implements OnInit{
   format_location_name(){
     var locationName = this.location.City_Plain;
     var p1, p2;
-    locationName = locationName.replace(/ /g,", ");
+    var pos = locationName.lastIndexOf(' ');
+    locationName = locationName.substring(0,pos) + ', ' + locationName.substring(pos+1);
     p1 = locationName.slice(0, locationName.length - 2);
     p2 = locationName.slice(locationName.length - 2);
     p2 = p2.toUpperCase();
@@ -71,32 +72,45 @@ export class VenueList implements OnInit{
 
     this.filterFollowers(minimumFollowers);
 
-    if(this.venue_type == "food"){
-      min = 2;
-      max = 40;
-      divisor = 40000;
+    if(this.location.Population){
+      if(this.venue_type == "food"){
+        min = 2;
+        max = 30;
+        divisor = 40000;
+      }else{
+        min = 1;
+        max = 20;
+        divisor = 30000;
+      }
+
+      var num_results = Math.round(this.location.Population/divisor);
+
+      if(num_results > max){
+        num_results = max;
+      }else if(num_results < min){
+        num_results = min;
+      }
     }else{
-      min = 1;
-      max = 30;
-      divisor = 30000;
-    }
-
-    var num_results = Math.round(this.location.Population/divisor);
-
-    if(num_results > max){
-      num_results = max;
-    }else if(num_results < min){
-      num_results = min;
+      if(this.venue_type == "food"){
+        num_results = 10;
+      }else{
+        num_results = 5;
+      }
     }
 
     this.venues = this.venues.slice(0,num_results);
   }
 
   get_distances(callback): void{
-      for(var i=0; i<this.venues.length; i++){
-        this.venues[i].distance = this.utils.get_distance(this.venues[i].lat,this.venues[i].lng);
-        this.venues[i].interactions = Math.round(this.venues[i].followers * 1.38);
+    var self = this;
+    this.utils.get_location(function(){
+      for(var i=0; i<self.venues.length; i++){
+        self.venues[i].distance = self.utils.get_distance(self.venues[i].lat,self.venues[i].lng);
+        //console.log(this.venues[i].lat,this.venues[i].lng);
+        //console.log(this.utils.get_distance(this.venues[i].lat,this.venues[i].lng));
+        self.venues[i].interactions = Math.round(self.venues[i].followers * 1.38);
       }
+    });
   }
 
   onSelect(venue: Venue){
