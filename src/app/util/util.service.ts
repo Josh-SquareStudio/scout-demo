@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 //import { Geolocation } from 'ionic-native';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Platform } from 'ionic-angular';
 
 @Injectable()
 export class UtilService{
@@ -9,9 +10,8 @@ export class UtilService{
 	lat: number;
 	lng: number;
 
-	constructor(private geolocation: Geolocation) {
+	constructor(private geolocation: Geolocation, private platform: Platform) {
 		this.browser = true;
-		this.get_location(function(){});
 	}
 
   get_location(callback): void{
@@ -19,10 +19,10 @@ export class UtilService{
     this.geolocation.getCurrentPosition().then(res => {
       self.lat = res.coords.latitude;
       self.lng = res.coords.longitude;
-			//alert(self.lat + " " + self.lng);
+			alert(self.lat + " " + self.lng);
       callback();
     }).catch((error) => {
-      console.log('Error getting location ',error);
+      alert('Error getting location '+error);
       callback();
     });
   }

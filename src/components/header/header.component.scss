@@ -18,6 +18,11 @@ app-header{
 		right:6px;
 	}
 
+	.nav-center{
+		width: 150px;
+		left: calc(50% - 75px);
+	}
+
 	.nav-icon{
 		display:inline-block;
 		width:30px;
@@ -41,11 +46,6 @@ app-header{
 	}
 
 	ion-title{
-		display:inline-block;
-		position:absolute;
-		left:50%;
-		top:50%;
-		transform:translate(-50%,-50%);
 	}
 
 	ion-title img{

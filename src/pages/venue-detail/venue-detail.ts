@@ -40,6 +40,10 @@ export class VenueDetail implements OnInit{
     this.venue.distance = this.utils.get_distance(this.venue.lat,this.venue.lng);
 	}
 
+  open_instagram(){
+    window.location.href = "https://www.instagram.com/" + this.venue.instagram;
+  }
+
   rank_latest_media(){
   	var temp_media = [];
   	var how_many_top = 10;

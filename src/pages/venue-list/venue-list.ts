@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Location } from '../../app/locations/location';
 import { Venue } from '../../app/venues/venue';
 import { VenueService } from '../../app/venues/venue.service';
@@ -19,7 +19,7 @@ export class VenueList implements OnInit{
   distances : number[];
   venue_type : string = "food";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private venueService: VenueService, private utils: UtilService , private headerService: HeaderService) {
+  constructor(public navCtrl: NavController, private platform: Platform, public navParams: NavParams, private venueService: VenueService, private utils: UtilService , private headerService: HeaderService) {
   	this.location = this.navParams.get('location');
     this.format_location_name();
     this.venues = this.navParams.get('venues');
@@ -28,7 +28,9 @@ export class VenueList implements OnInit{
 
   ngOnInit(): void {
     this.select_top_venues();
-    this.get_distances(function(){});
+    this.platform.ready().then(() => {
+			this.get_distances(function(){});
+		});
 	}
 
   format_location_name(){

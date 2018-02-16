@@ -27,6 +27,32 @@ import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { Facebook } from '@ionic-native/facebook';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+//666bcf1d
+/*Pro.init('666bcf1d', {
+  appVersion: '0.1'
+})*/
+
+/*@Injectable()
+export class MyErrorHandler implements ErrorHandler {
+  ionicErrorHandler: IonicErrorHandler;
+
+  constructor(injector: Injector) {
+    try {
+      this.ionicErrorHandler = injector.get(IonicErrorHandler);
+    } catch(e) {
+      // Unable to get the IonicErrorHandler provider, ensure
+      // IonicErrorHandler has been added to the providers list below
+    }
+  }
+
+  handleError(err: any): void {
+    IonicPro.monitoring.handleNewError(err);
+    // Remove this if you want to disable Ionic's auto exception handling
+    // in development mode.
+    this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
+  }
+}*/
+
 // Initialize Firebase
 var firebase_config = {
   apiKey: "AIzaSyA1S5Zv48ciri4AvvLC1aNBsQr21IXi2UQ",

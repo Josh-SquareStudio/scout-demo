@@ -25241,6 +25241,11 @@ app-header .nav-right {
   right: 6px;
 }
 
+app-header .nav-center {
+  width: 150px;
+  left: calc(50% - 75px);
+}
+
 app-header .nav-icon {
   display: inline-block;
   width: 30px;
@@ -25261,15 +25266,6 @@ app-header .nav-back {
 
 app-header ion-navbar {
   text-align: center;
-}
-
-app-header ion-title {
-  display: inline-block;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
 }
 
 app-header ion-title img {
@@ -25369,7 +25365,7 @@ profile-page .profile-image {
 
 profile-page .profile-name {
   margin-bottom: 20px;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
 }
 
 profile-page .favorites-name {
@@ -25444,7 +25440,7 @@ ion-icon {
 
 venue-detail .venue {
   text-align: center;
-  margin: 12px 0px;
+  margin: 0px 0px 20px 0px;
 }
 
 venue-detail a {
@@ -25452,26 +25448,40 @@ venue-detail a {
   text-decoration: none;
 }
 
+venue-detail .feature {
+  margin-top: 7px;
+}
+
+venue-detail .venue-instagram {
+  -ms-touch-action: auto;
+  touch-action: auto;
+}
+
 venue-detail .venue-image {
   margin: 0px 0px;
+  -webkit-filter: contrast(0.9);
+  filter: contrast(0.9);
 }
 
 venue-detail .venue-distance {
   margin: 10px 0px;
   display: inline-block;
   text-decoration: underline;
+  border-left: solid 1px #e7e7e7;
+  border-right: solid 1px #e7e7e7;
+  padding: 0px 14px;
 }
 
 venue-detail .price {
   margin-right: 8px;
   display: inline-block;
-  font-size: 1.1em;
+  font-size: 1em;
 }
 
 venue-detail .favorite-heart {
   width: 15px;
   height: 15px;
-  margin-left: 8px;
+  margin-left: 10px;
   margin-bottom: -2px;
 }
 
@@ -25540,10 +25550,12 @@ venue-list .venue {
 
 venue-list .venue-image {
   margin: 0px 0px;
+  -webkit-filter: contrast(0.9);
+  filter: contrast(0.9);
 }
 
 venue-list .venue-distance {
-  margin: 5px 0px;
+  margin: 12px 0px 0px 0px;
 }
 
 venue-list .venue-name {
@@ -25555,8 +25567,10 @@ venue-list .venue-bio {
   font-size: 1.2rem;
 }
 
-venue-list .price span {
-  margin-right: 5px;
+venue-list .pricespan {
+  margin: 10px 0px;
+  margin-right: 8px;
+  padding: 0px 14px;
 }
 
 venue-list .venue-interactions {
@@ -25565,6 +25579,18 @@ venue-list .venue-interactions {
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 1.5px;
+}
+
+venue-list .icon-spacer {
+  width: 1px;
+  height: 50px;
+  background-color: #e7e7e7;
+}
+
+venue-list .distancespan {
+  border-left: 1px solid #e7e7e7;
+  margin: 10px 0px;
+  padding: 0px 14px;
 }
 
 venue-list .venue-divider {

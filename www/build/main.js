@@ -6,7 +6,7 @@ webpackJsonp([0],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_locations_location_service__ = __webpack_require__(861);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_venues_venue_service__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__venue_list_venue_list__ = __webpack_require__(504);
@@ -99,7 +99,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/home/home.html"*/'<ion-header>\n	<app-header></app-header>\n</ion-header>\n<ion-content [attr.noScroll]="shouldScroll" class="homeContent">\n	<ion-searchbar mode="md" class="searchbar" placeholder="Search..." (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-list no-lines *ngFor="let filter_location of filter_locations" (click)="onSelect(filter_location)">\n  	<ion-item class="card-title">{{ filter_location.name }}</ion-item>\n  </ion-list>\n	<div class="homeImage"></div>\n</ion-content>\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/home/home.html"*/,
+        selector: 'page-home',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/pages/home/home.html"*/'<ion-header>\n	<app-header></app-header>\n</ion-header>\n<ion-content [attr.noScroll]="shouldScroll" class="homeContent">\n	<ion-searchbar mode="md" class="searchbar" placeholder="Search..." (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-list no-lines *ngFor="let filter_location of filter_locations" (click)="onSelect(filter_location)">\n  	<ion-item class="card-title">{{ filter_location.name }}</ion-item>\n  </ion-list>\n	<div class="homeImage"></div>\n</ion-content>\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/pages/home/home.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__app_locations_location_service__["a" /* LocationService */], __WEBPACK_IMPORTED_MODULE_3__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__app_locations_location_service__["a" /* LocationService */], __WEBPACK_IMPORTED_MODULE_3__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */]])
@@ -186,7 +186,7 @@ VenueService = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VenueDetail; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_util_util_service__ = __webpack_require__(183);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_header_header_service__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__profile_profile_service__ = __webpack_require__(185);
@@ -229,6 +229,9 @@ var VenueDetail = (function () {
         this.rank_latest_media();
         this.check_favorite();
         this.venue.distance = this.utils.get_distance(this.venue.lat, this.venue.lng);
+    };
+    VenueDetail.prototype.open_instagram = function () {
+        window.location.href = "https://www.instagram.com/" + this.venue.instagram;
     };
     VenueDetail.prototype.rank_latest_media = function () {
         var temp_media = [];
@@ -299,7 +302,7 @@ var VenueDetail = (function () {
 }());
 VenueDetail = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'venue-detail',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/venue-detail/venue-detail.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content padding>\n\n	<div class="venue">\n\n	  	<img class="venue-image" src={{venue.most_liked_media}}/>\n\n	  	<div class="feature">\n\n	  		<div class="price"><span *ngIf="venue.price == 1">&#36;</span><span *ngIf="venue.price == 2">&#36;&#36;</span><span *ngIf="venue.price == 3">&#36;&#36;&#36;</span><span *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span></div>\n\n				<p class="venue-distance" (click)="open_map()">{{venue.distance}} km ></p>\n\n	  		<img class="favorite-heart" src={{heart_image}} (click)="favorite_venue()" />\n\n	  	</div>\n\n	   <a href="https://www.instagram.com/{{venue.instagram}}"><h1 class="venue-name">{{venue.name}}</h1></a>\n\n	    <p class="venue-bio">{{venue.bio}}</p>\n\n		<ion-grid>\n\n		  	<ion-row *ngFor="let m of top_media">\n\n		    	<ion-col col-6><img src={{m[0].images.thumbnail.url}}/></ion-col>\n\n		    	<ion-col col-6><img src={{m[1].images.thumbnail.url}}/></ion-col>\n\n		  	</ion-row>\n\n		</ion-grid>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/venue-detail/venue-detail.html"*/,
+        selector: 'venue-detail',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/pages/venue-detail/venue-detail.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content padding>\n\n	<div class="venue">\n\n	  	<img class="venue-image" src={{venue.most_liked_media}}/>\n\n	  	<div class="feature">\n\n	  		<div class="price"><span *ngIf="venue.price == 1">&#36;</span><span *ngIf="venue.price == 2">&#36;&#36;</span><span *ngIf="venue.price == 3">&#36;&#36;&#36;</span><span *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span></div>\n\n				<p class="venue-distance" (click)="open_map()">{{venue.distance}} km ></p>\n\n	  		<img class="favorite-heart" src={{heart_image}} (click)="favorite_venue()" />\n\n	  	</div>\n\n	   <a class="venue-instagram" href="https://www.instagram.com/{{venue.instagram}}" (tap)="open_instagram()"><h1 class="venue-name">{{venue.name}}</h1></a>\n\n	    <p class="venue-bio">{{venue.bio}}</p>\n\n		<a href="https://www.instagram.com/{{venue.instagram}}"><ion-grid>\n\n		  	<ion-row *ngFor="let m of top_media">\n\n		    	<ion-col col-6><img src={{m[0].images.thumbnail.url}}/></ion-col>\n\n		    	<ion-col col-6><img src={{m[1].images.thumbnail.url}}/></ion-col>\n\n		  	</ion-row>\n\n		</ion-grid></a>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/pages/venue-detail/venue-detail.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_3__components_header_header_service__["a" /* HeaderService */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__app_util_util_service__["a" /* UtilService */], __WEBPACK_IMPORTED_MODULE_3__components_header_header_service__["a" /* HeaderService */], __WEBPACK_IMPORTED_MODULE_4__profile_profile_service__["a" /* ProfileService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */]])
@@ -316,6 +319,7 @@ VenueDetail = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UtilService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_geolocation__ = __webpack_require__(184);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(23);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -328,21 +332,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 //import { Geolocation } from 'ionic-native';
 
+
 var UtilService = (function () {
-    function UtilService(geolocation) {
+    function UtilService(geolocation, platform) {
         this.geolocation = geolocation;
+        this.platform = platform;
         this.browser = true;
-        this.get_location(function () { });
     }
     UtilService.prototype.get_location = function (callback) {
         var self = this;
         this.geolocation.getCurrentPosition().then(function (res) {
             self.lat = res.coords.latitude;
             self.lng = res.coords.longitude;
-            //alert(self.lat + " " + self.lng);
+            alert(self.lat + " " + self.lng);
             callback();
         }).catch(function (error) {
-            console.log('Error getting location ', error);
+            alert('Error getting location ' + error);
             callback();
         });
     };
@@ -385,7 +390,7 @@ var UtilService = (function () {
 }());
 UtilService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_geolocation__["a" /* Geolocation */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* Platform */]])
 ], UtilService);
 
 //# sourceMappingURL=util.service.js.map
@@ -563,7 +568,7 @@ webpackEmptyAsyncContext.id = 238;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SplashPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_login_service__ = __webpack_require__(283);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_firebase_firebase__ = __webpack_require__(495);
@@ -590,6 +595,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+//declare var Appsee:any;
 var SplashPage = (function () {
     function SplashPage(navCtrl, login, facebook, firebaseProvider, afAuth, platform, headerService) {
         this.navCtrl = navCtrl;
@@ -600,28 +606,29 @@ var SplashPage = (function () {
         this.platform = platform;
         this.headerService = headerService;
         this.headerService.splashIcons();
+        this.platform.ready().then(function () {
+            //Appsee.start("67bddf300a8642ac91953da588d7559a");
+        });
     }
     SplashPage.prototype.ngOnInit = function () {
         var self = this;
-        if (this.platform.is('cordova')) {
-            this.checkUser(); //if the user is already logged in, get their info and move on
-        }
-        else {
-            __WEBPACK_IMPORTED_MODULE_5_firebase___default.a.auth().onAuthStateChanged(function (user) {
-                if (user) {
-                    self.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__home_home__["a" /* HomePage */]);
-                    self.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_6__home_home__["a" /* HomePage */]);
-                }
-            });
-        }
+        __WEBPACK_IMPORTED_MODULE_5_firebase___default.a.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                self.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__home_home__["a" /* HomePage */]);
+                self.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_6__home_home__["a" /* HomePage */]);
+            }
+        });
     };
     SplashPage.prototype.createUser = function (response) {
     };
     SplashPage.prototype.loginFB = function () {
+        //this.loginBrowser();
         if (this.platform.is('cordova')) {
+            alert("loginapp");
             this.loginApp();
         }
         else {
+            alert("loginbrowser");
             this.loginBrowser();
         }
     };
@@ -678,7 +685,7 @@ var SplashPage = (function () {
 }());
 SplashPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'splash',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/splash/splash.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content padding class="splashContent">\n\n	<button ion-button full icon-left (click)="loginBrowser()" class="loginButton disable-hover">\n\n		<div class="loginButtonText">Login Via Facebook</div>\n\n		<div class="loginButtonIcon"><img src=\'assets/icons/X-facebook.png\'></div>\n\n	</button>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/splash/splash.html"*/,
+        selector: 'splash',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/pages/splash/splash.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content padding class="splashContent">\n\n	<button ion-button full icon-left (click)="loginApp()" class="loginButton disable-hover">\n\n		<div class="loginButtonText">Login Via Facebook</div>\n\n		<div class="loginButtonIcon"><img src=\'assets/icons/X-facebook.png\'></div>\n\n	</button>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/pages/splash/splash.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_8__components_header_header_service__["a" /* HeaderService */], __WEBPACK_IMPORTED_MODULE_2__app_login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_7_angularfire2_auth__["a" /* AngularFireAuth */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */],
@@ -810,7 +817,7 @@ FirebaseProvider = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VenueList; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__venue_detail_venue_detail__ = __webpack_require__(182);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_util_util_service__ = __webpack_require__(183);
@@ -831,8 +838,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var VenueList = (function () {
-    function VenueList(navCtrl, navParams, venueService, utils, headerService) {
+    function VenueList(navCtrl, platform, navParams, venueService, utils, headerService) {
         this.navCtrl = navCtrl;
+        this.platform = platform;
         this.navParams = navParams;
         this.venueService = venueService;
         this.utils = utils;
@@ -844,8 +852,11 @@ var VenueList = (function () {
         this.headerService.venueListIcons();
     }
     VenueList.prototype.ngOnInit = function () {
+        var _this = this;
         this.select_top_venues();
-        this.get_distances(function () { });
+        this.platform.ready().then(function () {
+            _this.get_distances(function () { });
+        });
     };
     VenueList.prototype.format_location_name = function () {
         var locationName = this.location.City_Plain;
@@ -936,10 +947,10 @@ var VenueList = (function () {
 }());
 VenueList = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'venue-list',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/venue-list/venue-list.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content>\n\n	<h1 class="location-title">{{location.City_Plain}}</h1>\n\n	<div class="button-container">\n\n		<button ion-button clear class="radio-button" (click)="change_type(\'food\')">\n\n			<img src="assets/icons/scoutFOOD.png"/>\n\n		</button>\n\n		<button ion-button clear class="radio-button" (click)="change_type(\'coffee\')">\n\n			<img src="assets/icons/scoutCOFFEE.png"/>\n\n		</button>\n\n	</div>\n\n	<ion-list no-lines>\n\n		<ion-item *ngFor="let venue of venues; let i = index" (click)="onSelect(venue)" class="venue" text-wrap>\n\n			<img class="venue-image" src="{{venue.most_liked_media}}"/>\n\n			<p class="venue-distance"><span *ngIf="venue.price == 1">&#36;</span><span *ngIf="venue.price == 2">&#36;&#36;</span><span *ngIf="venue.price == 3">&#36;&#36;&#36;</span><span *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span> {{venue.distance}} km</p>\n\n			<!-- <p class="venue-distance">{{venue.prediction}}</p>\n\n			<a href="https://instagram.com/{{venue.instagram}}" target="_blank"><p class="venue-distance">{{venue.instagram}}</p></a> -->\n\n			<h1 class="venue-name">{{i+1}}. {{venue.name}}</h1>\n\n			<p class="venue-bio">{{venue.bio}}</p>\n\n			<p class="venue-interactions">{{venue.interactions}} instagrams</p>\n\n			<div class="venue-divider"></div>\n\n		</ion-item>\n\n	</ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/venue-list/venue-list.html"*/,
+        selector: 'venue-list',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/pages/venue-list/venue-list.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content>\n\n	<h1 class="location-title">{{location.City_Plain}}</h1>\n\n	<div class="button-container">\n\n		<button ion-button clear class="radio-button" (click)="change_type(\'food\')">\n\n			<img src="assets/icons/scoutFOOD.png"/>\n\n		</button>\n\n		<div class="icon-spacer"></div>\n\n		<button ion-button clear class="radio-button" (click)="change_type(\'coffee\')">\n\n			<img src="assets/icons/scoutCOFFEE.png"/>\n\n		</button>\n\n	</div>\n\n	<ion-list no-lines>\n\n		<ion-item *ngFor="let venue of venues; let i = index" (click)="onSelect(venue)" class="venue" text-wrap>\n\n			<img class="venue-image" src="{{venue.most_liked_media}}"/>\n\n			<p class="venue-distance"><span class="pricespan" *ngIf="venue.price == 1">&#36;</span><span class="pricespan" *ngIf="venue.price == 2">&#36;&#36;</span><span class="pricespan" *ngIf="venue.price == 3">&#36;&#36;&#36;</span><span class="pricespan" *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span><span class="distancespan"> {{venue.distance}} km</span></p>\n\n			<!-- <p class="venue-distance">{{venue.prediction}}</p>\n\n			<a href="https://instagram.com/{{venue.instagram}}" target="_blank"><p class="venue-distance">{{venue.instagram}}</p></a> -->\n\n			<h1 class="venue-name">{{i+1}}. {{venue.name}}</h1>\n\n			<p class="venue-bio">{{venue.bio}}</p>\n\n			<p class="venue-interactions">{{venue.interactions}} instagrams</p>\n\n			<div class="venue-divider"></div>\n\n		</ion-item>\n\n	</ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/pages/venue-list/venue-list.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */]]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_4__app_util_util_service__["a" /* UtilService */], __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_4__app_util_util_service__["a" /* UtilService */], __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */]])
 ], VenueList);
 
 //# sourceMappingURL=venue-list.js.map
@@ -952,7 +963,7 @@ VenueList = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_login_service__ = __webpack_require__(283);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(108);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -986,7 +997,7 @@ var LoginPage = (function () {
 }());
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'login',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/login/login.html"*/'<ion-header>\n\n	<ion-navbar color="primary">\n\n	  <ion-title>Login</ion-title>\n\n	</ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n	<button ion-button full icon-left (click)="loginFB()"><ion-icon name="lock"></ion-icon>Login With Facebook</button>\n\n\n\n	<ion-card *ngIf="userData">\n\n    <ion-card-header>{{ userData.username }}</ion-card-header>\n\n    <img [src]="userData.picture" />\n\n    <ion-card-content>\n\n      <p>Email: {{ userData.email }}</p>\n\n      <p>First Name: {{ userData.first_name }}</p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/login/login.html"*/,
+        selector: 'login',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/pages/login/login.html"*/'<ion-header>\n\n	<ion-navbar color="primary">\n\n	  <ion-title>Login</ion-title>\n\n	</ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n	<button ion-button full icon-left (click)="loginFB()"><ion-icon name="lock"></ion-icon>Login With Facebook</button>\n\n\n\n	<ion-card *ngIf="userData">\n\n    <ion-card-header>{{ userData.username }}</ion-card-header>\n\n    <img [src]="userData.picture" />\n\n    <ion-card-content>\n\n      <p>Email: {{ userData.email }}</p>\n\n      <p>First Name: {{ userData.first_name }}</p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/pages/login/login.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__app_login_service__["a" /* LoginService */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__app_login_service__["a" /* LoginService */]])
@@ -1002,7 +1013,7 @@ LoginPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfilePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_header_header_service__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__profile_service__ = __webpack_require__(185);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_venues_venue_service__ = __webpack_require__(181);
@@ -1118,7 +1129,7 @@ var ProfilePage = (function () {
 }());
 ProfilePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'profile-page',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/profile/profile.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content padding>\n\n	<div class="profile">\n\n		<img class="profile-image" src={{profile_picture}}/>\n\n		<h1 class="profile-name">{{name}}</h1>\n\n		<p class="profile-bio">{{email}}</p>\n\n	</div>\n\n	<div class="divider"></div>\n\n	<div class="favorites">\n\n		<h1 class="favorites-title">Favorites</h1>\n\n		<ion-grid>\n\n		  	<ion-row *ngFor="let f of favs">\n\n		    	<ion-col col-6>\n\n		    		<img class="favorites-image" src={{f[0].venue.most_liked_media}} (click)="openFavorite(f[0])"/>\n\n		    		<p class="favorites-name" (click)="openFavorite(f[0])">{{f[0].venue.name}}</p>\n\n		    	</ion-col>\n\n					<ion-col col-6>\n\n		    		<img class="favorites-image" src={{f[1].venue.most_liked_media}} (click)="openFavorite(f[1])"/>\n\n		    		<p class="favorites-name" (click)="openFavorite(f[1])">{{f[1].venue.name}}</p>\n\n		    	</ion-col>\n\n					<!--<ion-col col-6>\n\n		    		<img class="favorites-image" src={{favorite_venues[i+1].venue.most_liked_media}} (click)="openFavorite(favorite_venues[i+1])"/>\n\n		    		<p class="favorites-name" (click)="openFavorite(favorite_venues[i+1])">{{favorite_venues[i+1].venue.name}}</p>\n\n		    	</ion-col>-->\n\n		  	</ion-row>\n\n		</ion-grid>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/pages/profile/profile.html"*/,
+        selector: 'profile-page',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/pages/profile/profile.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content padding>\n\n	<div class="profile">\n\n		<img class="profile-image" src={{profile_picture}}/>\n\n		<h1 class="profile-name">{{name}}</h1>\n\n		<p class="profile-bio">{{email}}</p>\n\n	</div>\n\n	<div class="divider"></div>\n\n	<div class="favorites">\n\n		<h1 class="favorites-title">Favorites</h1>\n\n		<ion-grid>\n\n		  	<ion-row *ngFor="let f of favs">\n\n		    	<ion-col col-6>\n\n		    		<img class="favorites-image" src={{f[0].venue.most_liked_media}} (click)="openFavorite(f[0])"/>\n\n		    		<p class="favorites-name" (click)="openFavorite(f[0])">{{f[0].venue.name}}</p>\n\n		    	</ion-col>\n\n					<ion-col col-6>\n\n		    		<img class="favorites-image" src={{f[1].venue.most_liked_media}} (click)="openFavorite(f[1])"/>\n\n		    		<p class="favorites-name" (click)="openFavorite(f[1])">{{f[1].venue.name}}</p>\n\n		    	</ion-col>\n\n					<!--<ion-col col-6>\n\n		    		<img class="favorites-image" src={{favorite_venues[i+1].venue.most_liked_media}} (click)="openFavorite(favorite_venues[i+1])"/>\n\n		    		<p class="favorites-name" (click)="openFavorite(favorite_venues[i+1])">{{favorite_venues[i+1].venue.name}}</p>\n\n		    	</ion-col>-->\n\n		  	</ion-row>\n\n		</ion-grid>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/pages/profile/profile.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__components_header_header_service__["a" /* HeaderService */], __WEBPACK_IMPORTED_MODULE_4__app_venues_venue_service__["a" /* VenueService */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__components_header_header_service__["a" /* HeaderService */], __WEBPACK_IMPORTED_MODULE_3__profile_service__["a" /* ProfileService */], __WEBPACK_IMPORTED_MODULE_4__app_venues_venue_service__["a" /* VenueService */]])
@@ -1149,7 +1160,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(278);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(281);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(557);
@@ -1199,6 +1210,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+//666bcf1d
+/*Pro.init('666bcf1d', {
+  appVersion: '0.1'
+})*/
+/*@Injectable()
+export class MyErrorHandler implements ErrorHandler {
+  ionicErrorHandler: IonicErrorHandler;
+
+  constructor(injector: Injector) {
+    try {
+      this.ionicErrorHandler = injector.get(IonicErrorHandler);
+    } catch(e) {
+      // Unable to get the IonicErrorHandler provider, ensure
+      // IonicErrorHandler has been added to the providers list below
+    }
+  }
+
+  handleError(err: any): void {
+    IonicPro.monitoring.handleNewError(err);
+    // Remove this if you want to disable Ionic's auto exception handling
+    // in development mode.
+    this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
+  }
+}*/
 // Initialize Firebase
 var firebase_config = {
     apiKey: "AIzaSyA1S5Zv48ciri4AvvLC1aNBsQr21IXi2UQ",
@@ -1273,11 +1308,10 @@ AppModule = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(281);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(278);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_splash_splash__ = __webpack_require__(282);
-//declare var TestFairy: any;
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1301,13 +1335,13 @@ var MyApp = (function () {
             // Here you can do any higher level native things you might need.
             statusBar.styleDefault();
             splashScreen.hide();
-            //TestFairy.begin("7a5cb39e8543159f61ffe5483fe5f0e9f1c22d33");
+            TestFairy.begin("7a5cb39e8543159f61ffe5483fe5f0e9f1c22d33");
         });
     }
     return MyApp;
 }());
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/app/app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/app/app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
 ], MyApp);
@@ -1468,7 +1502,7 @@ var LOCATIONS = [{ "key": "brightonuk", "name": "Brighton" }, { "key": "chichest
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeaderComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_home_home__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_profile_profile__ = __webpack_require__(508);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(507);
@@ -1512,7 +1546,7 @@ var HeaderComponent = (function () {
 }());
 HeaderComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'app-header',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/components/header/header.component.html"*/'<ion-navbar mode="md" color="light">\n\n	<div class="nav-left nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_left_back" (click)="back()"/>\n\n		<img class="nav-icon nav-account" src="assets/icons/scoutACCOUNT.png" *ngIf="headerService.show_account" (click)="account()"/>\n\n	</div>\n\n	<ion-title><img class=\'logo\' src=\'assets/images/scout-logo.png\'/></ion-title>\n\n	<div class="title-divider"></div>\n\n	<div class="nav-right nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_right_back" (click)="back()"/>\n\n		<img class="nav-icon nav-search" src="assets/icons/scoutSEARCH.png" *ngIf="headerService.show_search" (click)="search()"/>\n\n		<!--<img class="nav-icon nav-map" src="../assets/icons/scoutPIN.png" *ngIf="headerService.show_map" (click)="map()"/>-->\n\n	</div>\n\n</ion-navbar>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout-demo/src/components/header/header.component.html"*/
+        selector: 'app-header',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/components/header/header.component.html"*/'<ion-navbar mode="md" color="light">\n\n	<div class="nav-left nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_left_back" (click)="back()"/>\n\n		<img class="nav-icon nav-account" src="assets/icons/scoutACCOUNT.png" *ngIf="headerService.show_account" (click)="account()"/>\n\n	</div>\n\n	<div class="nav-center nav-icon-container">\n\n		<ion-title><img class=\'logo\' src=\'assets/images/scout-logo.png\'/></ion-title>\n\n	</div>\n\n	<div class="title-divider"></div>\n\n	<div class="nav-right nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_right_back" (click)="back()"/>\n\n		<img class="nav-icon nav-search" src="assets/icons/scoutSEARCH.png" *ngIf="headerService.show_search" (click)="search()"/>\n\n		<!--<img class="nav-icon nav-map" src="../assets/icons/scoutPIN.png" *ngIf="headerService.show_map" (click)="map()"/>-->\n\n	</div>\n\n</ion-navbar>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/scout/scoutApp/src/components/header/header.component.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_5__header_service__["a" /* HeaderService */]])
 ], HeaderComponent);

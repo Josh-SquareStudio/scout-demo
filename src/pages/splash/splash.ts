@@ -9,6 +9,8 @@ import { HomePage } from '../home/home';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { HeaderService } from '../../components/header/header.service';
 
+//declare var Appsee:any;
+
 @Component({
   selector: 'splash',
   templateUrl: 'splash.html',
@@ -23,33 +25,35 @@ export class SplashPage implements OnInit{
     public firebaseProvider: FirebaseProvider,
     private afAuth: AngularFireAuth,
     private platform: Platform,
-    private headerService: HeaderService
+    private headerService: HeaderService,
   ){
     this.headerService.splashIcons();
+    this.platform.ready().then(()=> {
+       //Appsee.start("67bddf300a8642ac91953da588d7559a");
+    });
   }
 
   ngOnInit(): void {
     var self = this;
-    if (this.platform.is('cordova')){
-      this.checkUser(); //if the user is already logged in, get their info and move on
-    }else{
-      firebase.auth().onAuthStateChanged(function(user) {
-  		  if (user) {
-          self.navCtrl.push(HomePage);
-          self.navCtrl.setRoot(HomePage);
-        }
-      });
-    }
+    firebase.auth().onAuthStateChanged(function(user) {
+		  if (user) {
+        self.navCtrl.push(HomePage);
+        self.navCtrl.setRoot(HomePage);
+      }
+    });
 	}
-  
+
 	createUser(response){
 
 	}
 
   loginFB(){
+    //this.loginBrowser();
     if (this.platform.is('cordova')){
+      alert("loginapp");
       this.loginApp();
     }else{
+      alert("loginbrowser");
       this.loginBrowser();
     }
   }
