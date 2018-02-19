@@ -58,11 +58,13 @@ export class ProfilePage implements OnInit{
 
         for(var key in favorites){
           self.getFavoriteVenue(favorites[key].link, function(venue){
-            self.favorite_venues.push({
-              link: favorites[key].link,
-              venue: venue,
-              present: true
-            });
+            if(venue.most_liked_media){
+              self.favorite_venues.push({
+                link: favorites[key].link,
+                venue: venue,
+                present: true
+              });
+            }
             self.pipeFavorites();
           });
         }
@@ -90,11 +92,11 @@ export class ProfilePage implements OnInit{
 	getProfileFavorites(i,favorites,callback){
 		var self = this;
 		this.venueService.get_favorite_venue(this.favorite_links[i].link,function(venue){
-			favorites.push({
-				link: self.favorite_links[i].link,
-				venue: venue,
-				present: true										//used for the template
-			});
+        favorites.push({
+  				link: self.favorite_links[i].link,
+  				venue: venue,
+  				present: true										//used for the template
+  			});
 			i++;
 			if(i < self.favorite_links.length){
 				self.getProfileFavorites(i,favorites,callback);

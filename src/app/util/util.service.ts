@@ -14,9 +14,9 @@ export class UtilService{
 		this.browser = true;
 	}
 
-  get_location(callback): void{
+  /*get_location(callback): void{
     var self = this;
-    this.geolocation.getCurrentPosition().then(res => {
+    this.geolocation.getCurrentPosition({timeout:15000}).then((res) => {
       self.lat = res.coords.latitude;
       self.lng = res.coords.longitude;
 			alert(self.lat + " " + self.lng);
@@ -25,6 +25,16 @@ export class UtilService{
       alert('Error getting location '+error);
       callback();
     });
+  }*/
+
+	async get_location(callback) {
+    await this.platform.ready();
+    const { coords } = await this.geolocation.getCurrentPosition();
+		//alert(coords);
+		this.lat = coords.latitude;
+		this.lng = coords.longitude;
+		//alert(this.lat + " " + this.lng);
+		callback();
   }
 
   get_distance(lat,lng): number{

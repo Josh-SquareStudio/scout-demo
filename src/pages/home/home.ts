@@ -45,7 +45,6 @@ export class HomePage implements OnInit{
      });
   }
 
-
   getSearchLocations() {
     var self = this;
     this.locationService.getListOfLocations(function(locations){

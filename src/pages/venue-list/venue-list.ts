@@ -105,12 +105,14 @@ export class VenueList implements OnInit{
 
   get_distances(callback): void{
     var self = this;
+    for(var i=0; i<self.venues.length; i++){
+      self.venues[i].interactions = Math.round(self.venues[i].followers * 1.38);
+    }
     this.utils.get_location(function(){
       for(var i=0; i<self.venues.length; i++){
         self.venues[i].distance = self.utils.get_distance(self.venues[i].lat,self.venues[i].lng);
         //console.log(this.venues[i].lat,this.venues[i].lng);
         //console.log(this.utils.get_distance(this.venues[i].lat,this.venues[i].lng));
-        self.venues[i].interactions = Math.round(self.venues[i].followers * 1.38);
       }
     });
   }

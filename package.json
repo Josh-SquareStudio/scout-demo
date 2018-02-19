@@ -33,7 +33,6 @@
     "cordova-android": "git+https://github.com/infil00p/cordova-android.git#StudioThreeFix",
     "cordova-browser": "^5.0.3",
     "cordova-ios": "^4.5.4",
-    "cordova-plugin-browsersync": "^1.1.0",
     "cordova-plugin-browsertab": "^0.2.0",
     "cordova-plugin-buildinfo": "^2.0.1",
     "cordova-plugin-compat": "^1.2.0",
@@ -86,8 +85,12 @@
         "ANDROID_PATHPREFIX": "/"
       },
       "com.testfairy.cordova-plugin": {},
-      "cordova-plugin-geolocation": {}
+      "cordova-plugin-geolocation": {
+        "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
+      }
     },
-    "platforms": []
+    "platforms": [
+      "ios"
+    ]
   }
 }
