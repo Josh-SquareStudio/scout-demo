@@ -2,7 +2,8 @@
 	<app-header></app-header>
 </ion-header>
 <ion-content [attr.noScroll]="shouldScroll" class="homeContent">
-	<ion-searchbar mode="md" class="searchbar" placeholder="Search a city…" (ionInput)="getItems($event)"></ion-searchbar>
+	<ion-searchbar mode="md" class="searchbar" placeholder="Type a City name…" (ionInput)="getItems($event)"></ion-searchbar>
+	<div class="near-me" *ngIf='showNearMe'><img src="assets/icons/scoutMAP.png"><p>Near me</p></div>
   <ion-list no-lines *ngFor="let filter_location of filter_locations" (click)="onSelect(filter_location)">
   	<ion-item class="card-title">{{ filter_location.name }}</ion-item>
   </ion-list>

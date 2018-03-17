@@ -17,6 +17,7 @@ export class HomePage implements OnInit{
   searchQuery: string = '';
   locations: SearchLocation[];
   filter_locations : SearchLocation[];
+  showNearMe = true;
 
   constructor(public navCtrl: NavController, private locationService: LocationService, private venue_service: VenueService, private headerService: HeaderService, private geo: Geolocation, private platform: Platform) {
     this.headerService.showMap(true);
@@ -67,9 +68,11 @@ export class HomePage implements OnInit{
       this.filter_locations = this.filter_locations.filter((location) => {
         return (location.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
+      this.showNearMe = false;
     }
     else{
     	this.filter_locations = [];							//make list empty if search string is
+      this.showNearMe = true;
     }
   }
 
