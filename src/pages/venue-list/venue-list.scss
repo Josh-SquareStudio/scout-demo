@@ -18,8 +18,28 @@
 }
 
 venue-list{
+	.fixedButtons{
+		position: fixed;
+		top: 51px;
+    z-index: 9999;
+    width: 100%;
+    background-color: white;
+	}
+
+	.buttonPadded{
+		margin-top: 105px;
+	}
+
+	.scout-slogan{
+		width: 40%;
+		margin-left: 30%;
+		text-align: center;
+		margin-top: 45px;
+		opacity: .8;
+	}
 	.location-title{
 		margin:45px 0px;
+		margin-top: 5px;
 		text-align: center;
 		font-size: 2.1rem;
 		margin-bottom: 35px;
@@ -35,7 +55,25 @@ venue-list{
 	}
 
 	.venue-distance{
-		margin: 12px 0px 0px 0px;
+		margin: 10px 0px;
+		display: inline-block;
+		color: #777;
+		border-left: solid 1px #e7e7e7;
+	  border-right: solid 1px #e7e7e7;
+	  padding: 0px 14px;
+	}
+
+	.venue-category{
+		margin: 10px 0px;
+		display: inline-block;
+	  border-right: solid 1px #e7e7e7;
+	  padding: 0px 14px;
+	}
+
+	.open-status{
+		margin: 10px 0px;
+		display: inline-block;
+	  padding: 0px 14px;
 	}
 
 	.venue-name{
@@ -45,6 +83,12 @@ venue-list{
 	.venue-bio{
 		margin: 5px 0px 20px 0px;
 		font-size: 1.2rem;
+	}
+
+	.price{
+		margin-right: 8px;
+		display: inline-block;
+		font-size: 1em;
 	}
 
 	.pricespan{

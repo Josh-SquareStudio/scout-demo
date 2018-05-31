@@ -1,8 +1,34 @@
 venue-detail {
 
+	.instagram-handle{
+		width: 100%;
+		text-align: center;
+		font-weight: bold;
+		margin-top: 15px;
+		font-family: Apercu;
+		opacity: .8;
+	}
+
+	.col{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+	}
+
+	#map{
+		width: 100%;
+		height: 150px;
+		margin: 20px 0;
+	}
+
 	.venue{
 		text-align: center;
-		margin: 0px 0px 20px 0px;
+		/*margin: 0px 0px 20px 0px;*/
+	}
+
+	.nowebsite, .nocall{
+		opacity: .4;
 	}
 
 	a{
@@ -26,11 +52,59 @@ venue-detail {
 	.venue-distance{
 		margin: 10px 0px;
 		display: inline-block;
-		text-decoration: underline;
+		color: #777;
 		border-left: solid 1px #e7e7e7;
 	  border-right: solid 1px #e7e7e7;
 	  padding: 0px 14px;
 	}
+
+	.venue-category{
+		margin: 10px 0px;
+		display: inline-block;
+	  border-right: solid 1px #e7e7e7;
+	  padding: 0px 14px;
+	}
+
+	.open-status{
+		margin: 10px 0px;
+		display: inline-block;
+	  padding: 0px 14px;
+	}
+
+	.action-bar{
+
+		img{
+			height: 18px;
+			margin-right: 2px;
+			display: inline;
+			padding-top: 8px;
+			box-sizing: border-box;
+		}
+
+		p{
+			display: inline;
+			margin-left: 5px;
+			font-size: .9em;
+		}
+
+		div{
+			display: inline-block;
+			padding: 10px;
+			width: 24%;
+			height: 40px;
+			line-height: 20px;
+			box-sizing: border-box;
+			cursor: pointer;
+		}
+	}
+
+	/*@media screen and (max-width: 425px){
+		.action-bar{
+			div{
+
+			}
+		}
+	}*/
 
 	.price{
 		margin-right: 8px;
@@ -38,12 +112,12 @@ venue-detail {
 		font-size: 1em;
 	}
 
-	.favorite-heart{
+	/*.favorite-heart{
 		width:15px;
 		height:15px;
 		margin-left:10px;
 		margin-bottom:-2px;
-	}
+	}*/
 
 	.venue-name{
 		margin: 20px 0px;
@@ -52,7 +126,12 @@ venue-detail {
 	}
 
 	.venue-bio{
-		margin: 5px 0px 40px 0px;
+		margin: 5px 0px 10px 0px;
+		font-size: 1.2rem;
+	}
+
+	.venue-opening-times{
+		margin: 20px 0px 10px 0px;
 		font-size: 1.2rem;
 	}
 
@@ -62,5 +141,66 @@ venue-detail {
 
 	[col-6]{
 		padding:2px 2px 0px 2px;
+	}
+
+	.oops-dialog{
+		display: none;
+		position: fixed;
+		background-color: white;
+		top: 0;
+		left: 0;
+		height: 100vh;
+		width: 100%;
+		z-index: 99999999;
+		font-family: "Apercu";
+
+		.dialog-wrapper{
+			width: 80%;
+			height: 95%;
+			margin: 2.5% 10%;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+
+			div{
+				padding: 20px;
+			}
+
+			.dialog-close{
+				text-align: right;
+				img{
+					width: 30px;
+				}
+				.dialog-close-button{
+					cursor: pointer;
+				}
+			}
+
+			.dialog-title{
+				border-top: 1px solid #e7e7e7;
+				h1{
+					font-family: "Domine" !important;
+				}
+			}
+
+			.dialog-reason{
+				font-size: 16pt !important;
+				border-top: 1px solid #e7e7e7;
+				ul{
+					margin: 0;
+					padding: 0;
+				}
+				li{
+					list-style: none;
+					text-decoration: underline;
+					margin: 10px 0;
+				}
+			}
+
+			.dialog-thanks{
+				border-top: 1px solid #e7e7e7;
+			}
+		}
 	}
 }

@@ -1,7 +1,8 @@
 <ion-navbar mode="md" color="light">
 	<div class="nav-left nav-icon-container">
 		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_left_back" (click)="back()"/>
-		<img class="nav-icon nav-account" src="assets/icons/scoutACCOUNT.png" *ngIf="headerService.show_account" (click)="account()"/>
+		<img class="nav-icon nav-search" src="assets/icons/scoutSEARCH.png" *ngIf="headerService.show_left_search" (click)="search()"/>
+		<img class="nav-icon nav-account" src="assets/icons/scoutACCOUNT.png" *ngIf="headerService.show_left_account" (click)="account()"/>
 	</div>
 	<div class="nav-center nav-icon-container">
 		<ion-title (click)="search()"><img class='logo' src='assets/images/scout-logo.png'/></ion-title>
@@ -9,7 +10,8 @@
 	<div class="title-divider"></div>
 	<div class="nav-right nav-icon-container">
 		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_right_back" (click)="back()"/>
-		<img class="nav-icon nav-search" src="assets/icons/scoutSEARCH.png" *ngIf="headerService.show_search" (click)="search()"/>
+		<img class="nav-icon nav-search" src="assets/icons/scoutSEARCH.png" *ngIf="headerService.show__right_search" (click)="search()"/>
+		<img class="nav-icon nav-account" src="assets/icons/scoutACCOUNT.png" *ngIf="headerService.show_right_account" (click)="account()"/>
 		<!--<img class="nav-icon nav-map" src="../assets/icons/scoutPIN.png" *ngIf="headerService.show_map" (click)="map()"/>-->
 	</div>
 </ion-navbar>

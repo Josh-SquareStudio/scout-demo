@@ -4,6 +4,8 @@ import { SearchLocation } from '../../app/locations/search-location';
 import { LocationService } from '../../app/locations/location.service';
 import { VenueService } from '../../app/venues/venue.service';
 import { VenueList } from '../venue-list/venue-list'
+import { NearmePage } from '../nearme/nearme'
+import { UtilService } from '../../app/util/util.service';
 import { HeaderService } from '../../components/header/header.service';
 import { Geolocation } from '@ionic-native/geolocation';
 
@@ -19,7 +21,7 @@ export class HomePage implements OnInit{
   filter_locations : SearchLocation[];
   showNearMe = true;
 
-  constructor(public navCtrl: NavController, private locationService: LocationService, private venue_service: VenueService, private headerService: HeaderService, private geo: Geolocation, private platform: Platform) {
+  constructor(public navCtrl: NavController, private locationService: LocationService, private venue_service: VenueService, private headerService: HeaderService, private geo: Geolocation, private platform: Platform, private utils: UtilService) {
     this.headerService.showMap(true);
   }
 
@@ -40,10 +42,7 @@ export class HomePage implements OnInit{
 	}
 
   setLocation() {
-     this.platform.ready().then(() => {
-        return this.geo.getCurrentPosition()
-                       .then(pos => {});
-     });
+    this.utils.get_location(function(){});
   }
 
   getSearchLocations() {
@@ -74,6 +73,10 @@ export class HomePage implements OnInit{
     	this.filter_locations = [];							//make list empty if search string is
       this.showNearMe = true;
     }
+  }
+
+  openNearMe(){
+    this.navCtrl.push(NearmePage);
   }
 
   onSelect(location: SearchLocation){

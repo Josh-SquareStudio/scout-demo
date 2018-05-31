@@ -36,11 +36,7 @@ page-home {
   }
 }
 
-.near-me{
-  width: calc(100% - 20px);
-  height: 30px;
-  margin-left: 10px;
-  margin-bottom: 10px;
+div .searchbar{
   img{
     width: 25px;
     height: 25px;
@@ -48,11 +44,16 @@ page-home {
   }
   p{
     float: left;
-    margin-top: -1px;
+    margin-top: 2px;
     font-family: "Apercu";
-    font-size: 1.4em;
+    font-size: 1.2em;
     margin-left: 8px;
   }
+}
+
+.near-me{
+  border: none !important;
+  margin-bottom: 0 !important;
 }
 
 .searchbar-md .searchbar-input, .searchbar-ios .searchbar-input{

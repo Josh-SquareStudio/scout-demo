@@ -12,8 +12,10 @@ import { VenueList } from '../pages/venue-list/venue-list';
 import { VenueDetail } from '../pages/venue-detail/venue-detail';
 import { ProfilePage } from '../pages/profile/profile';
 import { HeaderComponent } from '../components/header/header.component';
+import { NearmePage } from '../pages/nearme/nearme';
 
 import { ProfileService } from '../pages/profile/profile.service';
+import { VenueService } from './venues/venue.service';
 import { UtilService } from './util/util.service';
 import { Geolocation } from '@ionic-native/geolocation';
 
@@ -26,6 +28,8 @@ import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
 import { Facebook } from '@ionic-native/facebook';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { EmailComposer } from '@ionic-native/email-composer';
+
 
 //666bcf1d
 /*Pro.init('666bcf1d', {
@@ -78,7 +82,8 @@ const cloudSettings: CloudSettings = {
     VenueList,
     VenueDetail,
     ProfilePage,
-    HeaderComponent
+    HeaderComponent,
+    NearmePage
   ],
   imports: [
     BrowserModule,
@@ -97,18 +102,21 @@ const cloudSettings: CloudSettings = {
     VenueList,
     VenueDetail,
     ProfilePage,
-    HeaderComponent
+    HeaderComponent,
+    NearmePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseProvider,
+    VenueService,
     ProfileService,
     UtilService,
     Facebook,
     Geolocation,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    EmailComposer
   ]
 })
 export class AppModule {}

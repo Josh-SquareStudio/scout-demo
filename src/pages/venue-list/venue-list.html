@@ -2,6 +2,7 @@
 	<app-header></app-header>
 </ion-header>
 <ion-content>
+	<p class="scout-slogan">The most instagrammed independent places in</p>
 	<h1 class="location-title">{{location.City_Plain}}</h1>
 	<div class="button-container">
 		<button ion-button clear class="radio-button" mode="md" (click)="change_type('food')">
@@ -15,7 +16,14 @@
 	<ion-list no-lines>
 		<ion-item *ngFor="let venue of venues; let i = index" (click)="onSelect(venue)" class="venue" text-wrap>
 			<img class="venue-image" src="{{venue.most_liked_media}}"/>
-			<p class="venue-distance"><span class="pricespan" *ngIf="venue.price == 1">&#36;<span style="color: #ddd">&#36;&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 2">&#36;&#36;<span style="color: #ddd">&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 3">&#36;&#36;&#36;<span style="color: #ddd">&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span><span class="distancespan"> {{venue.distance}} km</span></p>
+			<div class="feature">
+	  		<div class="price"><span class="pricespan" *ngIf="venue.price == 1">&#36;<span style="color: #ddd">&#36;&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 2">&#36;&#36;<span style="color: #ddd">&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 3">&#36;&#36;&#36;<span style="color: #ddd">&#36;</span></span><span class="pricespan" *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span></div>
+				<p class="venue-distance">{{venue.distance}} km </p>
+				<p class="venue-category">{{venue.category.name}}</p>
+				<p *ngIf="venue.open_status == 0" class="open-status">-</p>
+				<p *ngIf="venue.open_status == 1" class="open-status"><span style="color: #2ECC71">Open</span></p>
+				<p *ngIf="venue.open_status == 2" class="open-status"><span style="color: #EF4836">Closed</span></p>
+	  	</div>
 			<!-- <p class="venue-distance">{{venue.prediction}}</p>
 			<a href="https://instagram.com/{{venue.instagram}}" target="_blank"><p class="venue-distance">{{venue.instagram}}</p></a> -->
 			<h1 class="venue-name">{{i+1}}. {{venue.name}}</h1>

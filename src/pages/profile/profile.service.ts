@@ -3,13 +3,14 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import firebase from 'firebase';
 import { Profile }  from './profile.class';
 import { Facebook } from '@ionic-native/facebook';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 @Injectable()
 export class ProfileService {
 
 	profile : Profile;
 
-	constructor(private afd: AngularFireDatabase, private facebook: Facebook) {
+	constructor(private afd: AngularFireDatabase, private facebook: Facebook, private emailComposer: EmailComposer) {
 		this.profile = {
 			id: "",
 			name: "",
@@ -32,7 +33,6 @@ export class ProfileService {
 		  }
 		});
   }
-
 
 	getProfile(callback: any){
 		var self = this;
@@ -116,5 +116,84 @@ export class ProfileService {
 			}
   	});
   }
+
+	flagVenue(key: string, reason: string){
+		var self = this;
+    var chains, wrong_profiles, repeats, others, total_flags, reportedBy;
+
+    var flags = this.afd.object('/flags/'+key);
+    flags.take(1)
+    .subscribe((data) =>{
+      console.log(data);
+      try{
+        chains = data.reason.chain;
+        wrong_profiles = data.reason.wrong_profile;
+        repeats = data.reason.repeat;
+        others = data.reason.other;
+				reportedBy = data.reportedBy;
+      }catch(e){
+        chains = 0;
+        wrong_profiles = 0;
+        repeats = 0;
+        others = 0;
+				reportedBy = [];
+      }
+
+			var alreadyReported = false;
+			for(var i = 0; i < reportedBy.length; i++){
+				if (self.profile.id == reportedBy[i]){
+					alreadyReported = true;
+					break;
+				}
+			}
+
+			if(!alreadyReported){
+				reportedBy.push(self.profile.id);
+
+	      switch(reason){
+	        case "chain":
+	          chains++;break;
+	        case "wrong profile":
+	          wrong_profiles++;break;
+	        case "repeat":
+	          repeats++;break;
+	        case "other":
+	          others++;break;
+	      }
+
+				total_flags = chains + wrong_profiles + repeats + others;
+	      if(total_flags > 0){
+
+	        self.emailComposer.isAvailable().then((available: boolean) =>{
+	         if(available) {
+	           let email = {
+	             to: 'solfonictoast@gmail.com',
+	             subject: 'Scout flag notification',
+	             body: 'Venue ' + key + ' has received enough flags to trigger this email',
+	             isHtml: true
+	           };
+
+	           // Send a text message using default options
+	           alert("before email");
+	           self.emailComposer.open(email);
+	           alert("emailed");
+	         }else{
+	           alert("email not avaiable");
+	         }
+	        });
+	      }
+
+	      flags.set({
+					reportedBy: reportedBy,
+	        reason:{
+	          chain:chains,
+	          wrong_profile:wrong_profiles,
+	          repeat:repeats,
+	          other: others
+	        }
+	      });
+			}
+    });
+	}
 
 }

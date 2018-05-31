@@ -1,11 +1,12 @@
-import { Component, OnInit} from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NavController, NavParams, Platform, Content } from 'ionic-angular';
 import { Location } from '../../app/locations/location';
 import { Venue } from '../../app/venues/venue';
 import { VenueService } from '../../app/venues/venue.service';
 import { VenueDetail } from '../venue-detail/venue-detail';
 import { UtilService } from '../../app/util/util.service';
 import { HeaderService } from '../../components/header/header.service';
+import jQuery from 'jquery';
 
 @Component({
   selector: 'venue-list',
@@ -14,6 +15,8 @@ import { HeaderService } from '../../components/header/header.service';
 })
 export class VenueList implements OnInit{
 
+  @ViewChild(Content)
+  content:Content;
 	venues: Venue[];
 	location : Location;
   distances : number[];
@@ -24,6 +27,30 @@ export class VenueList implements OnInit{
     this.format_location_name();
     this.venues = this.navParams.get('venues');
     this.headerService.venueListIcons();
+    this.initjQuery();
+  }
+
+  initjQuery(){
+    console.log('init jquery');
+    jQuery('.scroll-content').scroll(function(){
+      console.log('test');
+    });
+  }
+
+  onPageScroll(event) {
+    console.log(event.target.scrollTop);
+  }
+
+  ngAfterViewInit() {
+    this.content.ionScroll.subscribe((event: any) => {
+      if(event.scrollTop >= 142){
+        jQuery('.button-container').addClass("fixedButtons");
+        jQuery('.list').addClass("buttonPadded");
+      }else{
+        jQuery('.button-container').removeClass("fixedButtons");
+        jQuery('.list').removeClass("buttonPadded");
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -32,6 +59,11 @@ export class VenueList implements OnInit{
 			this.get_distances(function(){});
 		});
 	}
+
+  cutCategory(str){
+    var s = str.split(" ");
+    return s[0];
+  }
 
   format_location_name(){
     var locationName = this.location.City_Plain;
@@ -45,6 +77,7 @@ export class VenueList implements OnInit{
   }
 
   change_type(type : string){
+    this.content.scrollToTop();
     this.venue_type = type;
     console.log(this.venue_type);
     var self = this;
@@ -106,9 +139,11 @@ export class VenueList implements OnInit{
   get_distances(callback): void{
     var self = this;
     for(var i=0; i<self.venues.length; i++){
-      self.venues[i].interactions = Math.round(self.venues[i].followers * 1.38);
+      self.venues[i].interactions = (Math.round(self.venues[i].followers * 1.38)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      self.venues[i].open_status = self.venueService.check_if_open(self.venues[i]);
+      self.venues[i].category.name = self.cutCategory(self.venues[i].category.name);
     }
-    this.utils.get_location(function(){
+    this.utils.get_location(function(coords){
       for(var i=0; i<self.venues.length; i++){
         self.venues[i].distance = self.utils.get_distance(self.venues[i].lat,self.venues[i].lng);
         //console.log(this.venues[i].lat,this.venues[i].lng);

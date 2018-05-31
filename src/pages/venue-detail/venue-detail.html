@@ -2,20 +2,57 @@
 	<app-header></app-header>
 </ion-header>
 <ion-content padding>
+	<div class="oops-dialog">
+		<div class="dialog-wrapper">
+			<div class="dialog-close">
+				<img class="dialog-close-button" src="assets/icons/scoutCLOSE.png">
+			</div>
+			<div class="dialog-title">
+				<h1>Oops!</h1>
+				<p>Sometimes the Scout bot has a moment...</p>
+			</div>
+			<div class="dialog-reason">
+				<h1>What's Happened Here?</h1>
+				<ul>
+					<li (click)="flag_venue('chain')">It's a chain</li>
+					<li (click)="flag_venue('wrong profile')">Wrong Instagram profile</li>
+					<li (click)="flag_venue('repeat')">Repeated Venue</li>
+					<li (click)="flag_venue('other')">Something else</li>
+				</ul>
+			</div>
+			<div class="dialog-thanks">
+				<h1>Thanks &#270C;</h1>
+			</div>
+		</div>
+	</div>
 	<div class="venue">
 	  	<img class="venue-image" src={{venue.most_liked_media}}/>
 	  	<div class="feature">
-	  		<div class="price"><span class="pricespan" *ngIf="venue.price == 1">&#36;<span style="color: #ddd">&#36;&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 2">&#36;&#36;<span style="color: #ddd">&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 3">&#36;&#36;&#36;<span style="color: #ddd">&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span></div>
-				<p class="venue-distance" (click)="open_map()">{{venue.distance}} km ></p>
-	  		<img class="favorite-heart" src={{heart_image}} (click)="favorite_venue()" />
+	  		<div class="price"><span class="pricespan" *ngIf="venue.price == 1">&#36;<span style="color: #ddd">&#36;&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 2">&#36;&#36;<span style="color: #ddd">&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 3">&#36;&#36;&#36;<span style="color: #ddd">&#36;</span></span><span class="pricespan" *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span></div>
+				<p class="venue-distance" (click)="open_map()">{{venue.distance}} km </p>
+				<p class="venue-category">{{venue.category.name}}</p>
+				<p *ngIf="venue.open_status == 0" class="open-status">-</p>
+				<p *ngIf="venue.open_status == 1" class="open-status"><span style="color: #2ECC71">Open</span></p>
+				<p *ngIf="venue.open_status == 2" class="open-status"><span style="color: #EF4836">Closed</span></p>
 	  	</div>
 	   <a class="venue-instagram" href="https://www.instagram.com/{{venue.instagram}}" (tap)="open_instagram()"><h1 class="venue-name">{{venue.name}}</h1></a>
 	    <p class="venue-bio">{{venue.bio}}</p>
-		<a href="https://www.instagram.com/{{venue.instagram}}"><ion-grid>
+			<p *ngIf="opening_hours" class="venue-opening-times">{{opening_hours}}</p>
+			<div class="action-bar">
+				<div *ngIf="venue.external_url" class="website"><a href="{{venue.external_url}}"><img src="assets/icons/scoutLINK.png"> <p>Website</p></a></div>
+				<div *ngIf="!venue.external_url" class="nowebsite"><img src="assets/icons/scoutLINK.png"> <p>Website</p></div>
+				<div *ngIf="venue.phone" class="call"><a href="tel:{{venue.phone}}"><img src="assets/icons/scoutPHONE.png"> <p>Call</p></a></div>
+				<div *ngIf="!venue.phone" class="nocall"><img src="assets/icons/scoutPHONE.png"> <p>Call</p></div>
+				<div class="flag"><img src="assets/icons/scoutFLAG.png"> <p>Flag</p></div>
+				<div class="favorite" (click)="favorite_venue()"><img class="favorite-heart" src="{{heart_image}}"> <p>Favorite</p></div>
+			</div>
+			<div #map id="map" (click)="open_map()"></div>
+		<ion-grid>
 		  	<ion-row *ngFor="let m of top_media">
 		    	<ion-col col-6><img src={{m[0].images.thumbnail.url}}/></ion-col>
 		    	<ion-col col-6><img src={{m[1].images.thumbnail.url}}/></ion-col>
 		  	</ion-row>
-		</ion-grid></a>
+		</ion-grid>
+		<div class="instagram-handle"><a href="https://www.instagram.com/{{venue.instagram}}">Images from @{{venue.instagram}}</a></div>
 	</div>
 </ion-content>

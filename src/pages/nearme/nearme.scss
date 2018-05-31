@@ -1,0 +1,119 @@
+.radio-button{
+	width: 50px;
+	height: 50px;
+	font-size: .9em;
+}
+
+.radio-button img{
+	width: 20px;
+	height: 20px;
+}
+
+.button-container {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+	 border-bottom: 1px solid #eeeeee;
+}
+
+page-nearme{
+
+	.spinner-wrapper{
+		width: 100%;
+		text-align: center;
+		padding: 50px;
+	}
+
+	.scout-slogan{
+		width: 40%;
+		margin-left: 30%;
+		text-align: center;
+		margin-top: 45px;
+		opacity: .8;
+	}
+	.location-title{
+		margin:45px 0px;
+		margin-top: 5px;
+		text-align: center;
+		font-size: 2.1rem;
+		margin-bottom: 35px;
+	}
+	.venue{
+		text-align: center;
+		margin:12px 0px;
+	}
+
+	.venue-image{
+		margin: 0px 0px;
+		filter: contrast(0.9);
+	}
+
+	.venue-distance{
+		margin: 10px 0px;
+		display: inline-block;
+		color: #777;
+		border-left: solid 1px #e7e7e7;
+	  border-right: solid 1px #e7e7e7;
+	  padding: 0px 14px;
+	}
+
+	.venue-category{
+		margin: 10px 0px;
+		display: inline-block;
+	  border-right: solid 1px #e7e7e7;
+	  padding: 0px 14px;
+	}
+
+	.open-status{
+		margin: 10px 0px;
+		display: inline-block;
+	  padding: 0px 14px;
+	}
+
+	.venue-name{
+		margin: 15px 0px;
+	}
+
+	.venue-bio{
+		margin: 5px 0px 20px 0px;
+		font-size: 1.2rem;
+	}
+
+	.price{
+		margin-right: 8px;
+		display: inline-block;
+		font-size: 1em;
+	}
+
+	.pricespan{
+		margin: 10px 0px;
+		margin-right: 8px;
+		padding: 0px 14px;
+	}
+
+	.venue-interactions{
+		margin: 5px 0px 20px 0px;
+		font-weight: 900;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+	}
+
+	.icon-spacer{
+		width: 1px;
+		height: 50px;
+		background-color: #e7e7e7;
+	}
+
+	.distancespan{
+		border-left: 1px solid #e7e7e7;
+		margin: 10px 0px;
+		padding: 0px 14px;
+	}
+
+	.venue-divider{
+		height:1px;
+		background-color:#eeeeee;
+	}
+}

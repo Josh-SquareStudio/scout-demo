@@ -28,13 +28,15 @@ export class UtilService{
   }*/
 
 	async get_location(callback) {
-    await this.platform.ready();
-    const { coords } = await this.geolocation.getCurrentPosition();
-		//alert(coords);
-		this.lat = coords.latitude;
-		this.lng = coords.longitude;
-		//alert(this.lat + " " + this.lng);
-		callback();
+		if(this.lat == undefined){
+			await this.platform.ready();
+	    const { coords } = await this.geolocation.getCurrentPosition({enableHighAccuracy : false});
+			this.lat = coords.latitude;
+			this.lng = coords.longitude;
+			alert('ready');
+		}
+		console.log(this.lat + ", " + this.lng);
+		callback({lat: this.lat, lng: this.lng});
   }
 
   get_distance(lat,lng): number{

@@ -23,7 +23,7 @@ export class HeaderComponent{
   }
 
 	account(){
-		this.navCtrl.setRoot(ProfilePage);
+		this.navCtrl.push(ProfilePage);
 	}
 
 	search(){

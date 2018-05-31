@@ -8,6 +8,7 @@ import firebase from 'firebase';
 import { HomePage } from '../home/home';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { HeaderService } from '../../components/header/header.service';
+import { StatusBar } from '@ionic-native/status-bar';
 
 //declare var Appsee:any;
 
@@ -26,7 +27,9 @@ export class SplashPage implements OnInit{
     private afAuth: AngularFireAuth,
     private platform: Platform,
     private headerService: HeaderService,
+    private statusBar: StatusBar
   ){
+    this.statusBar.backgroundColorByHexString('#ffffff');
     this.headerService.splashIcons();
     this.platform.ready().then(()=> {
        //Appsee.start("67bddf300a8642ac91953da588d7559a");

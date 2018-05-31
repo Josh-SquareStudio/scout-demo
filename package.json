@@ -20,17 +20,21 @@
     "@angular/http": "4.1.3",
     "@angular/platform-browser": "4.1.3",
     "@angular/platform-browser-dynamic": "4.1.3",
-    "@ionic-native/core": "^4.5.3",
-    "@ionic-native/facebook": "^4.5.3",
-    "@ionic-native/geolocation": "^4.5.3",
+    "@ionic-native/core": "^4.7.0",
+    "@ionic-native/email-composer": "^4.7.0",
+    "@ionic-native/facebook": "^4.7.0",
+    "@ionic-native/geolocation": "^4.7.0",
+    "@ionic-native/google-maps": "^4.6.3",
     "@ionic-native/splash-screen": "3.12.1",
-    "@ionic-native/status-bar": "3.12.1",
+    "@ionic-native/status-bar": "^3.12.1",
     "@ionic/cloud-angular": "^0.12.0",
     "@ionic/storage": "2.0.1",
+    "@types/jquery": "^3.3.1",
+    "android-versions": "^1.3.0",
     "angularfire2": "^4.0.0-rc.0",
     "aws-amplify": "^0.2.0",
-    "com.testfairy.cordova-plugin": "^2.5.0",
-    "cordova-android": "git+https://github.com/infil00p/cordova-android.git#StudioThreeFix",
+    "com.testfairy.cordova-plugin": "^2.9.0",
+    "cordova-android": "^6.3.0",
     "cordova-browser": "^5.0.3",
     "cordova-ios": "^4.5.4",
     "cordova-plugin-browsertab": "^0.2.0",
@@ -39,8 +43,11 @@
     "cordova-plugin-console": "^1.1.0",
     "cordova-plugin-customurlscheme": "^4.3.0",
     "cordova-plugin-device": "^1.1.7",
+    "cordova-plugin-email-composer": "^0.8.15",
     "cordova-plugin-facebook4": "^1.9.1",
+    "cordova-plugin-firebase": "^0.1.25",
     "cordova-plugin-geolocation": "^4.0.1",
+    "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git#multiple_maps",
     "cordova-plugin-inappbrowser": "^1.7.2",
     "cordova-plugin-splashscreen": "^4.1.0",
     "cordova-plugin-statusbar": "^2.4.1",
@@ -48,9 +55,12 @@
     "cordova-universal-links-plugin": "^1.2.1",
     "express": "^4.15.4",
     "firebase": "^3.9.*",
+    "geofire": "^4.1.2",
     "ionic-angular": "3.6.0",
     "ionic-plugin-keyboard": "^2.2.1",
     "ionicons": "3.0.0",
+    "jquery": "^3.3.1",
+    "minimist": "^1.2.0",
     "promise-polyfill": "6.1.0",
     "rxjs": "5.4.0",
     "sw-toolbox": "3.6.0",
@@ -87,10 +97,12 @@
       "com.testfairy.cordova-plugin": {},
       "cordova-plugin-geolocation": {
         "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
-      }
+      },
+      "cordova-plugin-email-composer": {}
     },
     "platforms": [
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }
