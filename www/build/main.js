@@ -106,7 +106,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/home/home.html"*/'<ion-header>\n	<app-header></app-header>\n</ion-header>\n<ion-content [attr.noScroll]="shouldScroll" class="homeContent">\n	<ion-searchbar mode="md" class="searchbar" placeholder="Type a place name…" (ionInput)="getItems($event)"></ion-searchbar>\n	<div class="searchbar near-me" *ngIf=\'showNearMe\' (click)="openNearMe()"><img src="assets/icons/scoutMAP.png"><p>Near me</p></div>\n  <ion-list no-lines *ngFor="let filter_location of filter_locations" (click)="onSelect(filter_location)">\n  	<ion-item class="card-title">{{ filter_location.name }}</ion-item>\n  </ion-list>\n	<div class="homeImage"></div>\n</ion-content>\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/home/home.html"*/,
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\pages\home\home.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content [attr.noScroll]="shouldScroll" class="homeContent">\n\n	<ion-searchbar mode="md" class="searchbar" placeholder="Type a place name…" (ionInput)="getItems($event)"></ion-searchbar>\n\n	<div class="searchbar near-me" *ngIf=\'showNearMe\' (click)="openNearMe()"><img src="assets/icons/scoutMAP.png"><p>Near me</p></div>\n\n  <ion-list no-lines *ngFor="let filter_location of filter_locations" (click)="onSelect(filter_location)">\n\n  	<ion-item class="card-title">{{ filter_location.name }}</ion-item>\n\n  </ion-list>\n\n	<div class="homeImage"></div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\pages\home\home.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__app_locations_location_service__["a" /* LocationService */], __WEBPACK_IMPORTED_MODULE_3__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_7__components_header_header_service__["a" /* HeaderService */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__app_locations_location_service__["a" /* LocationService */], __WEBPACK_IMPORTED_MODULE_3__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_7__components_header_header_service__["a" /* HeaderService */], __WEBPACK_IMPORTED_MODULE_8__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_6__app_util_util_service__["a" /* UtilService */]])
@@ -187,12 +187,12 @@ var VenueDetail = (function () {
         var streak = false;
         for (var key in this.venue.opening_hours) {
             var obj = this.venue.opening_hours[key];
-            console.log(obj);
+            console.log("key: ", key);
             var days = obj.days;
             for (var i = 0; i < days.length; i++) {
                 console.log(days[i] + " " + prevDay);
-                if (prevDay - days[i] == 0 || i == days.length - 1) {
-                    if (i > 0 && i != days.length - 1) {
+                if (i == 0 || i == days.length - 1) {
+                    if (i > 0 && !streak /* && i != days.length - 1*/) {
                         text += ", ";
                     }
                     switch (days[i]) {
@@ -229,33 +229,27 @@ var VenueDetail = (function () {
                 }
                 else {
                     if (!streak) {
+                        text += " - ";
                         switch (days[i]) {
                             case 1:
-                                text += "-";
                                 prevDay = 1;
                                 break;
                             case 2:
-                                text += "-";
                                 prevDay = 2;
                                 break;
                             case 3:
-                                text += "-";
                                 prevDay = 3;
                                 break;
                             case 4:
-                                text += "-";
                                 prevDay = 4;
                                 break;
                             case 5:
-                                text += "-";
                                 prevDay = 5;
                                 break;
                             case 6:
-                                text += "-";
                                 prevDay = 6;
                                 break;
                             case 7:
-                                text += "-";
                                 prevDay = 7;
                                 break;
                         }
@@ -263,8 +257,10 @@ var VenueDetail = (function () {
                     }
                 }
             }
-            var start = obj.open[key].start;
-            var end = obj.open[key].end;
+            console.log("Error");
+            console.log(obj.open);
+            var start = obj.open[0].start;
+            var end = obj.open[0].end;
             if (start < 1200) {
                 start += " AM";
             }
@@ -279,10 +275,17 @@ var VenueDetail = (function () {
                 end -= 1200;
                 end += " PM";
             }
+            console.log("end: ", end);
+            if (start.length < 7) {
+                start = "0" + start;
+            }
+            if (end.length < 7) {
+                end = "0" + end;
+            }
             start = [start.slice(0, 2), ":", start.slice(2)].join('');
             end = [end.slice(0, 2), ":", end.slice(2)].join('');
             text += " " + start;
-            text += "-" + end + "\n";
+            text += " - " + end + "\n";
             console.log(text);
         }
         this.opening_hours = text;
@@ -403,16 +406,17 @@ var VenueDetail = (function () {
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('map'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */])
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */]) === "function" && _a || Object)
 ], VenueDetail.prototype, "mapElement", void 0);
 VenueDetail = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'venue-detail',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/venue-detail/venue-detail.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content padding>\n\n	<div class="oops-dialog">\n\n		<div class="dialog-wrapper">\n\n			<div class="dialog-close">\n\n				<img class="dialog-close-button" src="assets/icons/scoutCLOSE.png">\n\n			</div>\n\n			<div class="dialog-title">\n\n				<h1>Oops!</h1>\n\n				<p>Sometimes the Scout bot has a moment...</p>\n\n			</div>\n\n			<div class="dialog-reason">\n\n				<h1>What\'s Happened Here?</h1>\n\n				<ul>\n\n					<li (click)="flag_venue(\'chain\')">It\'s a chain</li>\n\n					<li (click)="flag_venue(\'wrong profile\')">Wrong Instagram profile</li>\n\n					<li (click)="flag_venue(\'repeat\')">Repeated Venue</li>\n\n					<li (click)="flag_venue(\'other\')">Something else</li>\n\n				</ul>\n\n			</div>\n\n			<div class="dialog-thanks">\n\n				<h1>Thanks &#270C;</h1>\n\n			</div>\n\n		</div>\n\n	</div>\n\n	<div class="venue">\n\n	  	<img class="venue-image" src={{venue.most_liked_media}}/>\n\n	  	<div class="feature">\n\n	  		<div class="price"><span class="pricespan" *ngIf="venue.price == 1">&#36;<span style="color: #ddd">&#36;&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 2">&#36;&#36;<span style="color: #ddd">&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 3">&#36;&#36;&#36;<span style="color: #ddd">&#36;</span></span><span class="pricespan" *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span></div>\n\n				<p class="venue-distance" (click)="open_map()">{{venue.distance}} km </p>\n\n				<p class="venue-category">{{venue.category.name}}</p>\n\n				<p *ngIf="venue.open_status == 0" class="open-status">-</p>\n\n				<p *ngIf="venue.open_status == 1" class="open-status"><span style="color: #2ECC71">Open</span></p>\n\n				<p *ngIf="venue.open_status == 2" class="open-status"><span style="color: #EF4836">Closed</span></p>\n\n	  	</div>\n\n	   <a class="venue-instagram" href="https://www.instagram.com/{{venue.instagram}}" (tap)="open_instagram()"><h1 class="venue-name">{{venue.name}}</h1></a>\n\n	    <p class="venue-bio">{{venue.bio}}</p>\n\n			<p *ngIf="opening_hours" class="venue-opening-times">{{opening_hours}}</p>\n\n			<div class="action-bar">\n\n				<div *ngIf="venue.external_url" class="website"><a href="{{venue.external_url}}"><img src="assets/icons/scoutLINK.png"> <p>Website</p></a></div>\n\n				<div *ngIf="!venue.external_url" class="nowebsite"><img src="assets/icons/scoutLINK.png"> <p>Website</p></div>\n\n				<div *ngIf="venue.phone" class="call"><a href="tel:{{venue.phone}}"><img src="assets/icons/scoutPHONE.png"> <p>Call</p></a></div>\n\n				<div *ngIf="!venue.phone" class="nocall"><img src="assets/icons/scoutPHONE.png"> <p>Call</p></div>\n\n				<div class="flag"><img src="assets/icons/scoutFLAG.png"> <p>Flag</p></div>\n\n				<div class="favorite" (click)="favorite_venue()"><img class="favorite-heart" src="{{heart_image}}"> <p>Favorite</p></div>\n\n			</div>\n\n			<div #map id="map" (click)="open_map()"></div>\n\n		<ion-grid>\n\n		  	<ion-row *ngFor="let m of top_media">\n\n		    	<ion-col col-6><img src={{m[0].images.thumbnail.url}}/></ion-col>\n\n		    	<ion-col col-6><img src={{m[1].images.thumbnail.url}}/></ion-col>\n\n		  	</ion-row>\n\n		</ion-grid>\n\n		<div class="instagram-handle"><a href="https://www.instagram.com/{{venue.instagram}}">Images from @{{venue.instagram}}</a></div>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/venue-detail/venue-detail.html"*/,
+        selector: 'venue-detail',template:/*ion-inline-start:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\pages\venue-detail\venue-detail.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content padding>\n\n	<div class="oops-dialog">\n\n		<div class="dialog-wrapper">\n\n			<div class="dialog-close">\n\n				<img class="dialog-close-button" src="assets/icons/scoutCLOSE.png">\n\n			</div>\n\n			<div class="dialog-title">\n\n				<h1>Oops!</h1>\n\n				<p>Sometimes the Scout bot has a moment...</p>\n\n			</div>\n\n			<div class="dialog-reason">\n\n				<h1>What\'s Happened Here?</h1>\n\n				<ul>\n\n					<li (click)="flag_venue(\'chain\')">It\'s a chain</li>\n\n					<li (click)="flag_venue(\'wrong profile\')">Wrong Instagram profile</li>\n\n					<li (click)="flag_venue(\'repeat\')">Repeated Venue</li>\n\n					<li (click)="flag_venue(\'other\')">Something else</li>\n\n				</ul>\n\n			</div>\n\n			<div class="dialog-thanks">\n\n				<h1>Thanks &#x270C;</h1>\n\n			</div>\n\n		</div>\n\n	</div>\n\n	<div class="venue">\n\n	  	<img class="venue-image" src={{venue.most_liked_media}}/>\n\n	  	<div class="feature">\n\n	  		<div class="price"><span class="pricespan" *ngIf="venue.price == 1">&#36;<span style="color: #ddd">&#36;&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 2">&#36;&#36;<span style="color: #ddd">&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 3">&#36;&#36;&#36;<span style="color: #ddd">&#36;</span></span><span class="pricespan" *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span></div>\n\n				<p class="venue-distance" (click)="open_map()">{{venue.distance}} km </p>\n\n				<p class="venue-category">{{venue.category.name}}</p>\n\n				<p *ngIf="venue.open_status == 0" class="open-status">-</p>\n\n				<p *ngIf="venue.open_status == 1" class="open-status"><span style="color: #2ECC71">Open</span></p>\n\n				<p *ngIf="venue.open_status == 2" class="open-status"><span style="color: #EF4836">Closed</span></p>\n\n	  	</div>\n\n	   <a class="venue-instagram" href="https://www.instagram.com/{{venue.instagram}}" (tap)="open_instagram()"><h1 class="venue-name">{{venue.name}}</h1></a>\n\n	    <p class="venue-bio">{{venue.bio}}</p>\n\n			<p *ngIf="opening_hours" class="venue-opening-times">{{opening_hours}}</p>\n\n			<div class="action-bar">\n\n				<div *ngIf="venue.external_url" class="website"><a href="{{venue.external_url}}"><img src="assets/icons/scoutLINK.png"> <p>Website</p></a></div>\n\n				<div *ngIf="!venue.external_url" class="nowebsite"><img src="assets/icons/scoutLINK.png"> <p>Website</p></div>\n\n				<div *ngIf="venue.phone" class="call"><a href="tel:{{venue.phone}}"><img src="assets/icons/scoutPHONE.png"> <p>Call</p></a></div>\n\n				<div *ngIf="!venue.phone" class="nocall"><img src="assets/icons/scoutPHONE.png"> <p>Call</p></div>\n\n				<div class="flag"><img src="assets/icons/scoutFLAG.png"> <p>Flag</p></div>\n\n				<div class="favorite" (click)="favorite_venue()"><img class="favorite-heart" src="{{heart_image}}"> <p>Favorite</p></div>\n\n			</div>\n\n			<div #map id="map" (click)="open_map()"></div>\n\n		<ion-grid>\n\n		  	<ion-row *ngFor="let m of top_media">\n\n		    	<ion-col col-6><img src={{m[0].images.thumbnail.url}}/></ion-col>\n\n		    	<ion-col col-6><img src={{m[1].images.thumbnail.url}}/></ion-col>\n\n		  	</ion-row>\n\n		</ion-grid>\n\n		<div class="instagram-handle"><a href="https://www.instagram.com/{{venue.instagram}}">Images from @{{venue.instagram}}</a></div>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\pages\venue-detail\venue-detail.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_3__components_header_header_service__["a" /* HeaderService */]]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__app_util_util_service__["a" /* UtilService */], __WEBPACK_IMPORTED_MODULE_3__components_header_header_service__["a" /* HeaderService */], __WEBPACK_IMPORTED_MODULE_4__profile_profile_service__["a" /* ProfileService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */]])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__app_util_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__app_util_util_service__["a" /* UtilService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_3__components_header_header_service__["a" /* HeaderService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__components_header_header_service__["a" /* HeaderService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_4__profile_profile_service__["a" /* ProfileService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__profile_profile_service__["a" /* ProfileService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */]) === "function" && _h || Object])
 ], VenueDetail);
 
+var _a, _b, _c, _d, _e, _f, _g, _h;
 //# sourceMappingURL=venue-detail.js.map
 
 /***/ }),
@@ -521,6 +525,7 @@ var ProfileService = (function () {
         return f;
     };
     ProfileService.prototype.favoriteVenue = function (venueString, callback) {
+        alert(venueString);
         this.afd.list('/profiles/' + this.profile.id + '/favorites').push({ link: venueString }).then(function (_) { return callback(); });
     };
     ProfileService.prototype.unFavoriteVenue = function (venueString, callback) {
@@ -788,7 +793,7 @@ var SplashPage = (function () {
 }());
 SplashPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'splash',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/splash/splash.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content padding class="splashContent">\n\n	<button ion-button full icon-left (click)="loginApp()" class="loginButton disable-hover">\n\n		<div class="loginButtonText">Login Via Facebook</div>\n\n		<div class="loginButtonIcon"><img src=\'assets/icons/X-facebook.png\'></div>\n\n	</button>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/splash/splash.html"*/,
+        selector: 'splash',template:/*ion-inline-start:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\pages\splash\splash.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content padding class="splashContent">\n\n	<button ion-button full icon-left (click)="loginApp()" class="loginButton disable-hover">\n\n		<div class="loginButtonText">Login Via Facebook</div>\n\n		<div class="loginButtonIcon"><img src=\'assets/icons/X-facebook.png\'></div>\n\n	</button>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\pages\splash\splash.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_8__components_header_header_service__["a" /* HeaderService */], __WEBPACK_IMPORTED_MODULE_2__app_login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_7_angularfire2_auth__["a" /* AngularFireAuth */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */],
@@ -1062,6 +1067,7 @@ var VenueList = (function () {
         this.location = this.navParams.get('location');
         this.format_location_name();
         this.venues = this.navParams.get('venues');
+        this.setVenueKeys();
         this.headerService.venueListIcons();
         this.initjQuery();
     }
@@ -1092,6 +1098,12 @@ var VenueList = (function () {
         this.platform.ready().then(function () {
             _this.get_distances(function () { });
         });
+    };
+    VenueList.prototype.setVenueKeys = function () {
+        var i = 0;
+        for (var key in this.venues) {
+            this.venues[key].fbkey = key;
+        }
     };
     VenueList.prototype.cutCategory = function (str) {
         var s = str.split(" ");
@@ -1183,7 +1195,7 @@ var VenueList = (function () {
             self.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__venue_detail_venue_detail__["a" /* VenueDetail */], {
                 venue: venue,
                 media: media,
-                venue_link: 'food/' + self.location.key + '/' + venue.key
+                venue_link: venue.type + "/" + self.location.key + '/' + venue.fbkey
             });
         });
     };
@@ -1195,7 +1207,7 @@ __decorate([
 ], VenueList.prototype, "content", void 0);
 VenueList = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'venue-list',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/venue-list/venue-list.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content>\n\n	<p class="scout-slogan">The most instagrammed independent places in</p>\n\n	<h1 class="location-title">{{location.City_Plain}}</h1>\n\n	<div class="button-container">\n\n		<button ion-button clear class="radio-button" mode="md" (click)="change_type(\'food\')">\n\n			<img src="assets/icons/scoutFOOD.png"/>\n\n		</button>\n\n		<div class="icon-spacer"></div>\n\n		<button ion-button clear class="radio-button" mode="md" (click)="change_type(\'coffee\')">\n\n			<img src="assets/icons/scoutCOFFEE.png"/>\n\n		</button>\n\n	</div>\n\n	<ion-list no-lines>\n\n		<ion-item *ngFor="let venue of venues; let i = index" (click)="onSelect(venue)" class="venue" text-wrap>\n\n			<img class="venue-image" src="{{venue.most_liked_media}}"/>\n\n			<div class="feature">\n\n	  		<div class="price"><span class="pricespan" *ngIf="venue.price == 1">&#36;<span style="color: #ddd">&#36;&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 2">&#36;&#36;<span style="color: #ddd">&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 3">&#36;&#36;&#36;<span style="color: #ddd">&#36;</span></span><span class="pricespan" *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span></div>\n\n				<p class="venue-distance">{{venue.distance}} km </p>\n\n				<p class="venue-category">{{venue.category.name}}</p>\n\n				<p *ngIf="venue.open_status == 0" class="open-status">-</p>\n\n				<p *ngIf="venue.open_status == 1" class="open-status"><span style="color: #2ECC71">Open</span></p>\n\n				<p *ngIf="venue.open_status == 2" class="open-status"><span style="color: #EF4836">Closed</span></p>\n\n	  	</div>\n\n			<!-- <p class="venue-distance">{{venue.prediction}}</p>\n\n			<a href="https://instagram.com/{{venue.instagram}}" target="_blank"><p class="venue-distance">{{venue.instagram}}</p></a> -->\n\n			<h1 class="venue-name">{{i+1}}. {{venue.name}}</h1>\n\n			<p class="venue-bio">{{venue.bio}}</p>\n\n			<p class="venue-interactions">{{venue.interactions}} instagrams</p>\n\n			<div class="venue-divider"></div>\n\n		</ion-item>\n\n	</ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/venue-list/venue-list.html"*/,
+        selector: 'venue-list',template:/*ion-inline-start:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\pages\venue-list\venue-list.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content>\n\n	<p class="scout-slogan">The most instagrammed independent places in</p>\n\n	<h1 class="location-title">{{location.City_Plain}}</h1>\n\n	<div class="button-container">\n\n		<button ion-button clear class="radio-button" mode="md" (click)="change_type(\'food\')">\n\n			<img src="assets/icons/scoutFOOD.png"/>\n\n		</button>\n\n		<div class="icon-spacer"></div>\n\n		<button ion-button clear class="radio-button" mode="md" (click)="change_type(\'coffee\')">\n\n			<img src="assets/icons/scoutCOFFEE.png"/>\n\n		</button>\n\n	</div>\n\n	<ion-list no-lines>\n\n		<ion-item *ngFor="let venue of venues; let i = index" (click)="onSelect(venue)" class="venue" text-wrap>\n\n			<img class="venue-image" src="{{venue.most_liked_media}}"/>\n\n			<div class="feature">\n\n	  		<div class="price"><span class="pricespan" *ngIf="venue.price == 1">&#36;<span style="color: #ddd">&#36;&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 2">&#36;&#36;<span style="color: #ddd">&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 3">&#36;&#36;&#36;<span style="color: #ddd">&#36;</span></span><span class="pricespan" *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span></div>\n\n				<p class="venue-distance">{{venue.distance}} km </p>\n\n				<p class="venue-category">{{venue.category.name}}</p>\n\n				<p *ngIf="venue.open_status == 0" class="open-status">-</p>\n\n				<p *ngIf="venue.open_status == 1" class="open-status"><span style="color: #2ECC71">Open</span></p>\n\n				<p *ngIf="venue.open_status == 2" class="open-status"><span style="color: #EF4836">Closed</span></p>\n\n	  	</div>\n\n			<!-- <p class="venue-distance">{{venue.prediction}}</p>\n\n			<a href="https://instagram.com/{{venue.instagram}}" target="_blank"><p class="venue-distance">{{venue.instagram}}</p></a> -->\n\n			<h1 class="venue-name">{{i+1}}. {{venue.name}}</h1>\n\n			<p class="venue-bio">{{venue.bio}}</p>\n\n			<p class="venue-interactions">{{venue.interactions}} instagrams</p>\n\n			<div class="venue-divider"></div>\n\n		</ion-item>\n\n	</ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\pages\venue-list\venue-list.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_4__app_util_util_service__["a" /* UtilService */], __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__["a" /* HeaderService */]])
@@ -1293,7 +1305,8 @@ var NearmePage = (function () {
         this.venueService.get_venue_nearme_media('food', key, venue, function (media) {
             self.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__venue_detail_venue_detail__["a" /* VenueDetail */], {
                 venue: venue,
-                media: media
+                media: media,
+                venue_link: venue.type + "/" + self.utils.generate_key(venue.location) + "/" + venue.fbkey
             });
         });
     };
@@ -1301,7 +1314,7 @@ var NearmePage = (function () {
 }());
 NearmePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-nearme',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/nearme/nearme.html"*/'<ion-header>\n	<app-header></app-header>\n</ion-header>\n\n<ion-content padding>\n	<p class="scout-slogan">The most instagrammed independent places near you</p>\n	<div class="button-container">\n		<button ion-button clear class="radio-button" mode="md" (click)="change_type(\'food\')">\n			<img src="assets/icons/scoutFOOD.png"/>\n		</button>\n		<div class="icon-spacer"></div>\n		<button ion-button clear class="radio-button" mode="md" (click)="change_type(\'coffee\')">\n			<img src="assets/icons/scoutCOFFEE.png"/>\n		</button>\n	</div>\n	<ion-list no-lines>\n		<div *ngIf="venues.length == 0" class="spinner-wrapper"><ion-spinner></ion-spinner></div>\n		<ion-item *ngFor="let venue of venues; let i = index" (click)="onSelect(venue)" class="venue" text-wrap>\n			<img class="venue-image" src="{{venue.most_liked_media}}"/>\n			<div class="feature">\n	  		<div class="price"><span class="pricespan" *ngIf="venue.price == 1">&#36;<span style="color: #ddd">&#36;&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 2">&#36;&#36;<span style="color: #ddd">&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 3">&#36;&#36;&#36;<span style="color: #ddd">&#36;</span></span><span class="pricespan" *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span></div>\n				<p class="venue-distance">{{venue.distance}} km </p>\n				<p class="venue-category">{{venue.category.name}}</p>\n				<p *ngIf="venue.open_status == 0" class="open-status">-</p>\n				<p *ngIf="venue.open_status == 1" class="open-status"><span style="color: #2ECC71">Open</span></p>\n				<p *ngIf="venue.open_status == 2" class="open-status"><span style="color: #EF4836">Closed</span></p>\n	  	</div>\n			<!-- <p class="venue-distance">{{venue.prediction}}</p>\n			<a href="https://instagram.com/{{venue.instagram}}" target="_blank"><p class="venue-distance">{{venue.instagram}}</p></a> -->\n			<h1 class="venue-name">{{i+1}}. {{venue.name}}</h1>\n			<p class="venue-bio">{{venue.bio}}</p>\n			<p class="venue-interactions">{{venue.interactions}} instagrams</p>\n			<div class="venue-divider"></div>\n		</ion-item>\n	</ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/nearme/nearme.html"*/,
+        selector: 'page-nearme',template:/*ion-inline-start:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\pages\nearme\nearme.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n	<p class="scout-slogan">The most instagrammed independent places near you</p>\n\n	<div class="button-container">\n\n		<button ion-button clear class="radio-button" mode="md" (click)="change_type(\'food\')">\n\n			<img src="assets/icons/scoutFOOD.png"/>\n\n		</button>\n\n		<div class="icon-spacer"></div>\n\n		<button ion-button clear class="radio-button" mode="md" (click)="change_type(\'coffee\')">\n\n			<img src="assets/icons/scoutCOFFEE.png"/>\n\n		</button>\n\n	</div>\n\n	<ion-list no-lines>\n\n		<div *ngIf="venues.length == 0" class="spinner-wrapper"><ion-spinner></ion-spinner></div>\n\n		<ion-item *ngFor="let venue of venues; let i = index" (click)="onSelect(venue)" class="venue" text-wrap>\n\n			<img class="venue-image" src="{{venue.most_liked_media}}"/>\n\n			<div class="feature">\n\n	  		<div class="price"><span class="pricespan" *ngIf="venue.price == 1">&#36;<span style="color: #ddd">&#36;&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 2">&#36;&#36;<span style="color: #ddd">&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 3">&#36;&#36;&#36;<span style="color: #ddd">&#36;</span></span><span class="pricespan" *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span></div>\n\n				<p class="venue-distance">{{venue.distance}} km </p>\n\n				<p class="venue-category">{{venue.category.name}}</p>\n\n				<p *ngIf="venue.open_status == 0" class="open-status">-</p>\n\n				<p *ngIf="venue.open_status == 1" class="open-status"><span style="color: #2ECC71">Open</span></p>\n\n				<p *ngIf="venue.open_status == 2" class="open-status"><span style="color: #EF4836">Closed</span></p>\n\n	  	</div>\n\n			<!-- <p class="venue-distance">{{venue.prediction}}</p>\n\n			<a href="https://instagram.com/{{venue.instagram}}" target="_blank"><p class="venue-distance">{{venue.instagram}}</p></a> -->\n\n			<h1 class="venue-name">{{i+1}}. {{venue.name}}</h1>\n\n			<p class="venue-bio">{{venue.bio}}</p>\n\n			<p class="venue-interactions">{{venue.interactions}} instagrams</p>\n\n			<div class="venue-divider"></div>\n\n		</ion-item>\n\n	</ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\pages\nearme\nearme.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_4__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_2__components_header_header_service__["a" /* HeaderService */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__components_header_header_service__["a" /* HeaderService */], __WEBPACK_IMPORTED_MODULE_4__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_3__app_util_util_service__["a" /* UtilService */]])
@@ -1351,7 +1364,7 @@ var LoginPage = (function () {
 }());
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'login',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/login/login.html"*/'<ion-header>\n\n	<ion-navbar color="primary">\n\n	  <ion-title>Login</ion-title>\n\n	</ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n	<button ion-button full icon-left (click)="loginFB()"><ion-icon name="lock"></ion-icon>Login With Facebook</button>\n\n\n\n	<ion-card *ngIf="userData">\n\n    <ion-card-header>{{ userData.username }}</ion-card-header>\n\n    <img [src]="userData.picture" />\n\n    <ion-card-content>\n\n      <p>Email: {{ userData.email }}</p>\n\n      <p>First Name: {{ userData.first_name }}</p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/login/login.html"*/,
+        selector: 'login',template:/*ion-inline-start:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\pages\login\login.html"*/'<ion-header>\n\n	<ion-navbar color="primary">\n\n	  <ion-title>Login</ion-title>\n\n	</ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n	<button ion-button full icon-left (click)="loginFB()"><ion-icon name="lock"></ion-icon>Login With Facebook</button>\n\n\n\n	<ion-card *ngIf="userData">\n\n    <ion-card-header>{{ userData.username }}</ion-card-header>\n\n    <img [src]="userData.picture" />\n\n    <ion-card-content>\n\n      <p>Email: {{ userData.email }}</p>\n\n      <p>First Name: {{ userData.first_name }}</p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\pages\login\login.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__app_login_service__["a" /* LoginService */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__app_login_service__["a" /* LoginService */]])
@@ -1485,7 +1498,7 @@ var ProfilePage = (function () {
 }());
 ProfilePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'profile-page',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/profile/profile.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content padding>\n\n	<div class="profile">\n\n		<img class="profile-image" src={{profile_picture}}/>\n\n		<h1 class="profile-name">{{name}}</h1>\n\n		<p class="profile-bio">{{email}}</p>\n\n	</div>\n\n	<div class="divider"></div>\n\n	<div class="favorites">\n\n		<h1 class="favorites-title">Favorites</h1>\n\n		<ion-grid>\n\n		  	<ion-row *ngFor="let f of favs">\n\n		    	<ion-col col-6>\n\n		    		<img class="favorites-image" src={{f[0].venue.most_liked_media}} (click)="openFavorite(f[0])"/>\n\n						<p class="favorites-name" (click)="openFavorite(f[0])">{{f[0].venue.name}}</p>\n\n						<p class="favorites-location">{{f[0].venue.location}}</p>\n\n		    	</ion-col>\n\n					<ion-col col-6>\n\n		    		<img class="favorites-image" src={{f[1].venue.most_liked_media}} (click)="openFavorite(f[1])"/>\n\n		    		<p class="favorites-name" (click)="openFavorite(f[1])">{{f[1].venue.name}}</p>\n\n						<p class="favorites-location">{{f[1].venue.location}}</p>\n\n		    	</ion-col>\n\n					<!--<ion-col col-6>\n\n		    		<img class="favorites-image" src={{favorite_venues[i+1].venue.most_liked_media}} (click)="openFavorite(favorite_venues[i+1])"/>\n\n		    		<p class="favorites-name" (click)="openFavorite(favorite_venues[i+1])">{{favorite_venues[i+1].venue.name}}</p>\n\n		    	</ion-col>-->\n\n		  	</ion-row>\n\n		</ion-grid>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/profile/profile.html"*/,
+        selector: 'profile-page',template:/*ion-inline-start:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\pages\profile\profile.html"*/'<ion-header>\n	<app-header></app-header>\n</ion-header>\n<ion-content padding>\n	<div class="profile">\n		<img class="profile-image" src={{profile_picture}}/>\n		<h1 class="profile-name">{{name}}</h1>\n		<p class="profile-bio">&#x270C;</p>\n	</div>\n	<div class="divider"></div>\n	<div class="favorites">\n		<h1 class="favorites-title">Favorites</h1>\n		<ion-grid>\n			<ion-row *ngFor="let f of favs">\n				<ion-col col-6>\n					<img class="favorites-image" src={{f[0].venue.most_liked_media}} (click)="openFavorite(f[0])" />\n					<p class="favorites-name" (click)="openFavorite(f[0])">{{f[0].venue.name}}</p>\n					<p class="favorites-location">{{f[0].venue.location}}</p>\n				</ion-col>\n				<ion-col col-6>\n					<img class="favorites-image" src={{f[1].venue.most_liked_media}} (click)="openFavorite(f[1])" />\n					<p class="favorites-name" (click)="openFavorite(f[1])">{{f[1].venue.name}}</p>\n					<p class="favorites-location">{{f[1].venue.location}}</p>\n				</ion-col>\n				<!--<ion-col col-6>\n		    		<img class="favorites-image" src={{favorite_venues[i+1].venue.most_liked_media}} (click)="openFavorite(favorite_venues[i+1])"/>\n		    		<p class="favorites-name" (click)="openFavorite(favorite_venues[i+1])">{{favorite_venues[i+1].venue.name}}</p>\n		    	</ion-col>-->\n			</ion-row>\n		</ion-grid>\n	</div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\pages\profile\profile.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__components_header_header_service__["a" /* HeaderService */], __WEBPACK_IMPORTED_MODULE_4__app_venues_venue_service__["a" /* VenueService */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__components_header_header_service__["a" /* HeaderService */], __WEBPACK_IMPORTED_MODULE_3__profile_service__["a" /* ProfileService */], __WEBPACK_IMPORTED_MODULE_4__app_venues_venue_service__["a" /* VenueService */]])
@@ -1707,7 +1720,7 @@ var MyApp = (function () {
     return MyApp;
 }());
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/app/app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n\n'/*ion-inline-end:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\app\app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
 ], MyApp);
@@ -1805,7 +1818,6 @@ var UtilService = (function () {
                         coords = (_a.sent()).coords;
                         this.lat = coords.latitude;
                         this.lng = coords.longitude;
-                        alert('ready');
                         _a.label = 3;
                     case 3:
                         console.log(this.lat + ", " + this.lng);
@@ -1854,9 +1866,10 @@ var UtilService = (function () {
 }());
 UtilService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* Platform */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* Platform */]) === "function" && _b || Object])
 ], UtilService);
 
+var _a, _b;
 //# sourceMappingURL=util.service.js.map
 
 /***/ }),
@@ -1905,8 +1918,8 @@ var VenueService = (function () {
             var obj = venue.opening_hours[key];
             for (var i = 0; i < obj.days.length; i++) {
                 if (obj.days[i] == currentDay) {
-                    var start = obj.open[key].start;
-                    var end = obj.open[key].end;
+                    var start = obj.open[0].start;
+                    var end = obj.open[0].end;
                     if (start < timeValue && timeValue < end) {
                         return 1; //open
                     }
@@ -1936,6 +1949,7 @@ var VenueService = (function () {
     VenueService.prototype.get_venues = function (type, location, callback) {
         var venues = this.afd.object('/' + type + '/' + location.key, { preserveSnapshot: true });
         venues.subscribe(function (snapshot) {
+            console.log(snapshot.val());
             callback(snapshot.val());
         });
         this.geoFire = new __WEBPACK_IMPORTED_MODULE_2_geofire__(this.afd.list('/venue_locations').$ref);
@@ -1982,9 +1996,10 @@ var VenueService = (function () {
 }());
 VenueService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_3__app_util_util_service__["a" /* UtilService */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__app_util_util_service__["a" /* UtilService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__app_util_util_service__["a" /* UtilService */]) === "function" && _b || Object])
 ], VenueService);
 
+var _a, _b;
 //# sourceMappingURL=venue.service.js.map
 
 /***/ }),
@@ -2103,7 +2118,7 @@ var HeaderComponent = (function () {
 }());
 HeaderComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'app-header',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/components/header/header.component.html"*/'<ion-navbar mode="md" color="light">\n\n	<div class="nav-left nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_left_back" (click)="back()"/>\n\n		<img class="nav-icon nav-search" src="assets/icons/scoutSEARCH.png" *ngIf="headerService.show_left_search" (click)="search()"/>\n\n		<img class="nav-icon nav-account" src="assets/icons/scoutACCOUNT.png" *ngIf="headerService.show_left_account" (click)="account()"/>\n\n	</div>\n\n	<div class="nav-center nav-icon-container">\n\n		<ion-title (click)="search()"><img class=\'logo\' src=\'assets/images/scout-logo.png\'/></ion-title>\n\n	</div>\n\n	<div class="title-divider"></div>\n\n	<div class="nav-right nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_right_back" (click)="back()"/>\n\n		<img class="nav-icon nav-search" src="assets/icons/scoutSEARCH.png" *ngIf="headerService.show__right_search" (click)="search()"/>\n\n		<img class="nav-icon nav-account" src="assets/icons/scoutACCOUNT.png" *ngIf="headerService.show_right_account" (click)="account()"/>\n\n		<!--<img class="nav-icon nav-map" src="../assets/icons/scoutPIN.png" *ngIf="headerService.show_map" (click)="map()"/>-->\n\n	</div>\n\n</ion-navbar>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/components/header/header.component.html"*/
+        selector: 'app-header',template:/*ion-inline-start:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\components\header\header.component.html"*/'<ion-navbar mode="md" color="light">\n\n	<div class="nav-left nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_left_back" (click)="back()"/>\n\n		<img class="nav-icon nav-search" src="assets/icons/scoutSEARCH.png" *ngIf="headerService.show_left_search" (click)="search()"/>\n\n		<img class="nav-icon nav-account" src="assets/icons/scoutACCOUNT.png" *ngIf="headerService.show_left_account" (click)="account()"/>\n\n	</div>\n\n	<div class="nav-center nav-icon-container">\n\n		<ion-title (click)="search()"><img class=\'logo\' src=\'assets/images/scout-logo.png\'/></ion-title>\n\n	</div>\n\n	<div class="title-divider"></div>\n\n	<div class="nav-right nav-icon-container">\n\n		<img class="nav-icon nav-back" src="assets/icons/scoutBACK.png" *ngIf="headerService.show_right_back" (click)="back()"/>\n\n		<img class="nav-icon nav-search" src="assets/icons/scoutSEARCH.png" *ngIf="headerService.show__right_search" (click)="search()"/>\n\n		<img class="nav-icon nav-account" src="assets/icons/scoutACCOUNT.png" *ngIf="headerService.show_right_account" (click)="account()"/>\n\n		<!--<img class="nav-icon nav-map" src="../assets/icons/scoutPIN.png" *ngIf="headerService.show_map" (click)="map()"/>-->\n\n	</div>\n\n</ion-navbar>\n\n'/*ion-inline-end:"C:\Users\Jordan\documents\scoutbot\scout-demo\src\components\header\header.component.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_5__header_service__["a" /* HeaderService */]])
 ], HeaderComponent);

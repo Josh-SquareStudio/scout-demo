@@ -5,28 +5,28 @@
 	<div class="profile">
 		<img class="profile-image" src={{profile_picture}}/>
 		<h1 class="profile-name">{{name}}</h1>
-		<p class="profile-bio">{{email}}</p>
+		<p class="profile-bio">&#x270C;</p>
 	</div>
 	<div class="divider"></div>
 	<div class="favorites">
 		<h1 class="favorites-title">Favorites</h1>
 		<ion-grid>
-		  	<ion-row *ngFor="let f of favs">
-		    	<ion-col col-6>
-		    		<img class="favorites-image" src={{f[0].venue.most_liked_media}} (click)="openFavorite(f[0])"/>
-						<p class="favorites-name" (click)="openFavorite(f[0])">{{f[0].venue.name}}</p>
-						<p class="favorites-location">{{f[0].venue.location}}</p>
-		    	</ion-col>
-					<ion-col col-6>
-		    		<img class="favorites-image" src={{f[1].venue.most_liked_media}} (click)="openFavorite(f[1])"/>
-		    		<p class="favorites-name" (click)="openFavorite(f[1])">{{f[1].venue.name}}</p>
-						<p class="favorites-location">{{f[1].venue.location}}</p>
-		    	</ion-col>
-					<!--<ion-col col-6>
+			<ion-row *ngFor="let f of favs">
+				<ion-col col-6>
+					<img class="favorites-image" src={{f[0].venue.most_liked_media}} (click)="openFavorite(f[0])" />
+					<p class="favorites-name" (click)="openFavorite(f[0])">{{f[0].venue.name}}</p>
+					<p class="favorites-location">{{f[0].venue.location}}</p>
+				</ion-col>
+				<ion-col col-6>
+					<img class="favorites-image" src={{f[1].venue.most_liked_media}} (click)="openFavorite(f[1])" />
+					<p class="favorites-name" (click)="openFavorite(f[1])">{{f[1].venue.name}}</p>
+					<p class="favorites-location">{{f[1].venue.location}}</p>
+				</ion-col>
+				<!--<ion-col col-6>
 		    		<img class="favorites-image" src={{favorite_venues[i+1].venue.most_liked_media}} (click)="openFavorite(favorite_venues[i+1])"/>
 		    		<p class="favorites-name" (click)="openFavorite(favorite_venues[i+1])">{{favorite_venues[i+1].venue.name}}</p>
 		    	</ion-col>-->
-		  	</ion-row>
+			</ion-row>
 		</ion-grid>
 	</div>
 </ion-content>

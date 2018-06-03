@@ -12,23 +12,23 @@ import { Geolocation } from '@ionic-native/geolocation';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [LocationService,VenueService,HeaderService]
+  providers: [LocationService, VenueService, HeaderService]
 })
-export class HomePage implements OnInit{
+export class HomePage implements OnInit {
 
   searchQuery: string = '';
   locations: SearchLocation[];
-  filter_locations : SearchLocation[];
+  filter_locations: SearchLocation[];
   showNearMe = true;
 
   constructor(public navCtrl: NavController, private locationService: LocationService, private venue_service: VenueService, private headerService: HeaderService, private geo: Geolocation, private platform: Platform, private utils: UtilService) {
     this.headerService.showMap(true);
   }
 
-  format_location_name(locationName: string){
+  format_location_name(locationName: string) {
     var p1, p2;
     var pos = locationName.lastIndexOf(' ');
-    locationName = locationName.substring(0,pos) + ', ' + locationName.substring(pos+1);
+    locationName = locationName.substring(0, pos) + ', ' + locationName.substring(pos + 1);
     p1 = locationName.slice(0, locationName.length - 2);
     p2 = locationName.slice(locationName.length - 2);
     p2 = p2.toUpperCase();
@@ -36,21 +36,21 @@ export class HomePage implements OnInit{
   }
 
   ngOnInit(): void {
-	  this.getSearchLocations();
+    this.getSearchLocations();
     this.headerService.homeIcons();
     this.setLocation();
-	}
+  }
 
   setLocation() {
-    this.utils.get_location(function(){});
+    this.utils.get_location(function() { });
   }
 
   getSearchLocations() {
     var self = this;
-    this.locationService.getListOfLocations(function(locations){
+    this.locationService.getListOfLocations(function(locations) {
       self.locations = [];
-      for(var key in locations){
-        self.locations.push({name:self.format_location_name(locations[key].City_Plain),key:key});
+      for (var key in locations) {
+        self.locations.push({ name: self.format_location_name(locations[key].City_Plain), key: key });
       }
     })
   }
@@ -69,23 +69,23 @@ export class HomePage implements OnInit{
       });
       this.showNearMe = false;
     }
-    else{
-    	this.filter_locations = [];							//make list empty if search string is
+    else {
+      this.filter_locations = [];							//make list empty if search string is
       this.showNearMe = true;
     }
   }
 
-  openNearMe(){
+  openNearMe() {
     this.navCtrl.push(NearmePage);
   }
 
-  onSelect(location: SearchLocation){
+  onSelect(location: SearchLocation) {
     var self = this;
-    this.locationService.getFirebaseLocation(location,function(firebase_location){
-      self.venue_service.get_venues("food",location,function(venues){
+    this.locationService.getFirebaseLocation(location, function(firebase_location) {
+      self.venue_service.get_venues("food", location, function(venues) {
         self.navCtrl.push(VenueList, {
-          location : firebase_location,
-          venues : venues,
+          location: firebase_location,
+          venues: venues,
         });
       });
     });

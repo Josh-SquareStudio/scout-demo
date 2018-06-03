@@ -80,7 +80,8 @@ export class NearmePage {
     this.venueService.get_venue_nearme_media('food',key,venue,function(media){
       self.navCtrl.push(VenueDetail, {
         venue : venue,
-        media : media
+        media : media,
+        venue_link: venue.type + "/" + self.utils.generate_key(venue.location) + "/" + venue.fbkey
       });
     });
   }

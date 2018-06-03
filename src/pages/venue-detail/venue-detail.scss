@@ -1,79 +1,78 @@
 venue-detail {
-
-	.instagram-handle{
+	.instagram-handle {
 		width: 100%;
 		text-align: center;
 		font-weight: bold;
 		margin-top: 15px;
 		font-family: Apercu;
-		opacity: .8;
+		opacity: 0.8;
 	}
 
-	.col{
+	.col {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		text-align: center;
 	}
 
-	#map{
+	#map {
 		width: 100%;
 		height: 150px;
 		margin: 20px 0;
 	}
 
-	.venue{
+	.venue {
 		text-align: center;
 		/*margin: 0px 0px 20px 0px;*/
 	}
 
-	.nowebsite, .nocall{
-		opacity: .4;
+	.nocall,
+	.nowebsite {
+		opacity: 0.4;
 	}
 
-	a{
+	a {
 		color: black;
 		text-decoration: none;
 	}
 
-	.feature{
-		margin-top: 7px
+	.feature {
+		margin-top: 7px;
 	}
 
-	.venue-instagram{
+	.venue-instagram {
 		touch-action: auto;
 	}
 
-	.venue-image{
-		margin: 0px 0px;
+	.venue-image {
+		margin: 0;
 		filter: contrast(0.9);
 	}
 
-	.venue-distance{
-		margin: 10px 0px;
+	.venue-distance {
+		margin: 10px 0;
 		display: inline-block;
 		color: #777;
 		border-left: solid 1px #e7e7e7;
-	  border-right: solid 1px #e7e7e7;
-	  padding: 0px 14px;
+		border-right: solid 1px #e7e7e7;
+		padding: 0 14px;
 	}
 
-	.venue-category{
-		margin: 10px 0px;
+	.venue-category {
+		margin: 10px 0;
 		display: inline-block;
-	  border-right: solid 1px #e7e7e7;
-	  padding: 0px 14px;
+		border-right: solid 1px #e7e7e7;
+		padding: 0 14px;
 	}
 
-	.open-status{
-		margin: 10px 0px;
+	.open-status {
+		margin: 10px 0;
 		display: inline-block;
-	  padding: 0px 14px;
+		padding: 0 14px;
 	}
 
-	.action-bar{
-
-		img{
+	.action-bar {
+		img {
 			height: 18px;
 			margin-right: 2px;
 			display: inline;
@@ -81,13 +80,13 @@ venue-detail {
 			box-sizing: border-box;
 		}
 
-		p{
+		p {
 			display: inline;
 			margin-left: 5px;
-			font-size: .9em;
+			font-size: 0.9em;
 		}
 
-		div{
+		div {
 			display: inline-block;
 			padding: 10px;
 			width: 24%;
@@ -97,7 +96,6 @@ venue-detail {
 			cursor: pointer;
 		}
 	}
-
 	/*@media screen and (max-width: 425px){
 		.action-bar{
 			div{
@@ -105,45 +103,42 @@ venue-detail {
 			}
 		}
 	}*/
-
-	.price{
+	.price {
 		margin-right: 8px;
 		display: inline-block;
 		font-size: 1em;
 	}
-
 	/*.favorite-heart{
 		width:15px;
 		height:15px;
 		margin-left:10px;
 		margin-bottom:-2px;
 	}*/
-
-	.venue-name{
-		margin: 20px 0px;
-		margin-top: 1rem !important;
+	.venue-name {
+		margin: 1rem 0 20px !important;
 		font-size: 2.1rem;
 	}
 
-	.venue-bio{
-		margin: 5px 0px 10px 0px;
+	.venue-bio {
+		margin: 5px 0 10px;
 		font-size: 1.2rem;
 	}
 
-	.venue-opening-times{
-		margin: 20px 0px 10px 0px;
+	.venue-opening-times {
+		margin: 20px 0 10px;
 		font-size: 1.2rem;
+		white-space: pre-wrap;
 	}
 
-	.price span{
+	.price span {
 		margin-right: 5px;
 	}
 
-	[col-6]{
-		padding:2px 2px 0px 2px;
+	[col-6] {
+		padding: 2px 2px 0;
 	}
 
-	.oops-dialog{
+	.oops-dialog {
 		display: none;
 		position: fixed;
 		background-color: white;
@@ -154,7 +149,7 @@ venue-detail {
 		z-index: 99999999;
 		font-family: "Apercu";
 
-		.dialog-wrapper{
+		.dialog-wrapper {
 			width: 80%;
 			height: 95%;
 			margin: 2.5% 10%;
@@ -163,42 +158,47 @@ venue-detail {
 			flex-direction: column;
 			justify-content: center;
 
-			div{
+			div {
 				padding: 20px;
 			}
 
-			.dialog-close{
+			.dialog-close {
 				text-align: right;
-				img{
+
+				img {
 					width: 30px;
 				}
-				.dialog-close-button{
+
+				.dialog-close-button {
 					cursor: pointer;
 				}
 			}
 
-			.dialog-title{
+			.dialog-title {
 				border-top: 1px solid #e7e7e7;
-				h1{
+
+				h1 {
 					font-family: "Domine" !important;
 				}
 			}
 
-			.dialog-reason{
+			.dialog-reason {
 				font-size: 16pt !important;
 				border-top: 1px solid #e7e7e7;
-				ul{
+
+				ul {
 					margin: 0;
 					padding: 0;
 				}
-				li{
+
+				li {
 					list-style: none;
 					text-decoration: underline;
 					margin: 10px 0;
 				}
 			}
 
-			.dialog-thanks{
+			.dialog-thanks {
 				border-top: 1px solid #e7e7e7;
 			}
 		}

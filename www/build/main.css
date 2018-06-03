@@ -25619,7 +25619,7 @@ venue-detail .instagram-handle {
   font-weight: bold;
   margin-top: 15px;
   font-family: Apercu;
-  opacity: .8;
+  opacity: 0.8;
 }
 
 venue-detail .col {
@@ -25650,8 +25650,9 @@ venue-detail .venue {
   /*margin: 0px 0px 20px 0px;*/
 }
 
-venue-detail .nowebsite, venue-detail .nocall {
-  opacity: .4;
+venue-detail .nocall,
+venue-detail .nowebsite {
+  opacity: 0.4;
 }
 
 venue-detail a {
@@ -25669,31 +25670,31 @@ venue-detail .venue-instagram {
 }
 
 venue-detail .venue-image {
-  margin: 0px 0px;
+  margin: 0;
   -webkit-filter: contrast(0.9);
   filter: contrast(0.9);
 }
 
 venue-detail .venue-distance {
-  margin: 10px 0px;
+  margin: 10px 0;
   display: inline-block;
   color: #777;
   border-left: solid 1px #e7e7e7;
   border-right: solid 1px #e7e7e7;
-  padding: 0px 14px;
+  padding: 0 14px;
 }
 
 venue-detail .venue-category {
-  margin: 10px 0px;
+  margin: 10px 0;
   display: inline-block;
   border-right: solid 1px #e7e7e7;
-  padding: 0px 14px;
+  padding: 0 14px;
 }
 
 venue-detail .open-status {
-  margin: 10px 0px;
+  margin: 10px 0;
   display: inline-block;
-  padding: 0px 14px;
+  padding: 0 14px;
 }
 
 venue-detail .action-bar img {
@@ -25708,7 +25709,7 @@ venue-detail .action-bar img {
 venue-detail .action-bar p {
   display: inline;
   margin-left: 5px;
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 venue-detail .action-bar div {
@@ -25729,19 +25730,19 @@ venue-detail .price {
 }
 
 venue-detail .venue-name {
-  margin: 20px 0px;
-  margin-top: 1rem !important;
+  margin: 1rem 0 20px !important;
   font-size: 2.1rem;
 }
 
 venue-detail .venue-bio {
-  margin: 5px 0px 10px 0px;
+  margin: 5px 0 10px;
   font-size: 1.2rem;
 }
 
 venue-detail .venue-opening-times {
-  margin: 20px 0px 10px 0px;
+  margin: 20px 0 10px;
   font-size: 1.2rem;
+  white-space: pre-wrap;
 }
 
 venue-detail .price span {
@@ -25749,7 +25750,7 @@ venue-detail .price span {
 }
 
 venue-detail [col-6] {
-  padding: 2px 2px 0px 2px;
+  padding: 2px 2px 0;
 }
 
 venue-detail .oops-dialog {

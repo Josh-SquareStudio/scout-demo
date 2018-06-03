@@ -11,54 +11,54 @@ import { VenueDetail } from '../venue-detail/venue-detail';
   providers: [HeaderService, VenueService]
 })
 
-export class ProfilePage implements OnInit{
+export class ProfilePage implements OnInit {
 
   id: string;
-	name: string;
-	email: string;
-	profile_picture: string;
-	favorite_links: any[];
+  name: string;
+  email: string;
+  profile_picture: string;
+  favorite_links: any[];
   favorite_venues: any[];
   favs: any[];
 
-	constructor(public navCtrl: NavController, private headerService: HeaderService, private profileService: ProfileService, private venueService: VenueService) {
-		this.headerService.profileIcons();
-		this.favorite_venues = [];
-	  this.favorite_links = [];
+  constructor(public navCtrl: NavController, private headerService: HeaderService, private profileService: ProfileService, private venueService: VenueService) {
+    this.headerService.profileIcons();
+    this.favorite_venues = [];
+    this.favorite_links = [];
     this.favs = [];
-	}
+  }
 
-	ngOnInit(){
-		this.setupProfile();
-	}
+  ngOnInit() {
+    this.setupProfile();
+  }
 
-	ionViewWillEnter() {
+  ionViewWillEnter() {
     //this.setupProfile();
   }
 
-  pipeFavorites(){
+  pipeFavorites() {
     this.favs = [];
-    for(var i = 0; i < this.favorite_venues.length; i++){
-      if(i == this.favorite_venues.length - 1){
-        this.favs.push([this.favorite_venues[i], {"link":"","venue":"","bio":"","followers":0,"key":""}]);
+    for (var i = 0; i < this.favorite_venues.length; i++) {
+      if (i == this.favorite_venues.length - 1) {
+        this.favs.push([this.favorite_venues[i], { "link": "", "venue": "", "bio": "", "followers": 0, "key": "" }]);
         //alert(JSON.stringify(this.favorite_venues[i]));
         continue;
       }
-      if(i%2 == 0){
-        this.favs.push([this.favorite_venues[i], this.favorite_venues[i+1]]);
+      if (i % 2 == 0) {
+        this.favs.push([this.favorite_venues[i], this.favorite_venues[i + 1]]);
       }
     }
   }
 
-	setupProfile(){
-		var self = this;
-		this.getProfileInfo(function(){
-      self.profileService.getFavoritesSubscribe(self.id, function(favorites){
+  setupProfile() {
+    var self = this;
+    this.getProfileInfo(function() {
+      self.profileService.getFavoritesSubscribe(self.id, function(favorites) {
         self.favorite_links = favorites;
 
-        for(var key in favorites){
-          self.getFavoriteVenue(favorites[key].link, function(venue){
-            if(venue.most_liked_media){
+        for (var key in favorites) {
+          self.getFavoriteVenue(favorites[key].link, function(venue) {
+            if (venue.most_liked_media) {
               self.favorite_venues.push({
                 link: favorites[key].link,
                 venue: venue,
@@ -70,54 +70,54 @@ export class ProfilePage implements OnInit{
         }
       });
     });
-	}
+  }
 
-	getProfileInfo(callback){
-		var self = this;
-		this.profileService.checkUser(function(profile){
-			self.id = profile.id;
-			self.name = profile.name;
-			self.email = profile.email;
+  getProfileInfo(callback) {
+    var self = this;
+    this.profileService.checkUser(function(profile) {
+      self.id = profile.id;
+      self.name = profile.name;
+      self.email = profile.email;
       self.profile_picture = profile.picture;
       callback();
-		});
-	}
+    });
+  }
 
-  getFavoriteVenue(link, callback){
-    this.venueService.get_favorite_venue(link, function(venue){
+  getFavoriteVenue(link, callback) {
+    this.venueService.get_favorite_venue(link, function(venue) {
       callback(venue);
     })
   }
 
-	getProfileFavorites(i,favorites,callback){
-		var self = this;
-		this.venueService.get_favorite_venue(this.favorite_links[i].link,function(venue){
-        favorites.push({
-  				link: self.favorite_links[i].link,
-  				venue: venue,
-  				present: true										//used for the template
-  			});
-			i++;
-			if(i < self.favorite_links.length){
-				self.getProfileFavorites(i,favorites,callback);
-			}
-			else{
-				callback(favorites);
-			}
-		});
-	}
+  getProfileFavorites(i, favorites, callback) {
+    var self = this;
+    this.venueService.get_favorite_venue(this.favorite_links[i].link, function(venue) {
+      favorites.push({
+        link: self.favorite_links[i].link,
+        venue: venue,
+        present: true										//used for the template
+      });
+      i++;
+      if (i < self.favorite_links.length) {
+        self.getProfileFavorites(i, favorites, callback);
+      }
+      else {
+        callback(favorites);
+      }
+    });
+  }
 
-	openFavorite(favorite){
-		var parts = favorite.link.split('/');
-		var media_link = 'media/'+parts[1]+'/'+parts[2];
-		var self = this;
-		this.venueService.get_favorite_venue_media(media_link,function(media){
-			self.navCtrl.push(VenueDetail, {
-	        venue : favorite.venue,
-	        media : media,
-	        venue_link : favorite.link
-	      });
-		});
-	}
+  openFavorite(favorite) {
+    var parts = favorite.link.split('/');
+    var media_link = 'media/' + parts[1] + '/' + parts[2];
+    var self = this;
+    this.venueService.get_favorite_venue_media(media_link, function(media) {
+      self.navCtrl.push(VenueDetail, {
+        venue: favorite.venue,
+        media: media,
+        venue_link: favorite.link
+      });
+    });
+  }
 
 }
