@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { Location } from '../../app/locations/location';
 import { Venue } from '../../app/venues/venue';
 import { HeaderService } from '../../components/header/header.service';
 import { UtilService } from '../../app/util/util.service';
 import { VenueService } from '../../app/venues/venue.service';
 import { VenueDetail } from '../venue-detail/venue-detail';
+import jQuery from 'jquery';
 
 @Component({
   selector: 'page-nearme',
@@ -14,6 +15,8 @@ import { VenueDetail } from '../venue-detail/venue-detail';
 })
 export class NearmePage {
 
+  @ViewChild(Content)
+  content: Content;
   venues: Venue[];
   venue_type : string;
   search_radius : number;
@@ -26,8 +29,16 @@ export class NearmePage {
     this.find_nearby_venues();
   }
 
-  ionViewDidLoad() {
-
+  ngAfterViewInit() {
+    this.content.ionScroll.subscribe((event: any) => {
+      if (event.scrollTop >= 142) {
+        jQuery('.button-container').addClass("fixedButtons");
+        jQuery('.list').addClass("buttonPadded");
+      } else {
+        jQuery('.button-container').removeClass("fixedButtons");
+        jQuery('.list').removeClass("buttonPadded");
+      }
+    });
   }
 
   add_venue(venue: Venue){

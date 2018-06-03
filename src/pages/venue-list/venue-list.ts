@@ -28,18 +28,6 @@ export class VenueList implements OnInit {
     this.venues = this.navParams.get('venues');
     this.setVenueKeys();
     this.headerService.venueListIcons();
-    this.initjQuery();
-  }
-
-  initjQuery() {
-    console.log('init jquery');
-    jQuery('.scroll-content').scroll(function() {
-      console.log('test');
-    });
-  }
-
-  onPageScroll(event) {
-    console.log(event.target.scrollTop);
   }
 
   ngAfterViewInit() {

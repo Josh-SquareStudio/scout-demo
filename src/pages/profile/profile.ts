@@ -32,16 +32,11 @@ export class ProfilePage implements OnInit {
     this.setupProfile();
   }
 
-  ionViewWillEnter() {
-    //this.setupProfile();
-  }
-
   pipeFavorites() {
     this.favs = [];
     for (var i = 0; i < this.favorite_venues.length; i++) {
-      if (i == this.favorite_venues.length - 1) {
+      if (i == this.favorite_venues.length - 1 && i % 2 == 0) {
         this.favs.push([this.favorite_venues[i], { "link": "", "venue": "", "bio": "", "followers": 0, "key": "" }]);
-        //alert(JSON.stringify(this.favorite_venues[i]));
         continue;
       }
       if (i % 2 == 0) {
@@ -54,6 +49,8 @@ export class ProfilePage implements OnInit {
     var self = this;
     this.getProfileInfo(function() {
       self.profileService.getFavoritesSubscribe(self.id, function(favorites) {
+        self.favorite_links = [];
+        self.favorite_venues = [];
         self.favorite_links = favorites;
 
         for (var key in favorites) {
@@ -108,8 +105,9 @@ export class ProfilePage implements OnInit {
   }
 
   openFavorite(favorite) {
+    console.log(favorite);
     var parts = favorite.link.split('/');
-    var media_link = 'media/' + parts[1] + '/' + parts[2];
+    var media_link = 'media/' + parts[1] + '/' + favorite.venue.key;
     var self = this;
     this.venueService.get_favorite_venue_media(media_link, function(media) {
       self.navCtrl.push(VenueDetail, {

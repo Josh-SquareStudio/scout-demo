@@ -28,6 +28,9 @@ export class VenueService {
     var timeValue = 0;
     var currentTime = new Date();
     var currentDay = currentTime.getDay();
+    if (currentDay == 0){ //sunday is 7 but getDay() makes it 0
+      currentDay = 7;
+    }
     timeValue += currentTime.getHours() * 100;
     timeValue += currentTime.getMinutes();
 

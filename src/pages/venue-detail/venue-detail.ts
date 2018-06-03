@@ -7,6 +7,7 @@ import { HeaderService } from '../../components/header/header.service';
 import { ProfileService } from '../profile/profile.service';
 import { Platform } from 'ionic-angular'; //for checking if device is ios for different maps app
 import { AngularFireDatabase } from 'angularfire2/database';
+import { VenueService } from '../../app/venues/venue.service';
 import jQuery from "jquery";
 import firebase from 'firebase';
 
@@ -15,7 +16,7 @@ declare var google;
 @Component({
   selector: 'venue-detail',
   templateUrl: 'venue-detail.html',
-  providers: [HeaderService]
+  providers: [VenueService, HeaderService]
 })
 export class VenueDetail implements OnInit {
 
@@ -30,18 +31,27 @@ export class VenueDetail implements OnInit {
   map: any;
   opening_hours: string;
 
-  constructor(private afd: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams, private utils: UtilService, private headerService: HeaderService, private profileService: ProfileService, private plt: Platform) {
+  constructor(
+    private afd: AngularFireDatabase,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private utils: UtilService,
+    private headerService: HeaderService,
+    private profileService: ProfileService,
+    private plt: Platform,
+    private venueService: VenueService)
+  {
     this.venue = this.navParams.get('venue');
     this.media = this.navParams.get('media');
     this.venue_link = this.navParams.get('venue_link');
     this.top_media = [];
     this.favorited = false;
     this.opening_hours = "";
+    this.venue.open_status = this.venueService.check_if_open(this.venue);
     this.heart_image = 'assets/icons/scoutHEART.png';
     this.headerService.venueDetailIcons();
     this.checked = false;
     this.formatOpeningHours();
-    //this.venue.category.name = this.cutCategory(this.venue.category.name);
   }
 
   ngOnInit(): void {

@@ -18,6 +18,18 @@
 }
 
 page-nearme{
+	.fixedButtons{
+		position: fixed;
+		top: 51px;
+		left: 0;
+    z-index: 9999;
+    width: 100%;
+    background-color: white;
+	}
+
+	.buttonPadded{
+		margin-top: 105px;
+	}
 
 	.spinner-wrapper{
 		width: 100%;

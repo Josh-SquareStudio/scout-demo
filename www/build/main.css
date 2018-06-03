@@ -25403,6 +25403,19 @@ div .searchbar p {
   border-bottom: 1px solid #eeeeee;
 }
 
+page-nearme .fixedButtons {
+  position: fixed;
+  top: 51px;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  background-color: white;
+}
+
+page-nearme .buttonPadded {
+  margin-top: 105px;
+}
+
 page-nearme .spinner-wrapper {
   width: 100%;
   text-align: center;

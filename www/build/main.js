@@ -8,10 +8,10 @@ webpackJsonp([0],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_locations_location_service__ = __webpack_require__(864);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_venues_venue_service__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__venue_list_venue_list__ = __webpack_require__(505);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_venues_venue_service__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__venue_list_venue_list__ = __webpack_require__(506);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__nearme_nearme__ = __webpack_require__(508);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_util_util_service__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_util_util_service__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_header_header_service__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_geolocation__ = __webpack_require__(185);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -123,12 +123,13 @@ HomePage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VenueDetail; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_util_util_service__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_util_util_service__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_header_header_service__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__profile_profile_service__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_database__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jquery__ = __webpack_require__(507);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_venues_venue_service__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_jquery__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -146,8 +147,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  //for checking if device is ios for different maps app
 
 
+
 var VenueDetail = (function () {
-    function VenueDetail(afd, navCtrl, navParams, utils, headerService, profileService, plt) {
+    function VenueDetail(afd, navCtrl, navParams, utils, headerService, profileService, plt, venueService) {
         this.afd = afd;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -155,17 +157,18 @@ var VenueDetail = (function () {
         this.headerService = headerService;
         this.profileService = profileService;
         this.plt = plt;
+        this.venueService = venueService;
         this.venue = this.navParams.get('venue');
         this.media = this.navParams.get('media');
         this.venue_link = this.navParams.get('venue_link');
         this.top_media = [];
         this.favorited = false;
         this.opening_hours = "";
+        this.venue.open_status = this.venueService.check_if_open(this.venue);
         this.heart_image = 'assets/icons/scoutHEART.png';
         this.headerService.venueDetailIcons();
         this.checked = false;
         this.formatOpeningHours();
-        //this.venue.category.name = this.cutCategory(this.venue.category.name);
     }
     VenueDetail.prototype.ngOnInit = function () {
         this.rank_latest_media();
@@ -311,22 +314,22 @@ var VenueDetail = (function () {
     };
     VenueDetail.prototype.checkWebsite = function () {
         if (this.venue.external_url == "") {
-            __WEBPACK_IMPORTED_MODULE_6_jquery___default()('.website').css('opacity', '.5');
-            __WEBPACK_IMPORTED_MODULE_6_jquery___default()('.website a').attr("href", "#");
+            __WEBPACK_IMPORTED_MODULE_7_jquery___default()('.website').css('opacity', '.5');
+            __WEBPACK_IMPORTED_MODULE_7_jquery___default()('.website a').attr("href", "#");
         }
     };
     VenueDetail.prototype.checkPhone = function () {
         if (this.venue.phone == "") {
-            __WEBPACK_IMPORTED_MODULE_6_jquery___default()('.call').css('opacity', '.5');
-            __WEBPACK_IMPORTED_MODULE_6_jquery___default()('.call a').attr("href", "#");
+            __WEBPACK_IMPORTED_MODULE_7_jquery___default()('.call').css('opacity', '.5');
+            __WEBPACK_IMPORTED_MODULE_7_jquery___default()('.call a').attr("href", "#");
         }
     };
     VenueDetail.prototype.initJquery = function () {
-        __WEBPACK_IMPORTED_MODULE_6_jquery___default()('.flag').click(function () {
-            __WEBPACK_IMPORTED_MODULE_6_jquery___default()('.oops-dialog').fadeIn(375);
+        __WEBPACK_IMPORTED_MODULE_7_jquery___default()('.flag').click(function () {
+            __WEBPACK_IMPORTED_MODULE_7_jquery___default()('.oops-dialog').fadeIn(375);
         });
-        __WEBPACK_IMPORTED_MODULE_6_jquery___default()('.dialog-close-button').click(function () {
-            __WEBPACK_IMPORTED_MODULE_6_jquery___default()('.oops-dialog').fadeOut(375);
+        __WEBPACK_IMPORTED_MODULE_7_jquery___default()('.dialog-close-button').click(function () {
+            __WEBPACK_IMPORTED_MODULE_7_jquery___default()('.oops-dialog').fadeOut(375);
         });
     };
     VenueDetail.prototype.open_instagram = function () {
@@ -365,7 +368,7 @@ var VenueDetail = (function () {
     VenueDetail.prototype.flag_venue = function (reason) {
         var key = this.venue.name + ' ' + this.venue.location;
         this.profileService.flagVenue(key, reason);
-        __WEBPACK_IMPORTED_MODULE_6_jquery___default()('.oops-dialog').fadeOut(375);
+        __WEBPACK_IMPORTED_MODULE_7_jquery___default()('.oops-dialog').fadeOut(375);
     };
     VenueDetail.prototype.favorite_venue = function () {
         var self = this;
@@ -411,9 +414,16 @@ __decorate([
 VenueDetail = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'venue-detail',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/venue-detail/venue-detail.html"*/'<ion-header>\n\n	<app-header></app-header>\n\n</ion-header>\n\n<ion-content padding>\n\n	<div class="oops-dialog">\n\n		<div class="dialog-wrapper">\n\n			<div class="dialog-close">\n\n				<img class="dialog-close-button" src="assets/icons/scoutCLOSE.png">\n\n			</div>\n\n			<div class="dialog-title">\n\n				<h1>Oops!</h1>\n\n				<p>Sometimes the Scout bot has a moment...</p>\n\n			</div>\n\n			<div class="dialog-reason">\n\n				<h1>What\'s Happened Here?</h1>\n\n				<ul>\n\n					<li (click)="flag_venue(\'chain\')">It\'s a chain</li>\n\n					<li (click)="flag_venue(\'wrong profile\')">Wrong Instagram profile</li>\n\n					<li (click)="flag_venue(\'repeat\')">Repeated Venue</li>\n\n					<li (click)="flag_venue(\'other\')">Something else</li>\n\n				</ul>\n\n			</div>\n\n			<div class="dialog-thanks">\n\n				<h1>Thanks &#x270C;</h1>\n\n			</div>\n\n		</div>\n\n	</div>\n\n	<div class="venue">\n\n	  	<img class="venue-image" src={{venue.most_liked_media}}/>\n\n	  	<div class="feature">\n\n	  		<div class="price"><span class="pricespan" *ngIf="venue.price == 1">&#36;<span style="color: #ddd">&#36;&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 2">&#36;&#36;<span style="color: #ddd">&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 3">&#36;&#36;&#36;<span style="color: #ddd">&#36;</span></span><span class="pricespan" *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span></div>\n\n				<p class="venue-distance" (click)="open_map()">{{venue.distance}} km </p>\n\n				<p class="venue-category">{{venue.category.name}}</p>\n\n				<p *ngIf="venue.open_status == 0" class="open-status">-</p>\n\n				<p *ngIf="venue.open_status == 1" class="open-status"><span style="color: #2ECC71">Open</span></p>\n\n				<p *ngIf="venue.open_status == 2" class="open-status"><span style="color: #EF4836">Closed</span></p>\n\n	  	</div>\n\n	   <a class="venue-instagram" href="https://www.instagram.com/{{venue.instagram}}" (tap)="open_instagram()"><h1 class="venue-name">{{venue.name}}</h1></a>\n\n	    <p class="venue-bio">{{venue.bio}}</p>\n\n			<p *ngIf="opening_hours" class="venue-opening-times">{{opening_hours}}</p>\n\n			<div class="action-bar">\n\n				<div *ngIf="venue.external_url" class="website"><a href="{{venue.external_url}}"><img src="assets/icons/scoutLINK.png"> <p>Website</p></a></div>\n\n				<div *ngIf="!venue.external_url" class="nowebsite"><img src="assets/icons/scoutLINK.png"> <p>Website</p></div>\n\n				<div *ngIf="venue.phone" class="call"><a href="tel:{{venue.phone}}"><img src="assets/icons/scoutPHONE.png"> <p>Call</p></a></div>\n\n				<div *ngIf="!venue.phone" class="nocall"><img src="assets/icons/scoutPHONE.png"> <p>Call</p></div>\n\n				<div class="flag"><img src="assets/icons/scoutFLAG.png"> <p>Flag</p></div>\n\n				<div class="favorite" (click)="favorite_venue()"><img class="favorite-heart" src="{{heart_image}}"> <p>Favorite</p></div>\n\n			</div>\n\n			<div #map id="map" (click)="open_map()"></div>\n\n		<ion-grid>\n\n		  	<ion-row *ngFor="let m of top_media">\n\n		    	<ion-col col-6><img src={{m[0].images.thumbnail.url}}/></ion-col>\n\n		    	<ion-col col-6><img src={{m[1].images.thumbnail.url}}/></ion-col>\n\n		  	</ion-row>\n\n		</ion-grid>\n\n		<div class="instagram-handle"><a href="https://www.instagram.com/{{venue.instagram}}">Images from @{{venue.instagram}}</a></div>\n\n	</div>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/venue-detail/venue-detail.html"*/,
-        providers: [__WEBPACK_IMPORTED_MODULE_3__components_header_header_service__["a" /* HeaderService */]]
+        providers: [__WEBPACK_IMPORTED_MODULE_6__app_venues_venue_service__["a" /* VenueService */], __WEBPACK_IMPORTED_MODULE_3__components_header_header_service__["a" /* HeaderService */]]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__app_util_util_service__["a" /* UtilService */], __WEBPACK_IMPORTED_MODULE_3__components_header_header_service__["a" /* HeaderService */], __WEBPACK_IMPORTED_MODULE_4__profile_profile_service__["a" /* ProfileService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5_angularfire2_database__["a" /* AngularFireDatabase */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */],
+        __WEBPACK_IMPORTED_MODULE_2__app_util_util_service__["a" /* UtilService */],
+        __WEBPACK_IMPORTED_MODULE_3__components_header_header_service__["a" /* HeaderService */],
+        __WEBPACK_IMPORTED_MODULE_4__profile_profile_service__["a" /* ProfileService */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */],
+        __WEBPACK_IMPORTED_MODULE_6__app_venues_venue_service__["a" /* VenueService */]])
 ], VenueDetail);
 
 //# sourceMappingURL=venue-detail.js.map
@@ -427,10 +437,10 @@ VenueDetail = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfileService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(504);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(505);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__ = __webpack_require__(182);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_email_composer__ = __webpack_require__(506);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_email_composer__ = __webpack_require__(507);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -524,7 +534,6 @@ var ProfileService = (function () {
         return f;
     };
     ProfileService.prototype.favoriteVenue = function (venueString, callback) {
-        alert(venueString);
         this.afd.list('/profiles/' + this.profile.id + '/favorites').push({ link: venueString }).then(function (_) { return callback(); });
     };
     ProfileService.prototype.unFavoriteVenue = function (venueString, callback) {
@@ -631,7 +640,7 @@ ProfileService = __decorate([
 
 /***/ }),
 
-/***/ 196:
+/***/ 197:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -644,11 +653,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 196;
+webpackEmptyAsyncContext.id = 197;
 
 /***/ }),
 
-/***/ 239:
+/***/ 240:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -661,21 +670,21 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 239;
+webpackEmptyAsyncContext.id = 240;
 
 /***/ }),
 
-/***/ 282:
+/***/ 283:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SplashPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_login_service__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_login_service__ = __webpack_require__(284);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__ = __webpack_require__(182);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_firebase_firebase__ = __webpack_require__(496);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(504);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_firebase_firebase__ = __webpack_require__(497);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(505);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__home_home__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_auth__ = __webpack_require__(509);
@@ -809,13 +818,13 @@ SplashPage = __decorate([
 
 /***/ }),
 
-/***/ 283:
+/***/ 284:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_cloud_angular__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_cloud_angular__ = __webpack_require__(285);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -969,13 +978,13 @@ HeaderService = __decorate([
 
 /***/ }),
 
-/***/ 496:
+/***/ 497:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FirebaseProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(497);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(59);
@@ -1025,18 +1034,18 @@ FirebaseProvider = __decorate([
 
 /***/ }),
 
-/***/ 505:
+/***/ 506:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VenueList; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_venues_venue_service__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__venue_detail_venue_detail__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_util_util_service__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_util_util_service__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_header_header_service__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jquery__ = __webpack_require__(507);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jquery__ = __webpack_require__(187);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1068,17 +1077,7 @@ var VenueList = (function () {
         this.venues = this.navParams.get('venues');
         this.setVenueKeys();
         this.headerService.venueListIcons();
-        this.initjQuery();
     }
-    VenueList.prototype.initjQuery = function () {
-        console.log('init jquery');
-        __WEBPACK_IMPORTED_MODULE_6_jquery___default()('.scroll-content').scroll(function () {
-            console.log('test');
-        });
-    };
-    VenueList.prototype.onPageScroll = function (event) {
-        console.log(event.target.scrollTop);
-    };
     VenueList.prototype.ngAfterViewInit = function () {
         this.content.ionScroll.subscribe(function (event) {
             if (event.scrollTop >= 142) {
@@ -1224,9 +1223,11 @@ VenueList = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_header_header_service__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_util_util_service__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_venues_venue_service__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_util_util_service__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_venues_venue_service__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__venue_detail_venue_detail__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jquery__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1236,6 +1237,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -1255,7 +1257,17 @@ var NearmePage = (function () {
         this.venues = [];
         this.find_nearby_venues();
     }
-    NearmePage.prototype.ionViewDidLoad = function () {
+    NearmePage.prototype.ngAfterViewInit = function () {
+        this.content.ionScroll.subscribe(function (event) {
+            if (event.scrollTop >= 142) {
+                __WEBPACK_IMPORTED_MODULE_6_jquery___default()('.button-container').addClass("fixedButtons");
+                __WEBPACK_IMPORTED_MODULE_6_jquery___default()('.list').addClass("buttonPadded");
+            }
+            else {
+                __WEBPACK_IMPORTED_MODULE_6_jquery___default()('.button-container').removeClass("fixedButtons");
+                __WEBPACK_IMPORTED_MODULE_6_jquery___default()('.list').removeClass("buttonPadded");
+            }
+        });
     };
     NearmePage.prototype.add_venue = function (venue) {
         venue.interactions = (Math.round(venue.followers * 1.38)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -1311,6 +1323,10 @@ var NearmePage = (function () {
     };
     return NearmePage;
 }());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* Content */]),
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* Content */])
+], NearmePage.prototype, "content", void 0);
 NearmePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-nearme',template:/*ion-inline-start:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/nearme/nearme.html"*/'<ion-header>\n	<app-header></app-header>\n</ion-header>\n\n<ion-content padding>\n	<p class="scout-slogan">The most instagrammed independent places near you</p>\n	<div class="button-container">\n		<button ion-button clear class="radio-button" mode="md" (click)="change_type(\'food\')">\n			<img src="assets/icons/scoutFOOD.png"/>\n		</button>\n		<div class="icon-spacer"></div>\n		<button ion-button clear class="radio-button" mode="md" (click)="change_type(\'coffee\')">\n			<img src="assets/icons/scoutCOFFEE.png"/>\n		</button>\n	</div>\n	<ion-list no-lines>\n		<div *ngIf="venues.length == 0" class="spinner-wrapper"><ion-spinner></ion-spinner></div>\n		<ion-item *ngFor="let venue of venues; let i = index" (click)="onSelect(venue)" class="venue" text-wrap>\n			<img class="venue-image" src="{{venue.most_liked_media}}"/>\n			<div class="feature">\n	  		<div class="price"><span class="pricespan" *ngIf="venue.price == 1">&#36;<span style="color: #ddd">&#36;&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 2">&#36;&#36;<span style="color: #ddd">&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 3">&#36;&#36;&#36;<span style="color: #ddd">&#36;</span></span><span class="pricespan" *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span></div>\n				<p class="venue-distance">{{venue.distance}} km </p>\n				<p class="venue-category">{{venue.category.name}}</p>\n				<p *ngIf="venue.open_status == 0" class="open-status">-</p>\n				<p *ngIf="venue.open_status == 1" class="open-status"><span style="color: #2ECC71">Open</span></p>\n				<p *ngIf="venue.open_status == 2" class="open-status"><span style="color: #EF4836">Closed</span></p>\n	  	</div>\n			<!-- <p class="venue-distance">{{venue.prediction}}</p>\n			<a href="https://instagram.com/{{venue.instagram}}" target="_blank"><p class="venue-distance">{{venue.instagram}}</p></a> -->\n			<h1 class="venue-name">{{i+1}}. {{venue.name}}</h1>\n			<p class="venue-bio">{{venue.bio}}</p>\n			<p class="venue-interactions">{{venue.interactions}} instagrams</p>\n			<div class="venue-divider"></div>\n		</ion-item>\n	</ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/Jordan/Documents/Uni/Work/SquareStudio/scoutApp/src/pages/nearme/nearme.html"*/,
@@ -1330,7 +1346,7 @@ NearmePage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_login_service__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_login_service__ = __webpack_require__(284);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(110);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1382,7 +1398,7 @@ LoginPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_header_header_service__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__profile_service__ = __webpack_require__(186);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_venues_venue_service__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_venues_venue_service__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__venue_detail_venue_detail__ = __webpack_require__(111);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1413,15 +1429,11 @@ var ProfilePage = (function () {
     ProfilePage.prototype.ngOnInit = function () {
         this.setupProfile();
     };
-    ProfilePage.prototype.ionViewWillEnter = function () {
-        //this.setupProfile();
-    };
     ProfilePage.prototype.pipeFavorites = function () {
         this.favs = [];
         for (var i = 0; i < this.favorite_venues.length; i++) {
-            if (i == this.favorite_venues.length - 1) {
+            if (i == this.favorite_venues.length - 1 && i % 2 == 0) {
                 this.favs.push([this.favorite_venues[i], { "link": "", "venue": "", "bio": "", "followers": 0, "key": "" }]);
-                //alert(JSON.stringify(this.favorite_venues[i]));
                 continue;
             }
             if (i % 2 == 0) {
@@ -1433,6 +1445,8 @@ var ProfilePage = (function () {
         var self = this;
         this.getProfileInfo(function () {
             self.profileService.getFavoritesSubscribe(self.id, function (favorites) {
+                self.favorite_links = [];
+                self.favorite_venues = [];
                 self.favorite_links = favorites;
                 for (var key in favorites) {
                     self.getFavoriteVenue(favorites[key].link, function (venue) {
@@ -1482,8 +1496,9 @@ var ProfilePage = (function () {
         });
     };
     ProfilePage.prototype.openFavorite = function (favorite) {
+        console.log(favorite);
         var parts = favorite.link.split('/');
-        var media_link = 'media/' + parts[1] + '/' + parts[2];
+        var media_link = 'media/' + parts[1] + '/' + favorite.venue.key;
         var self = this;
         this.venueService.get_favorite_venue_media(media_link, function (media) {
             self.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__venue_detail_venue_detail__["a" /* VenueDetail */], {
@@ -1529,29 +1544,29 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(280);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(561);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_splash_splash__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_splash_splash__ = __webpack_require__(283);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_login_login__ = __webpack_require__(511);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_home_home__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_venue_list_venue_list__ = __webpack_require__(505);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_venue_list_venue_list__ = __webpack_require__(506);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_venue_detail_venue_detail__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_profile_profile__ = __webpack_require__(512);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_header_header_component__ = __webpack_require__(868);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_nearme_nearme__ = __webpack_require__(508);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_profile_profile_service__ = __webpack_require__(186);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__venues_venue_service__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__util_util_service__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__venues_venue_service__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__util_util_service__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_geolocation__ = __webpack_require__(185);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__angular_http__ = __webpack_require__(497);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__angular_http__ = __webpack_require__(498);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angularfire2_database__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_angularfire2__ = __webpack_require__(869);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_firebase_firebase__ = __webpack_require__(496);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_cloud_angular__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_firebase_firebase__ = __webpack_require__(497);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_cloud_angular__ = __webpack_require__(285);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ionic_native_facebook__ = __webpack_require__(182);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_angularfire2_auth__ = __webpack_require__(509);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_email_composer__ = __webpack_require__(506);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_email_composer__ = __webpack_require__(507);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1688,8 +1703,8 @@ AppModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(159);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(279);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_splash_splash__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_splash_splash__ = __webpack_require__(283);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1736,156 +1751,12 @@ MyApp = __decorate([
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UtilService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_geolocation__ = __webpack_require__(185);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(22);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-//import { Geolocation } from 'ionic-native';
-
-
-var UtilService = (function () {
-    function UtilService(geolocation, platform) {
-        this.geolocation = geolocation;
-        this.platform = platform;
-        this.browser = true;
-    }
-    /*get_location(callback): void{
-      var self = this;
-      this.geolocation.getCurrentPosition({timeout:15000}).then((res) => {
-        self.lat = res.coords.latitude;
-        self.lng = res.coords.longitude;
-              alert(self.lat + " " + self.lng);
-        callback();
-      }).catch((error) => {
-        alert('Error getting location '+error);
-        callback();
-      });
-    }*/
-    UtilService.prototype.get_location = function (callback) {
-        return __awaiter(this, void 0, void 0, function () {
-            var coords;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!(this.lat == undefined)) return [3 /*break*/, 3];
-                        return [4 /*yield*/, this.platform.ready()];
-                    case 1:
-                        _a.sent();
-                        return [4 /*yield*/, this.geolocation.getCurrentPosition({ enableHighAccuracy: false })];
-                    case 2:
-                        coords = (_a.sent()).coords;
-                        this.lat = coords.latitude;
-                        this.lng = coords.longitude;
-                        _a.label = 3;
-                    case 3:
-                        console.log(this.lat + ", " + this.lng);
-                        callback({ lat: this.lat, lng: this.lng });
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    UtilService.prototype.get_distance = function (lat, lng) {
-        var dist = this.calculate_distance(this.lat, this.lng, lat, lng);
-        console.log(this.lat, this.lng, lat, lng);
-        //console.log(dist);
-        return dist;
-    };
-    UtilService.prototype.calculate_distance = function (lat1, lon1, lat2, lon2) {
-        var R = 6371; // Radius of the earth in km
-        var dLat = this.deg2rad(lat2 - lat1); // this.deg2rad below
-        var dLon = this.deg2rad(lon2 - lon1);
-        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
-                Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        var d = R * c; // Distance in km
-        return parseFloat(d.toFixed(2));
-    };
-    UtilService.prototype.order_array_by = function (input, attribute) {
-        var array = [];
-        for (var objectKey in input) {
-            array.push(input[objectKey]);
-        }
-        array.sort(function (a, b) {
-            a = parseInt(a[attribute]);
-            b = parseInt(b[attribute]);
-            return b - a;
-        });
-        return array;
-    };
-    UtilService.prototype.deg2rad = function (deg) {
-        return deg * (Math.PI / 180);
-    };
-    UtilService.prototype.generate_key = function (k) {
-        return k.replace(/\s/g, '').toLowerCase();
-    };
-    return UtilService;
-}());
-UtilService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* Platform */]])
-], UtilService);
-
-//# sourceMappingURL=util.service.js.map
-
-/***/ }),
-
-/***/ 80:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VenueService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_geofire__ = __webpack_require__(866);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_geofire___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_geofire__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_util_util_service__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_util_util_service__ = __webpack_require__(62);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1914,6 +1785,9 @@ var VenueService = (function () {
         var timeValue = 0;
         var currentTime = new Date();
         var currentDay = currentTime.getDay();
+        if (currentDay == 0) {
+            currentDay = 7;
+        }
         timeValue += currentTime.getHours() * 100;
         timeValue += currentTime.getMinutes();
         for (var key in venue.opening_hours) {
@@ -2002,6 +1876,138 @@ VenueService = __decorate([
 ], VenueService);
 
 //# sourceMappingURL=venue.service.js.map
+
+/***/ }),
+
+/***/ 62:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UtilService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_geolocation__ = __webpack_require__(185);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(22);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+//import { Geolocation } from 'ionic-native';
+
+
+var UtilService = (function () {
+    function UtilService(geolocation, platform) {
+        this.geolocation = geolocation;
+        this.platform = platform;
+        this.browser = true;
+    }
+    UtilService.prototype.get_location = function (callback) {
+        return __awaiter(this, void 0, void 0, function () {
+            var coords;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!(this.lat == undefined)) return [3 /*break*/, 3];
+                        return [4 /*yield*/, this.platform.ready()];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, this.geolocation.getCurrentPosition({ enableHighAccuracy: false })];
+                    case 2:
+                        coords = (_a.sent()).coords;
+                        this.lat = coords.latitude;
+                        this.lng = coords.longitude;
+                        _a.label = 3;
+                    case 3:
+                        console.log(this.lat + ", " + this.lng);
+                        callback({ lat: this.lat, lng: this.lng });
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    UtilService.prototype.get_distance = function (lat, lng) {
+        var dist = this.calculate_distance(this.lat, this.lng, lat, lng);
+        console.log(this.lat, this.lng, lat, lng);
+        //console.log(dist);
+        return dist;
+    };
+    UtilService.prototype.calculate_distance = function (lat1, lon1, lat2, lon2) {
+        var R = 6371; // Radius of the earth in km
+        var dLat = this.deg2rad(lat2 - lat1); // this.deg2rad below
+        var dLon = this.deg2rad(lon2 - lon1);
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c; // Distance in km
+        return parseFloat(d.toFixed(2));
+    };
+    UtilService.prototype.order_array_by = function (input, attribute) {
+        var array = [];
+        for (var objectKey in input) {
+            array.push(input[objectKey]);
+        }
+        array.sort(function (a, b) {
+            a = parseInt(a[attribute]);
+            b = parseInt(b[attribute]);
+            return b - a;
+        });
+        return array;
+    };
+    UtilService.prototype.deg2rad = function (deg) {
+        return deg * (Math.PI / 180);
+    };
+    UtilService.prototype.generate_key = function (k) {
+        return k.replace(/\s/g, '').toLowerCase();
+    };
+    return UtilService;
+}());
+UtilService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* Platform */]])
+], UtilService);
+
+//# sourceMappingURL=util.service.js.map
 
 /***/ }),
 
