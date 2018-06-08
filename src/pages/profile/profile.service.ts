@@ -93,6 +93,7 @@ export class ProfileService {
   }
 
   favoriteVenue(venueString: string, callback: any) {
+    alert(venueString);
     this.afd.list('/profiles/' + this.profile.id + '/favorites').push({ link: venueString }).then(_ => callback());
   }
 

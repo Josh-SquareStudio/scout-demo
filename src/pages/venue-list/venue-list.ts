@@ -79,6 +79,7 @@ export class VenueList implements OnInit {
     var self = this;
     self.venueService.get_venues(this.venue_type, this.location, function(venues) {
       self.venues = venues;
+      self.setVenueKeys();
       self.select_top_venues();
       self.get_distances(function() { });
     });
