@@ -14,10 +14,10 @@
 			<div class="dialog-reason">
 				<h1>What's Happened Here?</h1>
 				<ul>
-					<li (click)="flag_venue('chain')">It's a chain</li>
-					<li (click)="flag_venue('wrong profile')">Wrong Instagram profile</li>
-					<li (click)="flag_venue('repeat')">Repeated Venue</li>
-					<li (click)="flag_venue('other')">Something else</li>
+					<li (click)="flag_venue('chain')"><p>It's a chain</p></li>
+					<li (click)="flag_venue('wrong profile')"><p>Wrong Instagram profile</p></li>
+					<li (click)="flag_venue('repeat')"><p>Repeated Venue</p></li>
+					<li (click)="flag_venue('other')"><p>Something else</p></li>
 				</ul>
 			</div>
 			<div class="dialog-thanks">
@@ -37,7 +37,7 @@
 	  	</div>
 	   <a class="venue-instagram" href="https://www.instagram.com/{{venue.instagram}}" (tap)="open_instagram()"><h1 class="venue-name">{{venue.name}}</h1></a>
 	    <p class="venue-bio">{{venue.bio}}</p>
-			<p *ngIf="opening_hours" class="venue-opening-times">{{opening_hours}}</p>
+			<p class="venue-opening-times">{{opening_hours}}</p>
 			<div class="action-bar">
 				<div *ngIf="venue.external_url" class="website"><a href="{{venue.external_url}}"><img src="assets/icons/scoutLINK.png"> <p>Website</p></a></div>
 				<div *ngIf="!venue.external_url" class="nowebsite"><img src="assets/icons/scoutLINK.png"> <p>Website</p></div>

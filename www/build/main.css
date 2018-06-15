@@ -25743,7 +25743,7 @@ venue-detail .price {
 }
 
 venue-detail .venue-name {
-  margin: 1rem 0 20px !important;
+  margin: 2rem 0 20px !important;
   font-size: 2.1rem;
 }
 
@@ -25754,6 +25754,7 @@ venue-detail .venue-bio {
 
 venue-detail .venue-opening-times {
   margin: 20px 0 10px;
+  margin-bottom: 2rem;
   font-size: 1.2rem;
   white-space: pre-wrap;
 }
@@ -25807,7 +25808,7 @@ venue-detail .oops-dialog .dialog-wrapper .dialog-close {
 }
 
 venue-detail .oops-dialog .dialog-wrapper .dialog-close img {
-  width: 30px;
+  width: 15px;
 }
 
 venue-detail .oops-dialog .dialog-wrapper .dialog-close .dialog-close-button {
@@ -25836,6 +25837,7 @@ venue-detail .oops-dialog .dialog-wrapper .dialog-reason li {
   list-style: none;
   text-decoration: underline;
   margin: 10px 0;
+  font-size: 14px;
 }
 
 venue-detail .oops-dialog .dialog-wrapper .dialog-thanks {
