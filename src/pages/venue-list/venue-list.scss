@@ -15,6 +15,7 @@
    align-items: center;
    justify-content: center;
 	 border-bottom: 1px solid #eeeeee;
+	 background-color: white;
 }
 
 venue-list{
@@ -54,26 +55,39 @@ venue-list{
 		filter: contrast(0.9);
 	}
 
-	.venue-distance{
-		margin: 10px 0px;
+	.feature{
+		display: flex;
+		justify-content: space-evenly;
+	}
+
+	.venue-distance {
+		margin: 10px 0;
 		display: inline-block;
 		color: #777;
-		border-left: solid 1px #e7e7e7;
-	  border-right: solid 1px #e7e7e7;
-	  padding: 0px 14px;
+		padding: 0 5px;
 	}
 
-	.venue-category{
-		margin: 10px 0px;
+	.venue-category {
+		margin: 10px 0;
 		display: inline-block;
-	  border-right: solid 1px #e7e7e7;
-	  padding: 0px 14px;
+		padding: 0 5px;
 	}
 
-	.open-status{
-		margin: 10px 0px;
+	.open-status {
+		margin: 10px 0;
 		display: inline-block;
-	  padding: 0px 14px;
+		padding: 0 5px;
+	}
+
+	.price{
+		margin-top: 8px;
+	}
+
+	.feature-spacer{
+		width: 1px;
+		height: 25px;
+		background-color: #e7e7e7;
+		margin-top: 7px;
 	}
 
 	.venue-name{
@@ -83,18 +97,6 @@ venue-list{
 	.venue-bio{
 		margin: 5px 0px 20px 0px;
 		font-size: 1.2rem;
-	}
-
-	.price{
-		margin-right: 8px;
-		display: inline-block;
-		font-size: 1em;
-	}
-
-	.pricespan{
-		margin: 10px 0px;
-		margin-right: 8px;
-		padding: 0px 14px;
 	}
 
 	.venue-interactions{

@@ -30,21 +30,27 @@ export class NearmePage {
   }
 
   ngAfterViewInit() {
-    this.content.ionScroll.subscribe((event: any) => {
-      if (event.scrollTop >= 142) {
-        jQuery('.button-container').addClass("fixedButtons");
-        jQuery('.list').addClass("buttonPadded");
+    var offset = jQuery('.main-container').offset().top;
+    this.content.ionScroll.subscribe((event: any) => {;
+      if (event.scrollTop >= offset) {
+        jQuery('.fixed-header').show();
+        //jQuery('.list').addClass("buttonPadded");
       } else {
-        jQuery('.button-container').removeClass("fixedButtons");
-        jQuery('.list').removeClass("buttonPadded");
+        jQuery('.fixed-header').hide();
       }
     });
+  }
+
+  cutCategory(str) {
+    var s = str.split(" ");
+    return s[0];
   }
 
   add_venue(venue: Venue){
     venue.interactions = (Math.round(venue.followers * 1.38)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     venue.open_status = this.venueService.check_if_open(venue);
     venue.distance = this.utils.get_distance(venue.lat,venue.lng);
+    venue.category.name = this.cutCategory(venue.category.name);
     this.venues.push(venue);
     console.log(venue);
   }

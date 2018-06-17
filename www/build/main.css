@@ -25292,6 +25292,10 @@ app-header .back-button {
   overflow: hidden;
 }
 
+.homeContent .list {
+  margin: 5px 0;
+}
+
 .homeContent .searchbar {
   width: 95%;
   margin-left: 2.5%;
@@ -25449,26 +25453,45 @@ page-nearme .venue-image {
   filter: contrast(0.9);
 }
 
+page-nearme .feature {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+}
+
 page-nearme .venue-distance {
-  margin: 10px 0px;
+  margin: 10px 0;
   display: inline-block;
   color: #777;
-  border-left: solid 1px #e7e7e7;
-  border-right: solid 1px #e7e7e7;
-  padding: 0px 14px;
+  padding: 0 5px;
 }
 
 page-nearme .venue-category {
-  margin: 10px 0px;
+  margin: 10px 0;
   display: inline-block;
-  border-right: solid 1px #e7e7e7;
-  padding: 0px 14px;
+  padding: 0 5px;
 }
 
 page-nearme .open-status {
-  margin: 10px 0px;
+  margin: 10px 0;
   display: inline-block;
-  padding: 0px 14px;
+  padding: 0 5px;
+}
+
+page-nearme .price {
+  margin-top: 8px;
+}
+
+page-nearme .feature-spacer {
+  width: 1px;
+  height: 25px;
+  background-color: #e7e7e7;
+  margin-top: 7px;
 }
 
 page-nearme .venue-name {
@@ -25481,15 +25504,7 @@ page-nearme .venue-bio {
 }
 
 page-nearme .price {
-  margin-right: 8px;
   display: inline-block;
-  font-size: 1em;
-}
-
-page-nearme .pricespan {
-  margin: 10px 0px;
-  margin-right: 8px;
-  padding: 0px 14px;
 }
 
 page-nearme .venue-interactions {
@@ -25633,6 +25648,7 @@ venue-detail .instagram-handle {
   margin-top: 15px;
   font-family: Apercu;
   opacity: 0.8;
+  font-size: 1.2rem;
 }
 
 venue-detail .col {
@@ -25674,62 +25690,74 @@ venue-detail a {
 }
 
 venue-detail .feature {
-  margin-top: 7px;
-}
-
-venue-detail .venue-instagram {
-  -ms-touch-action: auto;
-  touch-action: auto;
-}
-
-venue-detail .venue-image {
-  margin: 0;
-  -webkit-filter: contrast(0.9);
-  filter: contrast(0.9);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
 }
 
 venue-detail .venue-distance {
   margin: 10px 0;
   display: inline-block;
   color: #777;
-  border-left: solid 1px #e7e7e7;
-  border-right: solid 1px #e7e7e7;
-  padding: 0 14px;
+  padding: 0 5px;
 }
 
 venue-detail .venue-category {
   margin: 10px 0;
   display: inline-block;
-  border-right: solid 1px #e7e7e7;
-  padding: 0 14px;
+  padding: 0 5px;
 }
 
 venue-detail .open-status {
   margin: 10px 0;
   display: inline-block;
-  padding: 0 14px;
+  padding: 0 5px;
+}
+
+venue-detail .feature-spacer {
+  width: 1px;
+  height: 25px;
+  background-color: #e7e7e7;
+  margin-top: 7px;
+}
+
+venue-detail .price {
+  margin-top: 10px;
+}
+
+venue-detail .action-bar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
 }
 
 venue-detail .action-bar img {
-  height: 18px;
-  margin-right: 2px;
+  height: 12px;
+  margin-right: 1px;
   display: inline;
-  padding-top: 8px;
+  padding-top: 2px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 venue-detail .action-bar p {
   display: inline;
-  margin-left: 5px;
+  margin-left: 1px;
   font-size: 0.9em;
 }
 
 venue-detail .action-bar div {
   display: inline-block;
-  padding: 10px;
-  width: 24%;
-  height: 40px;
   line-height: 20px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -25874,6 +25902,7 @@ venue-detail .oops-dialog .dialog-wrapper .dialog-thanks {
   -ms-flex-pack: center;
   justify-content: center;
   border-bottom: 1px solid #eeeeee;
+  background-color: white;
 }
 
 venue-list .fixedButtons {
@@ -25915,26 +25944,45 @@ venue-list .venue-image {
   filter: contrast(0.9);
 }
 
+venue-list .feature {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+}
+
 venue-list .venue-distance {
-  margin: 10px 0px;
+  margin: 10px 0;
   display: inline-block;
   color: #777;
-  border-left: solid 1px #e7e7e7;
-  border-right: solid 1px #e7e7e7;
-  padding: 0px 14px;
+  padding: 0 5px;
 }
 
 venue-list .venue-category {
-  margin: 10px 0px;
+  margin: 10px 0;
   display: inline-block;
-  border-right: solid 1px #e7e7e7;
-  padding: 0px 14px;
+  padding: 0 5px;
 }
 
 venue-list .open-status {
-  margin: 10px 0px;
+  margin: 10px 0;
   display: inline-block;
-  padding: 0px 14px;
+  padding: 0 5px;
+}
+
+venue-list .price {
+  margin-top: 8px;
+}
+
+venue-list .feature-spacer {
+  width: 1px;
+  height: 25px;
+  background-color: #e7e7e7;
+  margin-top: 7px;
 }
 
 venue-list .venue-name {
@@ -25944,18 +25992,6 @@ venue-list .venue-name {
 venue-list .venue-bio {
   margin: 5px 0px 20px 0px;
   font-size: 1.2rem;
-}
-
-venue-list .price {
-  margin-right: 8px;
-  display: inline-block;
-  font-size: 1em;
-}
-
-venue-list .pricespan {
-  margin: 10px 0px;
-  margin-right: 8px;
-  padding: 0px 14px;
 }
 
 venue-list .venue-interactions {

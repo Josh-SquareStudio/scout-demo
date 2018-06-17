@@ -6,6 +6,7 @@ venue-detail {
 		margin-top: 15px;
 		font-family: Apercu;
 		opacity: 0.8;
+		font-size: 1.2rem;
 	}
 
 	.col {
@@ -36,61 +37,64 @@ venue-detail {
 		text-decoration: none;
 	}
 
-	.feature {
-		margin-top: 7px;
-	}
-
-	.venue-instagram {
-		touch-action: auto;
-	}
-
-	.venue-image {
-		margin: 0;
-		filter: contrast(0.9);
+	.feature{
+		display: flex;
+		justify-content: space-evenly;
 	}
 
 	.venue-distance {
 		margin: 10px 0;
 		display: inline-block;
 		color: #777;
-		border-left: solid 1px #e7e7e7;
-		border-right: solid 1px #e7e7e7;
-		padding: 0 14px;
+		padding: 0 5px;
 	}
 
 	.venue-category {
 		margin: 10px 0;
 		display: inline-block;
-		border-right: solid 1px #e7e7e7;
-		padding: 0 14px;
+		padding: 0 5px;
 	}
 
 	.open-status {
 		margin: 10px 0;
 		display: inline-block;
-		padding: 0 14px;
+		padding: 0 5px;
+	}
+
+	.feature-spacer{
+		width: 1px;
+		height: 25px;
+		background-color: #e7e7e7;
+		margin-top: 7px;
+	}
+
+	.price{
+		margin-top: 10px;
 	}
 
 	.action-bar {
+		display: flex;
+		justify-content: space-evenly;
+
 		img {
-			height: 18px;
-			margin-right: 2px;
+			height: 12px;
+			margin-right: 1px;
 			display: inline;
-			padding-top: 8px;
+			padding-top: 2px;
 			box-sizing: border-box;
 		}
 
 		p {
 			display: inline;
-			margin-left: 5px;
+			margin-left: 1px;
 			font-size: 0.9em;
 		}
 
 		div {
 			display: inline-block;
-			padding: 10px;
-			width: 24%;
-			height: 40px;
+			//padding: 10px;
+			//width: 24%;
+			//height: 40px;
 			line-height: 20px;
 			box-sizing: border-box;
 			cursor: pointer;

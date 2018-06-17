@@ -31,13 +31,13 @@ export class VenueList implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.content.ionScroll.subscribe((event: any) => {
-      if (event.scrollTop >= 142) {
-        jQuery('.button-container').addClass("fixedButtons");
-        jQuery('.list').addClass("buttonPadded");
+    var offset = jQuery('.main-container').offset().top;
+    this.content.ionScroll.subscribe((event: any) => {;
+      if (event.scrollTop >= offset) {
+        jQuery('.fixed-header').show();
+        //jQuery('.list').addClass("buttonPadded");
       } else {
-        jQuery('.button-container').removeClass("fixedButtons");
-        jQuery('.list').removeClass("buttonPadded");
+        jQuery('.fixed-header').hide();
       }
     });
   }

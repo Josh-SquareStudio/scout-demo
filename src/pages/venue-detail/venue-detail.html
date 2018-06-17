@@ -14,10 +14,10 @@
 			<div class="dialog-reason">
 				<h1>What's Happened Here?</h1>
 				<ul>
-					<li (click)="flag_venue('chain')"><p>It's a chain</p></li>
-					<li (click)="flag_venue('wrong profile')"><p>Wrong Instagram profile</p></li>
-					<li (click)="flag_venue('repeat')"><p>Repeated Venue</p></li>
-					<li (click)="flag_venue('other')"><p>Something else</p></li>
+					<li (click)="flag_venue('chain')">It's a chain</li>
+					<li (click)="flag_venue('wrong profile')">Wrong Instagram profile</li>
+					<li (click)="flag_venue('repeat')">Repeated Venue</li>
+					<li (click)="flag_venue('other')">Something else</li>
 				</ul>
 			</div>
 			<div class="dialog-thanks">
@@ -27,10 +27,13 @@
 	</div>
 	<div class="venue">
 	  	<img class="venue-image" src={{venue.most_liked_media}}/>
-	  	<div class="feature">
+			<div class="feature">
 	  		<div class="price"><span class="pricespan" *ngIf="venue.price == 1">&#36;<span style="color: #ddd">&#36;&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 2">&#36;&#36;<span style="color: #ddd">&#36;&#36;</span></span><span class="pricespan" *ngIf="venue.price == 3">&#36;&#36;&#36;<span style="color: #ddd">&#36;</span></span><span class="pricespan" *ngIf="venue.price == 4">&#36;&#36;&#36;&#36;</span></div>
+				<div class="feature-spacer"></div>
 				<p class="venue-distance" (click)="open_map()">{{venue.distance}} km </p>
+				<div class="feature-spacer"></div>
 				<p class="venue-category">{{venue.category.name}}</p>
+				<div class="feature-spacer"></div>
 				<p *ngIf="venue.open_status == 0" class="open-status">-</p>
 				<p *ngIf="venue.open_status == 1" class="open-status"><span style="color: #2ECC71">Open</span></p>
 				<p *ngIf="venue.open_status == 2" class="open-status"><span style="color: #EF4836">Closed</span></p>
