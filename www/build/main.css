@@ -25297,7 +25297,6 @@ app-header .back-button {
 }
 
 .homeContent .searchbar {
-  display: none !important;
   width: 95%;
   margin-left: 2.5%;
   margin-top: 20px;
