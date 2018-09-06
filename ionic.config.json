@@ -1,8 +1,8 @@
 {
   "name": "CITY",
-  "app_id": "280e91b9",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "pro_id": "280e91b9"
 }
